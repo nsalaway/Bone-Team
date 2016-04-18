@@ -111,44 +111,44 @@ public class PickerManagerCode : MonoBehaviour {
         //(Add raycast to check fo the tag of each object and set their state to true here)
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit rayHitInfo = new RaycastHit();
-        if (Physics.Raycast(ray, out rayHitInfo, 1000f) && (Input.GetMouseButton(0)))
+        if (Physics.Raycast(ray, out rayHitInfo, 1000f) && (Input.GetMouseButtonDown(0)))
         {
-         if(rayHitInfo.collider.gameObject.tag == "BlueBox")
+         if(rayHitInfo.collider.tag == "BlueBox")
             {
                 isClickedBlue = !isClickedBlue;
                 Debug.Log("Blue clicked");
             }
-            if (rayHitInfo.collider.gameObject.tag == "TealBox")
+            if (rayHitInfo.collider.tag == "TealBox")
             {
                 isClickedTeal = !isClickedTeal;
                 Debug.Log("Teal clicked");
             }
-            if (rayHitInfo.collider.gameObject.tag == "GreenBox")
+            if (rayHitInfo.collider.tag == "GreenBox")
             {
                 isClickedGreen = !isClickedGreen;
                 Debug.Log("Green clicked");
             }
-            if (rayHitInfo.collider.gameObject.tag == "BlueGrey")
+            if (rayHitInfo.collider.tag == "GreyBox")
             {
                 isClickedGrey = !isClickedGrey;
                 Debug.Log("Grey clicked");
             }
-            if (rayHitInfo.collider.gameObject.tag == "RedBox")
+            if (rayHitInfo.collider.tag == "RedBox")
             {
                 isClickedRed = !isClickedRed;
                 Debug.Log("Red clicked");
             }
-            if (rayHitInfo.collider.gameObject.tag == "PinkBox")
+            if (rayHitInfo.collider.tag == "PinkBox")
             {
                 isClickedPink = !isClickedPink;
                 Debug.Log("Pink clicked");
             }
-            if (rayHitInfo.collider.gameObject.tag == "BlueOrange")
+            if (rayHitInfo.collider.tag == "OrangeBox")
             {
                 isClickedOrange = !isClickedOrange;
                 Debug.Log("Orange clicked");
             }
-            if (rayHitInfo.collider.gameObject.tag == "YellowBox")
+            if (rayHitInfo.collider.tag == "YellowBox")
             {
                 isClickedYellow = !isClickedYellow;
                 Debug.Log("Yellow clicked");
@@ -156,19 +156,14 @@ public class PickerManagerCode : MonoBehaviour {
 
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            finalizeAnswere = true;
-        }
-        
         if (State == 1)
         {
             
             if (Model == 1 || Model == 2)
             {
-                if (finalizeAnswere == true)
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    if (isClickedPink == true && isClickedGreen == true)
+                    if (isClickedPink == true && isClickedGreen == true && isClickedBlue == false && isClickedGrey == false && isClickedOrange == false && isClickedRed == false && isClickedTeal == false && isClickedYellow == false)
                     {
                         Debug.Log("Congrats you win");
                     }
@@ -177,9 +172,9 @@ public class PickerManagerCode : MonoBehaviour {
             }
             else if (Model == 3)
             {
-                if (finalizeAnswere == true)
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    if (isClickedTeal == true && isClickedOrange == true)
+                    if (isClickedTeal == true && isClickedOrange == true && isClickedBlue == false && isClickedGrey == false && isClickedPink == false && isClickedRed == false && isClickedGreen == false && isClickedYellow == false)
                     {
                         Debug.Log("congrats you win");
                     }
@@ -193,9 +188,9 @@ public class PickerManagerCode : MonoBehaviour {
 
             if (Model == 1 || Model == 2)
             {
-                if (finalizeAnswere == true)
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    if (isClickedOrange == true && isClickedYellow == true)
+                    if (isClickedOrange == true && isClickedYellow == true && isClickedBlue == false && isClickedTeal == false && isClickedGreen == false && isClickedGrey == false && isClickedRed == false && isClickedPink == false)
                     {
                         Debug.Log("Congrats you win");
                     }
@@ -204,9 +199,9 @@ public class PickerManagerCode : MonoBehaviour {
             }
             else if (Model == 3)
             {
-                if (finalizeAnswere == true)
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    if (isClickedTeal == true && isClickedOrange == true)
+                    if (isClickedTeal == true && isClickedOrange == true && isClickedBlue == false && isClickedGreen == false && isClickedGrey== false && isClickedRed == false && isClickedPink == false && isClickedYellow == false)
                     {
                         Debug.Log("congrats you win");
                     }
@@ -220,9 +215,9 @@ public class PickerManagerCode : MonoBehaviour {
 
             if (Model == 1 || Model == 3)
             {
-                if (finalizeAnswere == true)
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    if (isClickedPink == true && isClickedGrey == true)
+                    if (isClickedPink == true && isClickedGrey == true && isClickedBlue == false && isClickedTeal == false && isClickedGreen == false && isClickedRed == false && isClickedOrange == false && isClickedYellow == false)
                     {
                         Debug.Log("Congrats you win");
                     }
@@ -231,9 +226,9 @@ public class PickerManagerCode : MonoBehaviour {
             }
             else if (Model == 2)
             {
-                if (finalizeAnswere == true)
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    if (isClickedTeal == true && isClickedBlue == true)
+                    if (isClickedTeal == true && isClickedBlue == true && isClickedGreen == false && isClickedGrey == false && isClickedRed == false && isClickedPink == false && isClickedOrange == false && isClickedYellow == false)
                     {
                         Debug.Log("congrats you win");
                     }
@@ -247,9 +242,9 @@ public class PickerManagerCode : MonoBehaviour {
 
             if (Model == 1 || Model == 2)
             {
-                if (finalizeAnswere == true)
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    if (isClickedPink == true && isClickedGreen == true)
+                    if (isClickedPink == true && isClickedGreen == true && isClickedBlue == false && isClickedTeal == false && isClickedGrey == false && isClickedRed == false && isClickedOrange == false && isClickedYellow == false)
                     {
                         Debug.Log("Congrats you win");
                     }
@@ -258,9 +253,9 @@ public class PickerManagerCode : MonoBehaviour {
             }
             else if (Model == 3)
             {
-                if (finalizeAnswere == true)
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    if (isClickedRed == true && isClickedBlue == true)
+                    if (isClickedRed == true && isClickedBlue == true && isClickedTeal == false && isClickedGreen == false && isClickedGrey == false && isClickedPink == false && isClickedOrange == false && isClickedYellow == false)
                     {
                         Debug.Log("congrats you win");
                     }
@@ -274,9 +269,9 @@ public class PickerManagerCode : MonoBehaviour {
 
             if (Model == 1 || Model == 3)
             {
-                if (finalizeAnswere == true)
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    if (isClickedRed == true && isClickedYellow == true)
+                    if (isClickedRed == true && isClickedYellow == true && isClickedBlue == false && isClickedTeal == false && isClickedGreen == false && isClickedGrey == false && isClickedPink == false && isClickedOrange == false)
                     {
                         Debug.Log("Congrats you win");
                     }
@@ -285,9 +280,9 @@ public class PickerManagerCode : MonoBehaviour {
             }
             else if (Model ==2)
             {
-                if (finalizeAnswere == true)
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    if (isClickedTeal == true && isClickedBlue == true)
+                    if (isClickedTeal == true && isClickedBlue == true && isClickedGreen == false && isClickedGrey == false && isClickedRed == false && isClickedOrange == false && isClickedPink == false && isClickedYellow == false)
                     {
                         Debug.Log("congrats you win");
                     }
@@ -299,9 +294,9 @@ public class PickerManagerCode : MonoBehaviour {
         if (State == 6)
         {
 
-                if (finalizeAnswere == true)
-                {
-                    if (isClickedTeal == true && isClickedOrange == true)
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                    if (isClickedTeal == true && isClickedOrange == true && isClickedBlue == false && isClickedGreen == false && isClickedGrey == false && isClickedRed == false && isClickedPink == false && isClickedYellow == false)
                     {
                         Debug.Log("Congrats you win");
                     }
