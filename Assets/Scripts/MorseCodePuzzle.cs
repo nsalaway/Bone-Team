@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MorseCodePuzzle : MonoBehaviour
 {
@@ -8,17 +9,18 @@ public class MorseCodePuzzle : MonoBehaviour
 	public AudioSource soundManager;
 	public AudioClip[] sounds;
 	int pinkClickCounter, blackClickCounter, randomSoundChooser;
-	public int pinkMouseClicksNeeded = 30;
-	public int blackMouseClicksNeeded = 5;
+	int pinkMouseClicksNeeded = 30;
+	int blackMouseClicksNeeded = 5;
+	int dialNumber = 5;
 	public float totalTime = 10.0f;
 	float clickDelay;
 	public Text timerText;
 	bool wasBlackClicked;
+	public Transform arrowSprite;
 
 	void Start ()
 	{
-		randomSoundChooser = Random.Range (0, 2);
-
+		randomSoundChooser = Random.Range (2, 4);
 		//Play random sound at start of puzzle.
 		soundManager.PlayOneShot (sounds [randomSoundChooser], 1f);
 		Debug.Log (randomSoundChooser);
@@ -55,7 +57,7 @@ public class MorseCodePuzzle : MonoBehaviour
 		if (randomSoundChooser == 0) {
 			//pressing black button is wrong.
 			if (blackClickCounter > 0) {
-				Debug.Log ("boo you lose - wrong button");
+				YouLose ();
 			}
 			//pressing pink button is correct...
 			if (pinkClickCounter > 0) {
@@ -65,11 +67,11 @@ public class MorseCodePuzzle : MonoBehaviour
 				timerText.text = timerTextInSeconds.ToString ();
 				//if you don't press x times in x seconds, lose
 				if (totalTime <= 0 && pinkClickCounter < pinkMouseClicksNeeded) {
-					Debug.Log ("you lost - out of time");
+					YouLose ();
 				}
 				//if you do press x times in x seconds, win
 				if (pinkClickCounter >= pinkMouseClicksNeeded) {
-					Debug.Log ("you won");
+					YouWon ();
 				}
 			}
 		}
@@ -78,7 +80,7 @@ public class MorseCodePuzzle : MonoBehaviour
 		if (randomSoundChooser == 1) {
 			//pressing pink button is wrong.
 			if (pinkClickCounter > 0) {
-				Debug.Log ("boo you lost - wrong button");
+				YouLose ();
 			}
 			//pressing black button is correct...	
 			if (blackClickCounter > 0) {
@@ -86,14 +88,56 @@ public class MorseCodePuzzle : MonoBehaviour
 				timerText.text = timerTextInSeconds.ToString ();
 				//if you don't press x times in x seconds, lose
 				if (totalTime <= 0 && blackClickCounter < blackMouseClicksNeeded) {
-					Debug.Log ("you lost - out of time");
+					YouLose ();
 				}
 				//if you do press x times in x seconds, win
 				if (blackClickCounter >= blackMouseClicksNeeded) {
-					Debug.Log ("you won");
+					YouWon ();
 				}
 			}
-		}			
+		}
+
+
+		//"HARDER"/DIAL UP LOGIC.
+		if (randomSoundChooser == 2) {
+			//You should not be pressing either button.
+			if (blackClickCounter > 0) {
+				YouLose ();
+			}
+			if (pinkClickCounter > 0) {
+				YouLose ();
+			}
+		}
+
+		//"GENTLE"/DIAL DOWN LOGIC.
+		//You should not be pressing either button.
+		if (blackClickCounter > 0) {
+			YouLose ();
+		}
+		if (pinkClickCounter > 0) {
+			YouLose ();
+		}
+	}
+
+	//LOGIC FOR WINNING WITH DIAL PAD.
+	public void DialPad(){
+		if (randomSoundChooser == 2) {
+			//Need to turn dial UP to win.
+			if (dialNumber == 9) {
+				YouWon ();
+			} else if (dialNumber != 9) {
+				YouLose ();
+			}
+		}
+
+		if (randomSoundChooser == 3){
+			//Need to turn dial DOWN to win.
+			if (dialNumber == 2) {
+				YouWon ();
+			} else if (dialNumber != 2) {
+				YouLose ();
+			}
+		}
 	}
 
 
@@ -104,7 +148,7 @@ public class MorseCodePuzzle : MonoBehaviour
 			clickDelay -= Time.deltaTime;
 			//If you press during this countdown, you lose.
 			if (Input.GetMouseButtonDown (0)) {
-				Debug.Log ("you lose - too soon");
+				YouLose ();
 			}
 		}
 
@@ -121,5 +165,28 @@ public class MorseCodePuzzle : MonoBehaviour
 		if (Input.GetMouseButtonDown (1)) {
 			soundManager.PlayOneShot (sounds [randomSoundChooser], 1f);
 		}
+	}
+
+	public void RotateArrow ()
+	{
+		Debug.Log ("clicked dial");
+		Debug.Log (dialNumber);
+
+		arrowSprite.Rotate (0f, 0f, -40f);
+		if (dialNumber <= 8) {
+			dialNumber++;
+		} else if (dialNumber >= 9) {
+			dialNumber = 0;
+		}
+	}
+
+	public void YouLose ()
+	{
+		Debug.Log ("you lost");
+	}
+
+	public void YouWon ()
+	{
+		Debug.Log ("you won");
 	}
 }
