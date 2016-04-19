@@ -20,7 +20,7 @@ public class MorseCodePuzzle : MonoBehaviour
 
 	void Start ()
 	{
-		randomSoundChooser = Random.Range (2, 4);
+		randomSoundChooser = Random.Range (0, 4);
 		//Play random sound at start of puzzle.
 		soundManager.PlayOneShot (sounds [randomSoundChooser], 1f);
 		Debug.Log (randomSoundChooser);
@@ -52,7 +52,7 @@ public class MorseCodePuzzle : MonoBehaviour
 			}
 		}
 			
-
+		//==============================================================================================================================================================
 		//"FASTER"/PINK BUTTON LOGIC.
 		if (randomSoundChooser == 0) {
 			//pressing black button is wrong.
@@ -75,7 +75,8 @@ public class MorseCodePuzzle : MonoBehaviour
 				}
 			}
 		}
-						
+			
+		//==============================================================================================================================================================
 		//"SLOWER"/BLACK BUTTON LOGIC.
 		if (randomSoundChooser == 1) {
 			//pressing pink button is wrong.
@@ -97,7 +98,7 @@ public class MorseCodePuzzle : MonoBehaviour
 			}
 		}
 
-
+		//==============================================================================================================================================================
 		//"HARDER"/DIAL UP LOGIC.
 		if (randomSoundChooser == 2) {
 			//You should not be pressing either button.
@@ -109,18 +110,24 @@ public class MorseCodePuzzle : MonoBehaviour
 			}
 		}
 
+		//==============================================================================================================================================================
 		//"GENTLE"/DIAL DOWN LOGIC.
 		//You should not be pressing either button.
-		if (blackClickCounter > 0) {
-			YouLose ();
-		}
-		if (pinkClickCounter > 0) {
-			YouLose ();
+		if (randomSoundChooser == 3) {
+			if (blackClickCounter > 0) {
+				YouLose ();
+			}
+			if (pinkClickCounter > 0) {
+				YouLose ();
+			}
 		}
 	}
 
+	//==============================================================================================================================================================
 	//LOGIC FOR WINNING WITH DIAL PAD.
-	public void DialPad(){
+
+	public void DialPad ()
+	{
 		if (randomSoundChooser == 2) {
 			//Need to turn dial UP to win.
 			if (dialNumber == 9) {
@@ -130,7 +137,7 @@ public class MorseCodePuzzle : MonoBehaviour
 			}
 		}
 
-		if (randomSoundChooser == 3){
+		if (randomSoundChooser == 3) {
 			//Need to turn dial DOWN to win.
 			if (dialNumber == 2) {
 				YouWon ();
@@ -140,7 +147,24 @@ public class MorseCodePuzzle : MonoBehaviour
 		}
 	}
 
+	//WHEN YOU PRESS THE DIAL PAD...
+	public void RotateArrow ()
+	{
+		//rotate arrow & increment dailNumber
+		arrowSprite.Rotate (0f, 0f, -40f);
+		if (dialNumber <= 8) {
+			dialNumber++;
+		} else if (dialNumber >= 9) {
+			dialNumber = 0;
+		}
+		Debug.Log ("clicked dial");
+		Debug.Log (dialNumber);
+	}
 
+	//==============================================================================================================================================================
+	/// <summary>
+	/// Resets the black button delay (so you can press again after 1 second).
+	/// </summary>
 	public void ResetButton ()
 	{
 		//If you pressed the black button, start counting down the delay until you can press it again.
@@ -159,24 +183,14 @@ public class MorseCodePuzzle : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Replays the chosen robot sound.
+	/// </summary>
 	public void ReplaySound ()
 	{
 		//Replay sound on right click.
 		if (Input.GetMouseButtonDown (1)) {
 			soundManager.PlayOneShot (sounds [randomSoundChooser], 1f);
-		}
-	}
-
-	public void RotateArrow ()
-	{
-		Debug.Log ("clicked dial");
-		Debug.Log (dialNumber);
-
-		arrowSprite.Rotate (0f, 0f, -40f);
-		if (dialNumber <= 8) {
-			dialNumber++;
-		} else if (dialNumber >= 9) {
-			dialNumber = 0;
 		}
 	}
 
