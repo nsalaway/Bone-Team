@@ -75,7 +75,7 @@ public class PickerManagerCode : MonoBehaviour {
         if (State == 4)
         {
             //(instantiate code for State here)
-            Instantiate(tealBox, new Vector3(-.5f, .2f, gameObject.transform.position.z), gameObject.transform.rotation);
+            Instantiate(blueBox, new Vector3(-.5f, .2f, gameObject.transform.position.z), gameObject.transform.rotation);
             Instantiate(greenBox, new Vector3(-.5f, .0f, gameObject.transform.position.z), gameObject.transform.rotation);
             Instantiate(greyBox, new Vector3(-.5f, -.2f, gameObject.transform.position.z), gameObject.transform.rotation);
             Instantiate(redBox, new Vector3(.5f, .4f, gameObject.transform.position.z), gameObject.transform.rotation);
