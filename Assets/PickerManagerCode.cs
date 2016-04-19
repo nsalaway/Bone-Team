@@ -11,6 +11,7 @@ public class PickerManagerCode : MonoBehaviour {
     public GameObject pinkBox;
     public GameObject orangeBox;
     public GameObject yellowBox;
+    public GameObject enterBox;
     
     private bool isClickedBlue = false;
     private bool isClickedTeal = false;
@@ -155,6 +156,10 @@ public class PickerManagerCode : MonoBehaviour {
                 isClickedYellow = !isClickedYellow;
                 Debug.Log("Yellow clicked");
             }
+            if (rayHitInfo.collider.tag == "EnterBox")
+            {
+                finalizeAnswere = true;
+            }
 
         }
 
@@ -163,7 +168,7 @@ public class PickerManagerCode : MonoBehaviour {
             
             if (Model == 1 || Model == 2)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (finalizeAnswere ==true)
                 {
                     if (isClickedPink == true && isClickedGreen == true && isClickedBlue == false && isClickedGrey == false && isClickedOrange == false && isClickedRed == false && isClickedTeal == false && isClickedYellow == false)
                     {
@@ -175,7 +180,7 @@ public class PickerManagerCode : MonoBehaviour {
             }
             else if (Model == 3)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (finalizeAnswere == true)
                 {
                     if (isClickedTeal == true && isClickedOrange == true && isClickedBlue == false && isClickedGrey == false && isClickedPink == false && isClickedRed == false && isClickedGreen == false && isClickedYellow == false)
                     {
@@ -192,7 +197,7 @@ public class PickerManagerCode : MonoBehaviour {
 
             if (Model == 1 || Model == 2)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (finalizeAnswere == true)
                 {
                     if (isClickedOrange == true && isClickedYellow == true && isClickedBlue == false && isClickedTeal == false && isClickedGreen == false && isClickedGrey == false && isClickedRed == false && isClickedPink == false)
                     {
@@ -204,7 +209,7 @@ public class PickerManagerCode : MonoBehaviour {
             }
             else if (Model == 3)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (finalizeAnswere == true)
                 {
                     if (isClickedTeal == true && isClickedOrange == true && isClickedBlue == false && isClickedGreen == false && isClickedGrey== false && isClickedRed == false && isClickedPink == false && isClickedYellow == false)
                     {
@@ -221,7 +226,7 @@ public class PickerManagerCode : MonoBehaviour {
 
             if (Model == 1 || Model == 3)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (finalizeAnswere == true)
                 {
                     if (isClickedPink == true && isClickedGrey == true && isClickedBlue == false && isClickedTeal == false && isClickedGreen == false && isClickedRed == false && isClickedOrange == false && isClickedYellow == false)
                     {
@@ -233,7 +238,7 @@ public class PickerManagerCode : MonoBehaviour {
             }
             else if (Model == 2)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (finalizeAnswere == true)
                 {
                     if (isClickedTeal == true && isClickedBlue == true && isClickedGreen == false && isClickedGrey == false && isClickedRed == false && isClickedPink == false && isClickedOrange == false && isClickedYellow == false)
                     {
@@ -250,7 +255,7 @@ public class PickerManagerCode : MonoBehaviour {
 
             if (Model == 1 || Model == 2)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (finalizeAnswere == true)
                 {
                     if (isClickedPink == true && isClickedGreen == true && isClickedBlue == false && isClickedTeal == false && isClickedGrey == false && isClickedRed == false && isClickedOrange == false && isClickedYellow == false)
                     {
@@ -262,7 +267,7 @@ public class PickerManagerCode : MonoBehaviour {
             }
             else if (Model == 3)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (finalizeAnswere == true)
                 {
                     if (isClickedRed == true && isClickedBlue == true && isClickedTeal == false && isClickedGreen == false && isClickedGrey == false && isClickedPink == false && isClickedOrange == false && isClickedYellow == false)
                     {
@@ -279,7 +284,7 @@ public class PickerManagerCode : MonoBehaviour {
 
             if (Model == 1 || Model == 3)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (finalizeAnswere == true)
                 {
                     if (isClickedRed == true && isClickedYellow == true && isClickedBlue == false && isClickedTeal == false && isClickedGreen == false && isClickedGrey == false && isClickedPink == false && isClickedOrange == false)
                     {
@@ -291,7 +296,7 @@ public class PickerManagerCode : MonoBehaviour {
             }
             else if (Model ==2)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (finalizeAnswere == true)
                 {
                     if (isClickedTeal == true && isClickedBlue == true && isClickedGreen == false && isClickedGrey == false && isClickedRed == false && isClickedOrange == false && isClickedPink == false && isClickedYellow == false)
                     {
@@ -306,7 +311,7 @@ public class PickerManagerCode : MonoBehaviour {
         if (State == 6)
         {
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (finalizeAnswere == true)
             {
                     if (isClickedTeal == true && isClickedOrange == true && isClickedBlue == false && isClickedGreen == false && isClickedGrey == false && isClickedRed == false && isClickedPink == false && isClickedYellow == false)
                     {
