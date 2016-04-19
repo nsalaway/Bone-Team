@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PickerManagerCode : MonoBehaviour {
     public GameObject blueBox;
@@ -31,6 +32,7 @@ public class PickerManagerCode : MonoBehaviour {
     {
         State = Random.Range(1, 7);
         Model = Random.Range(1, 4);
+        Debug.Log("Model" + Model);
 
         if (State == 1)
         {
@@ -166,8 +168,9 @@ public class PickerManagerCode : MonoBehaviour {
                     if (isClickedPink == true && isClickedGreen == true && isClickedBlue == false && isClickedGrey == false && isClickedOrange == false && isClickedRed == false && isClickedTeal == false && isClickedYellow == false)
                     {
                         Debug.Log("Congrats you win");
+                        SceneManager.LoadScene(0);
                     }
-                    else { Debug.Log("Failure"); }
+                    else { Debug.Log("Failure"); SceneManager.LoadScene(0); }
                 }
             }
             else if (Model == 3)
@@ -177,8 +180,9 @@ public class PickerManagerCode : MonoBehaviour {
                     if (isClickedTeal == true && isClickedOrange == true && isClickedBlue == false && isClickedGrey == false && isClickedPink == false && isClickedRed == false && isClickedGreen == false && isClickedYellow == false)
                     {
                         Debug.Log("congrats you win");
+                        SceneManager.LoadScene(0);
                     }
-                    else { Debug.Log("Failure"); }
+                    else { Debug.Log("Failure"); SceneManager.LoadScene(0); }
                 }
             }
 
@@ -193,8 +197,9 @@ public class PickerManagerCode : MonoBehaviour {
                     if (isClickedOrange == true && isClickedYellow == true && isClickedBlue == false && isClickedTeal == false && isClickedGreen == false && isClickedGrey == false && isClickedRed == false && isClickedPink == false)
                     {
                         Debug.Log("Congrats you win");
+                        SceneManager.LoadScene(0);
                     }
-                    else { Debug.Log("Failure"); }
+                    else { Debug.Log("Failure"); SceneManager.LoadScene(0); }
                 }
             }
             else if (Model == 3)
@@ -204,8 +209,9 @@ public class PickerManagerCode : MonoBehaviour {
                     if (isClickedTeal == true && isClickedOrange == true && isClickedBlue == false && isClickedGreen == false && isClickedGrey== false && isClickedRed == false && isClickedPink == false && isClickedYellow == false)
                     {
                         Debug.Log("congrats you win");
+                        SceneManager.LoadScene(0);
                     }
-                    else { Debug.Log("Failure"); }
+                    else { Debug.Log("Failure"); SceneManager.LoadScene(0); }
                 }
             }
 
@@ -220,8 +226,9 @@ public class PickerManagerCode : MonoBehaviour {
                     if (isClickedPink == true && isClickedGrey == true && isClickedBlue == false && isClickedTeal == false && isClickedGreen == false && isClickedRed == false && isClickedOrange == false && isClickedYellow == false)
                     {
                         Debug.Log("Congrats you win");
+                        SceneManager.LoadScene(0);
                     }
-                    else { Debug.Log("Failure"); }
+                    else { Debug.Log("Failure"); SceneManager.LoadScene(0); }
                 }
             }
             else if (Model == 2)
@@ -231,8 +238,9 @@ public class PickerManagerCode : MonoBehaviour {
                     if (isClickedTeal == true && isClickedBlue == true && isClickedGreen == false && isClickedGrey == false && isClickedRed == false && isClickedPink == false && isClickedOrange == false && isClickedYellow == false)
                     {
                         Debug.Log("congrats you win");
+                        SceneManager.LoadScene(0);
                     }
-                    else { Debug.Log("Failure"); }
+                    else { Debug.Log("Failure"); SceneManager.LoadScene(0); }
                 }
             }
 
@@ -247,8 +255,9 @@ public class PickerManagerCode : MonoBehaviour {
                     if (isClickedPink == true && isClickedGreen == true && isClickedBlue == false && isClickedTeal == false && isClickedGrey == false && isClickedRed == false && isClickedOrange == false && isClickedYellow == false)
                     {
                         Debug.Log("Congrats you win");
+                        SceneManager.LoadScene(0);
                     }
-                    else { Debug.Log("Failure"); }
+                    else { Debug.Log("Failure"); SceneManager.LoadScene(0); }
                 }
             }
             else if (Model == 3)
@@ -258,8 +267,9 @@ public class PickerManagerCode : MonoBehaviour {
                     if (isClickedRed == true && isClickedBlue == true && isClickedTeal == false && isClickedGreen == false && isClickedGrey == false && isClickedPink == false && isClickedOrange == false && isClickedYellow == false)
                     {
                         Debug.Log("congrats you win");
+                        SceneManager.LoadScene(0);
                     }
-                    else { Debug.Log("Failure"); }
+                    else { Debug.Log("Failure"); SceneManager.LoadScene(0); }
                 }
             }
 
@@ -274,8 +284,9 @@ public class PickerManagerCode : MonoBehaviour {
                     if (isClickedRed == true && isClickedYellow == true && isClickedBlue == false && isClickedTeal == false && isClickedGreen == false && isClickedGrey == false && isClickedPink == false && isClickedOrange == false)
                     {
                         Debug.Log("Congrats you win");
+                        SceneManager.LoadScene(0);
                     }
-                    else { Debug.Log("Failure"); }
+                    else { Debug.Log("Failure"); SceneManager.LoadScene(0); }
                 }
             }
             else if (Model ==2)
@@ -285,8 +296,9 @@ public class PickerManagerCode : MonoBehaviour {
                     if (isClickedTeal == true && isClickedBlue == true && isClickedGreen == false && isClickedGrey == false && isClickedRed == false && isClickedOrange == false && isClickedPink == false && isClickedYellow == false)
                     {
                         Debug.Log("congrats you win");
+                        SceneManager.LoadScene(0);
                     }
-                    else { Debug.Log("Failure"); }
+                    else { Debug.Log("Failure"); SceneManager.LoadScene(0); }
                 }
             }
 
@@ -299,8 +311,9 @@ public class PickerManagerCode : MonoBehaviour {
                     if (isClickedTeal == true && isClickedOrange == true && isClickedBlue == false && isClickedGreen == false && isClickedGrey == false && isClickedRed == false && isClickedPink == false && isClickedYellow == false)
                     {
                         Debug.Log("Congrats you win");
-                    }
-                    else { Debug.Log("Failure"); }
+                    SceneManager.LoadScene(0);
+                }
+                    else { Debug.Log("Failure"); SceneManager.LoadScene(0); }
                 }
         }
 
