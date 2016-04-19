@@ -31,10 +31,12 @@ public class PickerManagerCode : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        //DECLARE THE PUZZLE STATE AND ROBOT NUMBER
         State = Random.Range(1, 7);
         Model = OverallGameManagerErik.RobotNumber;
         Debug.Log("Model" + Model);
 
+        //iNSTANTIATE THE REQUIRED GAME OBJECTS FOR EACH STATE
         if (State == 1)
         {
             //(instantiate code for State here)
@@ -108,13 +110,15 @@ public class PickerManagerCode : MonoBehaviour {
        
     }
 
-
+    //yOU WIN FUNCTION
 	void YouWin()
     {
         Debug.Log("Congrats you win");
         SceneManager.LoadScene(0);
         OverallGameManagerErik.NumberCorrect += 1;
     }
+
+    //YOU LOSE FUNCTION
     void YouLose()
     {
         Debug.Log("Failure");
@@ -129,6 +133,8 @@ public class PickerManagerCode : MonoBehaviour {
         //(Add raycast to check fo the tag of each object and set their state to true here)
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit rayHitInfo = new RaycastHit();
+
+        //IF THE MOUSE CLICKS OVER AN OBJECT CHECK THE TAG AND ACTIVATE THE OBJECT
         if (Physics.Raycast(ray, out rayHitInfo, 1000f) && (Input.GetMouseButtonDown(0)))
         {
          if(rayHitInfo.collider.tag == "BlueBox")
@@ -177,7 +183,7 @@ public class PickerManagerCode : MonoBehaviour {
             }
 
         }
-
+        //ANSWERES AND DECLARING WIN/LOSE FOR EACH GAME STATE
         if (State == 1)
         {
             
