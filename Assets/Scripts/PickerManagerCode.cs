@@ -32,7 +32,7 @@ public class PickerManagerCode : MonoBehaviour {
     void Start()
     {
         State = Random.Range(1, 7);
-        Model = Random.Range(1, 4);
+        Model = OverallGameManagerErik.RobotNumber;
         Debug.Log("Model" + Model);
 
         if (State == 1)
@@ -113,11 +113,13 @@ public class PickerManagerCode : MonoBehaviour {
     {
         Debug.Log("Congrats you win");
         SceneManager.LoadScene(0);
+        OverallGameManagerErik.NumberCorrect += 1;
     }
     void YouLose()
     {
         Debug.Log("Failure");
         SceneManager.LoadScene(0);
+        OverallGameManagerErik.NumberIncorrect += 1;
     }
 
 
