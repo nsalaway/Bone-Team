@@ -101,6 +101,12 @@ ModelImporter:
     100186: pSphere16
     100188: pSphere17
     100190: //RootNode
+    100192: pCube39
+    100194: pCylinder71
+    100196: pCylinder72
+    100198: pCylinder73
+    100200: pCube40
+    100202: pCylinder74
     400000: pCube11
     400002: pCube12
     400004: pCube13
@@ -197,6 +203,12 @@ ModelImporter:
     400186: pSphere16
     400188: pSphere17
     400190: //RootNode
+    400192: pCube39
+    400194: pCylinder71
+    400196: pCylinder72
+    400198: pCylinder73
+    400200: pCube40
+    400202: pCylinder74
     2300000: pCube11
     2300002: pCube12
     2300004: pCube13
@@ -292,6 +304,12 @@ ModelImporter:
     2300184: pSphere15
     2300186: pSphere16
     2300188: pSphere17
+    2300190: pCube39
+    2300192: pCylinder71
+    2300194: pCylinder72
+    2300196: pCylinder73
+    2300198: pCube40
+    2300200: pCylinder74
     3300000: pCube11
     3300002: pCube12
     3300004: pCube13
@@ -387,6 +405,12 @@ ModelImporter:
     3300184: pSphere15
     3300186: pSphere16
     3300188: pSphere17
+    3300190: pCube39
+    3300192: pCylinder71
+    3300194: pCylinder72
+    3300196: pCylinder73
+    3300198: pCube40
+    3300200: pCylinder74
     4300000: pCylinder2
     4300002: pSphere10
     4300004: pCube11
@@ -482,6 +506,12 @@ ModelImporter:
     4300184: pCylinder68
     4300186: pCylinder69
     4300188: pCylinder70
+    4300190: pCylinder71
+    4300192: pCylinder72
+    4300194: pCylinder73
+    4300196: pCube39
+    4300198: pCylinder74
+    4300200: pCube40
     9500000: //RootNode
   materials:
     importMaterials: 1
