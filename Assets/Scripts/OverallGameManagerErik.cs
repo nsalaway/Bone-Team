@@ -9,11 +9,10 @@ public class OverallGameManagerErik : MonoBehaviour {
     public static int NumberIncorrect;
     public int numberToWin, numberToLose;
     public static bool levelFinished;
-    public bool isGameActive = false;
+    public static bool isGameActive = false;
 
-    int randomizer, previousPuzzle = 7;
-
-    public GameObject puzzle1, puzzle2, puzzle3;
+    int randomizer=8, previousPuzzle = 7;
+    
     public GameObject[] puzzles = new GameObject[3];
 
     private int puzzleToLoad;
@@ -22,7 +21,7 @@ public class OverallGameManagerErik : MonoBehaviour {
 
     void Start()
     {
-
+        randomizer = Random.Range(0, 3);
         RobotNumber = Random.Range(1, 4);
         puzzleToLoad = Random.Range(1, 4);
 
@@ -46,11 +45,11 @@ public class OverallGameManagerErik : MonoBehaviour {
     {
         if (NumberCorrect == numberToWin)
         {
-            //YOU WIN THE GAME!
+            Debug.Log("YOU ARE AMAZING");
         }
         else if (NumberIncorrect == numberToLose)
         {
-            //YOU LOSE THE GAME
+            Debug.Log("YOU SUCK AT THIS GAME");
         }
         if (isGameActive)
         {
@@ -66,9 +65,22 @@ public class OverallGameManagerErik : MonoBehaviour {
                 randomizer = Random.Range(0, 3);
             }
             previousPuzzle = randomizer;
-            GameObject myPuzzle = (GameObject)Instantiate(puzzles[randomizer], transform.position, Quaternion.identity);
+            GameObject myPuzzle = (GameObject)Instantiate(puzzles[randomizer], transform.position, puzzles[randomizer].transform.rotation);
+
 
         }
 
+    }
+
+    public static void PuzzleWon(GameObject myGO)
+    {
+        NumberCorrect++;
+        isGameActive = false;
+        Destroy(myGO);
+    }
+
+    public static void MadeError()
+    {
+        NumberIncorrect++;
     }
 }

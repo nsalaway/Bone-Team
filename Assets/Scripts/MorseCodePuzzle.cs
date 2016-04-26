@@ -20,7 +20,8 @@ public class MorseCodePuzzle : MonoBehaviour
 
 	void Start ()
 	{
-		randomSoundChooser = Random.Range (0, 4);
+        OverallGameManagerErik.isGameActive = true;
+        randomSoundChooser = Random.Range (0, 4);
 		//Play random sound at start of puzzle.
 		soundManager.PlayOneShot (sounds [randomSoundChooser], 1f);
 		Debug.Log (randomSoundChooser);
@@ -197,10 +198,14 @@ public class MorseCodePuzzle : MonoBehaviour
 	public void YouLose ()
 	{
 		Debug.Log ("you lost");
-	}
+        OverallGameManagerErik.isGameActive = false;
+        Destroy(gameObject);
+    }
 
 	public void YouWon ()
 	{
 		Debug.Log ("you won");
-	}
+        OverallGameManagerErik.isGameActive = false;
+        Destroy(gameObject);
+    }
 }

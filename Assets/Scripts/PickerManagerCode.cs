@@ -32,6 +32,7 @@ public class PickerManagerCode : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        OverallGameManagerErik.isGameActive = true;
         //DECLARE THE PUZZLE STATE AND ROBOT NUMBER
         State = Random.Range(1, 7);
    
@@ -107,23 +108,24 @@ public class PickerManagerCode : MonoBehaviour {
 			spawnYellow ();
 
         }
-       
+
+
+        transform.Rotate(90, 0, 0);
     }
 
     //yOU WIN FUNCTION
 	void YouWin()
     {
         Debug.Log("Congrats you win");
-        SceneManager.LoadScene(0);
-        OverallGameManagerErik.NumberCorrect += 1;
+        OverallGameManagerErik.PuzzleWon(this.gameObject);
     }
 
     //YOU LOSE FUNCTION
     void YouLose()
     {
         Debug.Log("Failure");
-        SceneManager.LoadScene(0);
-        OverallGameManagerErik.NumberIncorrect += 1;
+        OverallGameManagerErik.MadeError();
+
     }
 
 
@@ -343,36 +345,44 @@ public class PickerManagerCode : MonoBehaviour {
 
 	void spawnBlue()
 	{
-		Instantiate(blueBox, new Vector3(-.5f, 1.5f, gameObject.transform.position.z), gameObject.transform.rotation);
+		GameObject myButton = (GameObject)Instantiate(blueBox, new Vector3(-2f, 4f, 0f), gameObject.transform.rotation);
+        myButton.transform.parent = transform;
 	}
 	void spawnTeal()
 	{
-		Instantiate(tealBox, new Vector3(-.5f, .5f, gameObject.transform.position.z), gameObject.transform.rotation);
-	}
+        GameObject myButton = (GameObject)Instantiate(tealBox, new Vector3(-2f, 2f, 0f), gameObject.transform.rotation);
+        myButton.transform.parent = transform;
+    }
 	void spawnGreen()
 	{
-		Instantiate(greenBox, new Vector3(-.5f, -.5f, gameObject.transform.position.z), gameObject.transform.rotation);
-	}
+        GameObject myButton = (GameObject)Instantiate(greenBox, new Vector3(-2f, 0f, 0f), gameObject.transform.rotation);
+        myButton.transform.parent = transform;
+    }
 	void spawnGrey()
 	{
-		Instantiate(greyBox, new Vector3(-.5f, -1.5f, gameObject.transform.position.z), gameObject.transform.rotation);
-	}
+        GameObject myButton = (GameObject)Instantiate(greyBox, new Vector3(-2f, -2f, 0f), gameObject.transform.rotation);
+        myButton.transform.parent = transform;
+    }
 	void spawnRed()
 	{
-		Instantiate(redBox, new Vector3(.5f, 1.5f, gameObject.transform.position.z), gameObject.transform.rotation);
-	}
+        GameObject myButton = (GameObject)Instantiate(redBox, new Vector3(0f, 4f, 0f), gameObject.transform.rotation);
+        myButton.transform.parent = transform;
+    }
 	void spawnPink()
 	{
-		Instantiate(pinkBox, new Vector3(.5f, .5f, gameObject.transform.position.z), gameObject.transform.rotation);
-	}
+        GameObject myButton = (GameObject)Instantiate(pinkBox, new Vector3(0f, 2f, 0f), gameObject.transform.rotation);
+        myButton.transform.parent = transform;
+    }
 	void spawnOrange()
 	{
-		Instantiate(orangeBox, new Vector3(.5f, -.50f, gameObject.transform.position.z), gameObject.transform.rotation);
-	}
+        GameObject myButton = (GameObject)Instantiate(orangeBox, new Vector3(0f, 0f, 0f), gameObject.transform.rotation);
+        myButton.transform.parent = transform;
+    }
 	void spawnYellow()
 	{
-		Instantiate(yellowBox, new Vector3(.5f, -1.5f, gameObject.transform.position.z), gameObject.transform.rotation);
-	}
+        GameObject myButton = (GameObject)Instantiate(yellowBox, new Vector3(0f, -2f, 0f), gameObject.transform.rotation);
+        myButton.transform.parent = transform;
+    }
 
 
 

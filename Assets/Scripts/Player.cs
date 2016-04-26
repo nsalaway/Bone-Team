@@ -35,13 +35,14 @@ public class Player : MonoBehaviour {
                             {
                                 transform.position = transform.position + Vector3.forward;
                                 Debug.Log("You Win!");
+                                OverallGameManagerErik.PuzzleWon(transform.parent.gameObject);
                                 //tell game manager the game was won
                                 //destroy maze
                             }
                             else
                             {
                                 counter++;
-                                Debug.Log("Wall!");
+                                OverallGameManagerErik.MadeError();
                             }
                         }
 
@@ -61,6 +62,7 @@ public class Player : MonoBehaviour {
                             {
                                 transform.position = transform.position + Vector3.back;
                                 Debug.Log("You Win!");
+                                OverallGameManagerErik.PuzzleWon(transform.parent.gameObject);
                                 //tell game manager the game was won
                                 //destroy maze
                             }
@@ -68,6 +70,7 @@ public class Player : MonoBehaviour {
                             {
                                 counter++;
                                 Debug.Log("Wall!");
+                                OverallGameManagerErik.MadeError();
                             }
                         }
 
@@ -87,6 +90,7 @@ public class Player : MonoBehaviour {
                             {
                                 transform.position = transform.position + Vector3.left;
                                 Debug.Log("You Win!");
+                                OverallGameManagerErik.PuzzleWon(transform.parent.gameObject);
                                 //tell game manager the game was won
                                 //destroy maze
                             }
@@ -94,6 +98,7 @@ public class Player : MonoBehaviour {
                             {
                                 counter++;
                                 Debug.Log("Wall!");
+                                OverallGameManagerErik.MadeError();
                             }
                         }
 
@@ -113,6 +118,7 @@ public class Player : MonoBehaviour {
                             {
                                 transform.position = transform.position + Vector3.right;
                                 Debug.Log("You Win!");
+                                OverallGameManagerErik.PuzzleWon(transform.parent.gameObject);
                                 //tell game manager the game was won
                                 //destroy maze
                             }
@@ -120,6 +126,7 @@ public class Player : MonoBehaviour {
                             {
                                 counter++;
                                 Debug.Log("Wall!");
+                                OverallGameManagerErik.MadeError();
                             }
                         }
 
@@ -132,22 +139,5 @@ public class Player : MonoBehaviour {
             }
         }
 
-        if (counter >= 3)
-        {
-            //tell game manager game was lost
-            //destroy maze
-        }
-
     }
-
-    /*void OnCollisionEnter(Collision coll)
-    {
-        Debug.Log("hey");
-        if (coll.gameObject.tag == "Goal")
-        {
-            //tell game manager the game was won
-            //destroy maze
-            Debug.Log("YOU WIN!");
-        }
-    }*/
 }
