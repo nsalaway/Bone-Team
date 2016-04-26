@@ -27,84 +27,84 @@ public class PickerManagerCode : MonoBehaviour {
     private int State;
     private int Model;
 
+	bool isLoaded = false;
 
     // Use this for initialization
     void Start()
     {
         //DECLARE THE PUZZLE STATE AND ROBOT NUMBER
         State = Random.Range(1, 7);
-        Model = OverallGameManagerErik.RobotNumber;
-        Debug.Log("Model" + Model);
+   
 
         //iNSTANTIATE THE REQUIRED GAME OBJECTS FOR EACH STATE
         if (State == 1)
         {
             //(instantiate code for State here)
-            Instantiate(blueBox, new Vector3(-.5f, .4f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(tealBox, new Vector3(-.5f, .2f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(greenBox, new Vector3(-.5f, .0f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(greyBox, new Vector3(-.5f, -.2f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(redBox, new Vector3(.5f, .4f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(pinkBox, new Vector3(.5f, .2f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(orangeBox, new Vector3(.5f, .0f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(yellowBox, new Vector3(.5f, -.2f, gameObject.transform.position.z), gameObject.transform.rotation);
+			spawnBlue();
+			spawnTeal();
+			spawnGreen ();
+			spawnGrey ();
+			spawnRed ();
+			spawnPink ();
+			spawnOrange ();
+			spawnYellow ();
 
         }
         if (State == 2)
         {
             //(instantiate code for State here)
-            Instantiate(blueBox, new Vector3(-.5f, .4f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(tealBox, new Vector3(-.5f, .2f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(greyBox, new Vector3(-.5f, -.2f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(redBox, new Vector3(.5f, .4f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(pinkBox, new Vector3(.5f, .2f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(orangeBox, new Vector3(.5f, .0f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(yellowBox, new Vector3(.5f, -.2f, gameObject.transform.position.z), gameObject.transform.rotation);
+			spawnBlue();
+			spawnTeal();
+			spawnGrey ();
+			spawnRed ();
+			spawnPink ();
+			spawnOrange ();
+			spawnYellow ();
 
         }
         if (State == 3)
         {
             //(instantiate code for State here)
-            Instantiate(blueBox, new Vector3(-.5f, .4f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(tealBox, new Vector3(-.5f, .2f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(greenBox, new Vector3(-.5f, .0f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(greyBox, new Vector3(-.5f, -.2f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(pinkBox, new Vector3(.5f, .2f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(orangeBox, new Vector3(.5f, .0f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(yellowBox, new Vector3(.5f, -.2f, gameObject.transform.position.z), gameObject.transform.rotation);
+			spawnBlue();
+			spawnTeal();
+			spawnGreen ();
+			spawnGrey ();
+			spawnPink ();
+			spawnOrange ();
+			spawnYellow ();
 
         }
         if (State == 4)
         {
             //(instantiate code for State here)
-            Instantiate(blueBox, new Vector3(-.5f, .2f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(greenBox, new Vector3(-.5f, .0f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(greyBox, new Vector3(-.5f, -.2f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(redBox, new Vector3(.5f, .4f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(pinkBox, new Vector3(.5f, .2f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(orangeBox, new Vector3(.5f, .0f, gameObject.transform.position.z), gameObject.transform.rotation);
+			spawnBlue();
+			spawnGreen ();
+			spawnGrey ();
+			spawnRed ();
+			spawnPink ();
+			spawnOrange ();
 
         }
         if (State == 5)
         {
             //(instantiate code for State here)
-            Instantiate(blueBox, new Vector3(-.5f, .4f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(tealBox, new Vector3(-.5f, .2f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(greenBox, new Vector3(-.5f, .0f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(greyBox, new Vector3(-.5f, -.2f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(redBox, new Vector3(.5f, .4f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(yellowBox, new Vector3(.5f, -.2f, gameObject.transform.position.z), gameObject.transform.rotation);
+			spawnBlue();
+			spawnTeal();
+			spawnGreen ();
+			spawnGrey ();
+			spawnRed ();
+			spawnYellow ();
 
         }
         if (State == 6)
         {
             //(instantiate code for State here)
-            Instantiate(blueBox, new Vector3(-.5f, .4f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(tealBox, new Vector3(-.5f, .2f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(redBox, new Vector3(.5f, .4f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(pinkBox, new Vector3(.5f, .2f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(orangeBox, new Vector3(.5f, .0f, gameObject.transform.position.z), gameObject.transform.rotation);
-            Instantiate(yellowBox, new Vector3(.5f, -.2f, gameObject.transform.position.z), gameObject.transform.rotation);
+			spawnBlue();
+			spawnTeal();
+			spawnRed ();
+			spawnPink ();
+			spawnOrange ();
+			spawnYellow ();
 
         }
        
@@ -129,6 +129,13 @@ public class PickerManagerCode : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+		if (!isLoaded)
+		{
+			Model = OverallGameManagerErik.RobotNumber;
+			Debug.Log("Model" + Model);
+			isLoaded = true;
+		}
+
 
         //(Add raycast to check fo the tag of each object and set their state to true here)
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -333,5 +340,46 @@ public class PickerManagerCode : MonoBehaviour {
         }
 
     }
+
+	void spawnBlue()
+	{
+		Instantiate(blueBox, new Vector3(-.5f, 1.5f, gameObject.transform.position.z), gameObject.transform.rotation);
+	}
+	void spawnTeal()
+	{
+		Instantiate(tealBox, new Vector3(-.5f, .5f, gameObject.transform.position.z), gameObject.transform.rotation);
+	}
+	void spawnGreen()
+	{
+		Instantiate(greenBox, new Vector3(-.5f, -.5f, gameObject.transform.position.z), gameObject.transform.rotation);
+	}
+	void spawnGrey()
+	{
+		Instantiate(greyBox, new Vector3(-.5f, -1.5f, gameObject.transform.position.z), gameObject.transform.rotation);
+	}
+	void spawnRed()
+	{
+		Instantiate(redBox, new Vector3(.5f, 1.5f, gameObject.transform.position.z), gameObject.transform.rotation);
+	}
+	void spawnPink()
+	{
+		Instantiate(pinkBox, new Vector3(.5f, .5f, gameObject.transform.position.z), gameObject.transform.rotation);
+	}
+	void spawnOrange()
+	{
+		Instantiate(orangeBox, new Vector3(.5f, -.50f, gameObject.transform.position.z), gameObject.transform.rotation);
+	}
+	void spawnYellow()
+	{
+		Instantiate(yellowBox, new Vector3(.5f, -1.5f, gameObject.transform.position.z), gameObject.transform.rotation);
+	}
+
+
+
+
+
+
+
+
 
 }

@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class OverallGameManagerErik : MonoBehaviour {
 
-    public static int RobotNumber;
+	public static int RobotNumber;
     public static int NumberCorrect;
     public static int NumberIncorrect;
     public int numberToWin, numberToLose;
