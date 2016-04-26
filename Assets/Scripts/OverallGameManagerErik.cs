@@ -7,7 +7,14 @@ public class OverallGameManagerErik : MonoBehaviour {
     public static int RobotNumber;
     public static int NumberCorrect;
     public static int NumberIncorrect;
+    public int numberToWin, numberToLose;
     public static bool levelFinished;
+    public bool isGameActive = false;
+
+    int randomizer, previousPuzzle = 7;
+
+    public GameObject puzzle1, puzzle2, puzzle3;
+    public GameObject[] puzzles = new GameObject[3];
 
     private int puzzleToLoad;
 
@@ -18,10 +25,6 @@ public class OverallGameManagerErik : MonoBehaviour {
         RobotNumber = Random.Range(1, 4);
         puzzleToLoad = Random.Range(1, 4);
 
-    }
-	
-	// Update is called once per frame
-	void Update () {
         if (RobotNumber == 1)
         {
             //instantiate Robot 1
@@ -35,24 +38,35 @@ public class OverallGameManagerErik : MonoBehaviour {
             //instantiate Robot 3
         }
 
-        // If the current scene isn't an acrtive puzzle select a random level to load
-        //if (SceneManager.GetActiveScene == SceneManager.GetSceneByName "Not A Puzzle Scene")
-        //{
-        //if (puzzleToLoad == 1)
-        //{
-        //   SceneManager.LoadScene("WhateverPuzzleAssignedTo1");
-        //}
-        //if (puzzleToLoad == 2)
-        //{
-        //    SceneManager.LoadScene("WhateverPuzzleAssignedTo2");
-        //}
-        //if (puzzleToLoad == 3)
-        //{
-        //   SceneManager.LoadScene("WhateverPuzzleAssignedTo3");
-        //}
-        //}
-        // If a level has been finished load one of the other two levels
+    }
+	
+	// Update is called once per frame
+	void Update () {
+        if (NumberCorrect == numberToWin)
+        {
+            //YOU WIN THE GAME!
+        }
+        else if (NumberIncorrect == numberToLose)
+        {
+            //YOU LOSE THE GAME
+        }
+        if (isGameActive)
+        {
+            //dont do anything basically
+        }
 
+        else
+        {
+
+            //spawn a new puzzle
+            while (randomizer == previousPuzzle)
+            {
+                randomizer = Random.Range(0, 3);
+            }
+            previousPuzzle = randomizer;
+            GameObject myPuzzle = (GameObject)Instantiate(puzzles[randomizer], transform.position, Quaternion.identity);
+
+        }
 
     }
 }
