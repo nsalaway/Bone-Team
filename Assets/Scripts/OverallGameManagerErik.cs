@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class OverallGameManagerErik : MonoBehaviour {
 
-	public static int RobotNumber;
+    public static int RobotNumber;
     public static int NumberCorrect;
     public static int NumberIncorrect;
     public int numberToWin, numberToLose;
@@ -18,9 +18,10 @@ public class OverallGameManagerErik : MonoBehaviour {
 
     private int puzzleToLoad;
 
-	// Use this for initialization
+    // Use this for initialization
 
-	void Start () {
+    void Start()
+    {
 
         RobotNumber = Random.Range(1, 4);
         puzzleToLoad = Random.Range(1, 4);
@@ -39,9 +40,10 @@ public class OverallGameManagerErik : MonoBehaviour {
         }
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         if (NumberCorrect == numberToWin)
         {
             //YOU WIN THE GAME!
