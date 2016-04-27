@@ -198,14 +198,12 @@ public class MorseCodePuzzle : MonoBehaviour
 	public void YouLose ()
 	{
 		Debug.Log ("you lost");
-        OverallGameManagerErik.isGameActive = false;
-        Destroy(gameObject);
+        OverallGameManagerErik.MadeError();
     }
 
 	public void YouWon ()
 	{
 		Debug.Log ("you won");
-        OverallGameManagerErik.isGameActive = false;
-        Destroy(gameObject);
+        OverallGameManagerErik.PuzzleWon(transform.parent.gameObject);
     }
 }
