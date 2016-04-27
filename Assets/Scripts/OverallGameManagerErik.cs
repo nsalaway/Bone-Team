@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 public class OverallGameManagerErik : MonoBehaviour {
 
     public static int RobotNumber;
-    public static int NumberCorrect;
-    public static int NumberIncorrect;
+    static int NumberCorrect = 0;
+    static int NumberIncorrect = 0;
     public int numberToWin, numberToLose;
     public static bool levelFinished;
     public static bool isGameActive = false;
@@ -46,10 +46,12 @@ public class OverallGameManagerErik : MonoBehaviour {
         if (NumberCorrect == numberToWin)
         {
             Debug.Log("YOU ARE AMAZING");
+            //SceneManager.LoadScene(0);
         }
         else if (NumberIncorrect == numberToLose)
         {
             Debug.Log("YOU SUCK AT THIS GAME");
+            //SceneManager.LoadScene(0);
         }
         if (isGameActive)
         {
@@ -82,5 +84,6 @@ public class OverallGameManagerErik : MonoBehaviour {
     public static void MadeError()
     {
         NumberIncorrect++;
+        Debug.Log("Strike" + NumberIncorrect);
     }
 }

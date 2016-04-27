@@ -123,10 +123,19 @@ public class PickerManagerCode : MonoBehaviour {
     //YOU LOSE FUNCTION
     void YouLose()
     {
-        Debug.Log("Failure");
+        //Debug.Log("Failure");
         OverallGameManagerErik.MadeError();
+    isClickedBlue = false;
+    isClickedTeal = false;
+    isClickedGreen = false;
+    isClickedGrey = false;
+    isClickedRed = false;
+    isClickedPink = false;
+    isClickedOrange = false;
+    isClickedYellow = false;
+    finalizeAnswere = false;
 
-    }
+}
 
 
     // Update is called once per frame
