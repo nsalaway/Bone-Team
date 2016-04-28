@@ -16,7 +16,8 @@ public class MorseCodePuzzle : MonoBehaviour
 	float clickDelay;
 	public Text timerText;
 	bool wasBlackClicked;
-	public Transform arrowSprite;
+	public Transform arrowParentCube;
+	bool wasDialPressed;
 
 	void Start ()
 	{
@@ -60,6 +61,10 @@ public class MorseCodePuzzle : MonoBehaviour
 			if (blackClickCounter > 0) {
 				YouLose ();
 			}
+			//pressing dial is wrong.
+			if (wasDialPressed == true) {
+				YouLose ();
+			}
 			//pressing pink button is correct...
 			if (pinkClickCounter > 0) {
 				//start counting down timer when you press pink button.
@@ -82,6 +87,10 @@ public class MorseCodePuzzle : MonoBehaviour
 		if (randomSoundChooser == 1) {
 			//pressing pink button is wrong.
 			if (pinkClickCounter > 0) {
+				YouLose ();
+			}
+			//pressing dial is wrong.
+			if (wasDialPressed == true) {
 				YouLose ();
 			}
 			//pressing black button is correct...	
@@ -151,8 +160,10 @@ public class MorseCodePuzzle : MonoBehaviour
 	//WHEN YOU PRESS THE DIAL PAD...
 	public void RotateArrow ()
 	{
+		wasDialPressed = true;
+
 		//rotate arrow & increment dailNumber
-		arrowSprite.Rotate (0f, 0f, -40f);
+		arrowParentCube.Rotate (0f, 50f, 0f);
 		if (dialNumber <= 8) {
 			dialNumber++;
 		} else if (dialNumber >= 9) {
@@ -197,13 +208,15 @@ public class MorseCodePuzzle : MonoBehaviour
 
 	public void YouLose ()
 	{
-		Debug.Log ("you lost");
+		Debug.Log ("you lose");
         OverallGameManagerErik.MadeError();
+		pinkClickCounter = 0;
+		blackClickCounter = 0;
+		totalTime = 10.0f;
     }
 
 	public void YouWon ()
 	{
-		Debug.Log ("you won");
         OverallGameManagerErik.PuzzleWon(transform.parent.gameObject);
     }
 }
