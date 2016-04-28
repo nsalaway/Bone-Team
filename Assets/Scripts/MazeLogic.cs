@@ -17,6 +17,7 @@ public class MazeLogic : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        OverallGameManagerErik.isGameActive = true;
         CreateMaze();
         CreateUnits();
     }
@@ -32,6 +33,8 @@ public class MazeLogic : MonoBehaviour {
     {
         GameObject myLeftMaze = (GameObject)Instantiate(leftMazes[modifierOne], transform.position, Quaternion.identity);
         GameObject myRightMaze = (GameObject)Instantiate(rightMazes[modifierTwo], transform.position, Quaternion.identity);
+        myLeftMaze.transform.parent = transform;
+        myRightMaze.transform.parent = transform;
     }
 
     void CreateUnits()
@@ -41,6 +44,7 @@ public class MazeLogic : MonoBehaviour {
 
         Vector3 playerStartLocation = new Vector3(randX, 1, randZ);
         GameObject myPlayer = (GameObject)Instantiate(player, playerStartLocation, Quaternion.identity);
+        myPlayer.transform.parent = transform;
 
 
         randZ = Random.Range(-4, 6);
@@ -56,5 +60,6 @@ public class MazeLogic : MonoBehaviour {
 
         Vector3 goalLocation = new Vector3(randX, 1, randZ);
         GameObject myGoal = (GameObject)Instantiate(goal, goalLocation, Quaternion.identity);
+        myGoal.transform.parent = transform;
     }
 }

@@ -4,24 +4,27 @@ using UnityEngine.SceneManagement;
 
 public class OverallGameManagerErik : MonoBehaviour {
 
-	public static int RobotNumber;
-    public static int NumberCorrect;
-    public static int NumberIncorrect;
+    public static int RobotNumber;
+    static int NumberCorrect = 0;
+    static int NumberIncorrect = 0;
+    public int numberToWin, numberToLose;
     public static bool levelFinished;
+    public static bool isGameActive = false;
+
+    int randomizer=8, previousPuzzle = 7;
+    
+    public GameObject[] puzzles = new GameObject[3];
 
     private int puzzleToLoad;
 
-	// Use this for initialization
+    // Use this for initialization
 
-	void Start () {
-
+    void Start()
+    {
+        randomizer = Random.Range(0, 3);
         RobotNumber = Random.Range(1, 4);
         puzzleToLoad = Random.Range(1, 4);
 
-    }
-	
-	// Update is called once per frame
-	void Update () {
         if (RobotNumber == 1)
         {
             //instantiate Robot 1
@@ -35,24 +38,52 @@ public class OverallGameManagerErik : MonoBehaviour {
             //instantiate Robot 3
         }
 
-        // If the current scene isn't an acrtive puzzle select a random level to load
-        //if (SceneManager.GetActiveScene == SceneManager.GetSceneByName "Not A Puzzle Scene")
-        //{
-        //if (puzzleToLoad == 1)
-        //{
-        //   SceneManager.LoadScene("WhateverPuzzleAssignedTo1");
-        //}
-        //if (puzzleToLoad == 2)
-        //{
-        //    SceneManager.LoadScene("WhateverPuzzleAssignedTo2");
-        //}
-        //if (puzzleToLoad == 3)
-        //{
-        //   SceneManager.LoadScene("WhateverPuzzleAssignedTo3");
-        //}
-        //}
-        // If a level has been finished load one of the other two levels
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (NumberCorrect == numberToWin)
+        {
+            Debug.Log("YOU ARE AMAZING");
+            //SceneManager.LoadScene(0);
+        }
+        else if (NumberIncorrect == numberToLose)
+        {
+            Debug.Log("YOU SUCK AT THIS GAME");
+            //SceneManager.LoadScene(0);
+        }
+        if (isGameActive)
+        {
+            //dont do anything basically
+        }
+
+        else
+        {
+
+            //spawn a new puzzle
+            while (randomizer == previousPuzzle)
+            {
+                randomizer = Random.Range(0, 3);
+            }
+            previousPuzzle = randomizer;
+            GameObject myPuzzle = (GameObject)Instantiate(puzzles[randomizer], transform.position, puzzles[randomizer].transform.rotation);
 
 
+        }
+
+    }
+
+    public static void PuzzleWon(GameObject myGO)
+    {
+        NumberCorrect++;
+        isGameActive = false;
+        Destroy(myGO);
+    }
+
+    public static void MadeError()
+    {
+        NumberIncorrect++;
+        Debug.Log("Strike" + NumberIncorrect);
     }
 }
