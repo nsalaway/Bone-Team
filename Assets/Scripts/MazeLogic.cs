@@ -3,9 +3,8 @@ using System.Collections;
 
 public class MazeLogic : MonoBehaviour {
 
-    public int modifierOne;
-    public int modifierTwo;
-    public int modifierThree;
+    int antenna;
+    int eyes;
 
     int randX = 1, randZ;
 
@@ -18,8 +17,10 @@ public class MazeLogic : MonoBehaviour {
     // Use this for initialization
     void Start () {
         OverallGameManagerErik.isGameActive = true;
+        GetRobot();
         CreateMaze();
         CreateUnits();
+        
     }
 	
 	// Update is called once per frame
@@ -31,8 +32,8 @@ public class MazeLogic : MonoBehaviour {
 
     void CreateMaze()
     {
-        GameObject myLeftMaze = (GameObject)Instantiate(leftMazes[modifierOne], transform.position, Quaternion.identity);
-        GameObject myRightMaze = (GameObject)Instantiate(rightMazes[modifierTwo], transform.position, Quaternion.identity);
+        GameObject myLeftMaze = (GameObject)Instantiate(leftMazes[antenna], transform.position, Quaternion.identity);
+        GameObject myRightMaze = (GameObject)Instantiate(rightMazes[eyes], transform.position, Quaternion.identity);
         myLeftMaze.transform.parent = transform;
         myRightMaze.transform.parent = transform;
     }
@@ -61,5 +62,11 @@ public class MazeLogic : MonoBehaviour {
         Vector3 goalLocation = new Vector3(randX, 1, randZ);
         GameObject myGoal = (GameObject)Instantiate(goal, goalLocation, Quaternion.identity);
         myGoal.transform.parent = transform;
+    }
+
+    void GetRobot()
+    {
+        eyes = OverallGameManagerErik.eyes;
+        antenna = OverallGameManagerErik.antenna;
     }
 }
