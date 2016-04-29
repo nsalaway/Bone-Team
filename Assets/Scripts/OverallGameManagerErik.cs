@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class OverallGameManagerErik : MonoBehaviour {
 
     public static int RobotNumber;
-    static int NumberCorrect = 0;
-    static int NumberIncorrect = 0;
+    public static int antenna;
+    public static int eyes;
+    public static int NumberCorrect = 0;
+    public static int NumberIncorrect = 0;
     public int numberToWin, numberToLose;
-    public static bool levelFinished;
+    //public static bool levelFinished;
     public static bool isGameActive = false;
+	public float overallGameTime = 900.0f;
+	public Text gameTimerText;
 
     int randomizer=8, previousPuzzle = 7;
     
@@ -21,6 +26,10 @@ public class OverallGameManagerErik : MonoBehaviour {
 
     void Start()
     {
+        RandomizeRobot();
+        NumberCorrect = 0;
+        NumberIncorrect = 0;
+        isGameActive = false;
         randomizer = Random.Range(0, 3);
         RobotNumber = Random.Range(1, 4);
         puzzleToLoad = Random.Range(1, 4);
@@ -43,12 +52,24 @@ public class OverallGameManagerErik : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+		//Timer.
+		overallGameTime -= Time.deltaTime;
+		string timerTextInSeconds = string.Format ("{0:0}:{1:00}", Mathf.Floor (overallGameTime / 60), overallGameTime % 60); //Displays timer in minutes & seconds.
+		gameTimerText.text = timerTextInSeconds.ToString ();
+
+		//Restart.
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RestartGame();
+        }
+		//You won.
         if (NumberCorrect == numberToWin)
         {
             Debug.Log("YOU ARE AMAZING");
             //SceneManager.LoadScene(0);
         }
-        else if (NumberIncorrect == numberToLose)
+		//You lost.
+		if (NumberIncorrect == numberToLose || overallGameTime <= 0f)
         {
             Debug.Log("YOU SUCK AT THIS GAME");
             //SceneManager.LoadScene(0);
@@ -67,23 +88,49 @@ public class OverallGameManagerErik : MonoBehaviour {
                 randomizer = Random.Range(0, 3);
             }
             previousPuzzle = randomizer;
-			GameObject myPuzzle = (GameObject)Instantiate(puzzles[0], transform.position, puzzles[0].transform.rotation);
+			GameObject myPuzzle = (GameObject)Instantiate(puzzles[randomizer], transform.position, puzzles[randomizer].transform.rotation);
 
 
         }
 
     }
-
+	/// <summary>
+	/// When you win a puzzle, destroy it & add score.
+	/// </summary>
     public static void PuzzleWon(GameObject myGO)
     {
         NumberCorrect++;
         isGameActive = false;
         Destroy(myGO);
+		Debug.Log ("correctly solved puzzle");
     }
 
+	/// <summary>
+	/// When you make an error, add a strike.
+	/// </summary>
     public static void MadeError()
     {
         NumberIncorrect++;
         Debug.Log("Strike" + NumberIncorrect);
+    }
+		
+    void RestartGame()
+    {
+
+        SceneManager.LoadScene(0);
+
+    }
+
+	/// <summary>
+	/// Randomizes the robot.
+	/// </summary>
+    void RandomizeRobot()
+    {
+        int randomizer = Random.Range(0, 3);
+        antenna = randomizer;
+        Debug.Log("Antenna: " + antenna);
+        randomizer = Random.Range(0, 3);
+        eyes = randomizer;
+        Debug.Log("Eyes: " + eyes);
     }
 }

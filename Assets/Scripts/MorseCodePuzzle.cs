@@ -14,10 +14,10 @@ public class MorseCodePuzzle : MonoBehaviour
 	int dialNumber = 5;
 	public float totalTime = 10.0f;
 	float clickDelay;
-	public Text timerText;
 	bool wasBlackClicked;
 	public Transform arrowParentCube;
 	bool wasDialPressed;
+	public Transform arrowSprite;
 
 	void Start ()
 	{
@@ -25,7 +25,7 @@ public class MorseCodePuzzle : MonoBehaviour
         randomSoundChooser = Random.Range (0, 4);
 		//Play random sound at start of puzzle.
 		soundManager.PlayOneShot (sounds [randomSoundChooser], 1f);
-		Debug.Log (randomSoundChooser);
+		Debug.Log ("sound #" + randomSoundChooser);
 	}
 
 	// Update is called once per frame
@@ -33,7 +33,6 @@ public class MorseCodePuzzle : MonoBehaviour
 	{
 		ReplaySound ();
 		ResetButton ();
-		string timerTextInSeconds = string.Format ("{1:00}", Mathf.Floor (totalTime / 60), totalTime % 60); //Displays timer in seconds.
 		Ray mouseRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit mouseRayInfo = new RaycastHit ();
 
@@ -41,15 +40,16 @@ public class MorseCodePuzzle : MonoBehaviour
 		if (Input.GetMouseButtonDown (0) && Physics.Raycast (mouseRay, out mouseRayInfo, 1000f)) {
 			if (mouseRayInfo.collider.tag == "pink") {
 				pinkClickCounter++;
+				Debug.Log ("pink counter = " + pinkClickCounter);
 			} 
 
 			if (mouseRayInfo.collider.tag == "black") {
-				//If you haven't already clicked in the past 1 second, you can click & raise counter (see ResetButton function).
+				//If you haven't already clicked in the past 2 seconds, you can click & raise counter (see ResetButton function).
 				if (!wasBlackClicked) {
 					clickDelay = 1f;
 					wasBlackClicked = true;
 					blackClickCounter++;
-					Debug.Log (blackClickCounter);
+					Debug.Log ("black counter = " + blackClickCounter);
 				}
 			}
 		}
@@ -63,16 +63,16 @@ public class MorseCodePuzzle : MonoBehaviour
 			}
 			//pressing dial is wrong.
 			if (wasDialPressed == true) {
+				Debug.Log ("dial pressed - you lose");
 				YouLose ();
 			}
 			//pressing pink button is correct...
 			if (pinkClickCounter > 0) {
 				//start counting down timer when you press pink button.
-				Debug.Log (pinkClickCounter);
 				totalTime -= Time.deltaTime;
-				timerText.text = timerTextInSeconds.ToString ();
 				//if you don't press x times in x seconds, lose
 				if (totalTime <= 0 && pinkClickCounter < pinkMouseClicksNeeded) {
+					Debug.Log ("time is up");
 					YouLose ();
 				}
 				//if you do press x times in x seconds, win
@@ -91,14 +91,18 @@ public class MorseCodePuzzle : MonoBehaviour
 			}
 			//pressing dial is wrong.
 			if (wasDialPressed == true) {
+				Debug.Log ("dial pressed - you lose");
 				YouLose ();
 			}
 			//pressing black button is correct...	
 			if (blackClickCounter > 0) {
+            }
+            //pressing black button is correct...	
+            if (blackClickCounter > 0) {
 				totalTime -= Time.deltaTime;
-				timerText.text = timerTextInSeconds.ToString ();
 				//if you don't press x times in x seconds, lose
 				if (totalTime <= 0 && blackClickCounter < blackMouseClicksNeeded) {
+					Debug.Log ("time is up");
 					YouLose ();
 				}
 				//if you do press x times in x seconds, win
@@ -169,8 +173,7 @@ public class MorseCodePuzzle : MonoBehaviour
 		} else if (dialNumber >= 9) {
 			dialNumber = 0;
 		}
-		Debug.Log ("clicked dial");
-		Debug.Log (dialNumber);
+		Debug.Log ("clicked dial " + dialNumber);
 	}
 
 	//==============================================================================================================================================================
@@ -208,11 +211,11 @@ public class MorseCodePuzzle : MonoBehaviour
 
 	public void YouLose ()
 	{
-		Debug.Log ("you lose");
         OverallGameManagerErik.MadeError();
 		pinkClickCounter = 0;
 		blackClickCounter = 0;
 		totalTime = 10.0f;
+		wasDialPressed = false;
     }
 
 	public void YouWon ()
