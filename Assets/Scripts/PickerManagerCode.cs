@@ -354,42 +354,42 @@ public class PickerManagerCode : MonoBehaviour {
 
 	void spawnBlue()
 	{
-		GameObject myButton = (GameObject)Instantiate(blueBox, new Vector3(-2f, 4f, 0f), gameObject.transform.rotation);
+		GameObject myButton = (GameObject)Instantiate(blueBox, new Vector3(-2.5f, 4f, 0f), gameObject.transform.rotation);
         myButton.transform.parent = transform;
 	}
 	void spawnTeal()
 	{
-        GameObject myButton = (GameObject)Instantiate(tealBox, new Vector3(-2f, 2f, 0f), gameObject.transform.rotation);
+        GameObject myButton = (GameObject)Instantiate(tealBox, new Vector3(-2.5f, 2f, 0f), gameObject.transform.rotation);
         myButton.transform.parent = transform;
     }
 	void spawnGreen()
 	{
-        GameObject myButton = (GameObject)Instantiate(greenBox, new Vector3(-2f, 0f, 0f), gameObject.transform.rotation);
+        GameObject myButton = (GameObject)Instantiate(greenBox, new Vector3(-2.5f, 0f, 0f), gameObject.transform.rotation);
         myButton.transform.parent = transform;
     }
 	void spawnGrey()
 	{
-        GameObject myButton = (GameObject)Instantiate(greyBox, new Vector3(-2f, -2f, 0f), gameObject.transform.rotation);
+        GameObject myButton = (GameObject)Instantiate(greyBox, new Vector3(-2.5f, -2f, 0f), gameObject.transform.rotation);
         myButton.transform.parent = transform;
     }
 	void spawnRed()
 	{
-        GameObject myButton = (GameObject)Instantiate(redBox, new Vector3(0f, 4f, 0f), gameObject.transform.rotation);
+        GameObject myButton = (GameObject)Instantiate(redBox, new Vector3(0.5f, 4f, 0f), gameObject.transform.rotation);
         myButton.transform.parent = transform;
     }
 	void spawnPink()
 	{
-        GameObject myButton = (GameObject)Instantiate(pinkBox, new Vector3(0f, 2f, 0f), gameObject.transform.rotation);
+        GameObject myButton = (GameObject)Instantiate(pinkBox, new Vector3(0.5f, 2f, 0f), gameObject.transform.rotation);
         myButton.transform.parent = transform;
     }
 	void spawnOrange()
 	{
-        GameObject myButton = (GameObject)Instantiate(orangeBox, new Vector3(0f, 0f, 0f), gameObject.transform.rotation);
+        GameObject myButton = (GameObject)Instantiate(orangeBox, new Vector3(0.5f, 0f, 0f), gameObject.transform.rotation);
         myButton.transform.parent = transform;
     }
 	void spawnYellow()
 	{
-        GameObject myButton = (GameObject)Instantiate(yellowBox, new Vector3(0f, -2f, 0f), gameObject.transform.rotation);
+        GameObject myButton = (GameObject)Instantiate(yellowBox, new Vector3(0.5f, -2f, 0f), gameObject.transform.rotation);
         myButton.transform.parent = transform;
     }
 

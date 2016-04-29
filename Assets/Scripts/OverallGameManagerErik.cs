@@ -67,7 +67,7 @@ public class OverallGameManagerErik : MonoBehaviour {
                 randomizer = Random.Range(0, 3);
             }
             previousPuzzle = randomizer;
-			GameObject myPuzzle = (GameObject)Instantiate(puzzles[1], transform.position, puzzles[1].transform.rotation);
+			GameObject myPuzzle = (GameObject)Instantiate(puzzles[0], transform.position, puzzles[0].transform.rotation);
 
 
         }
