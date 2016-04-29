@@ -142,8 +142,8 @@ public class PickerManagerCode : MonoBehaviour {
     void Update () {
 		if (!isLoaded)
 		{
-			Model = OverallGameManagerErik.RobotNumber;
-			Debug.Log("Model" + Model);
+			Model = OverallGameManagerErik.antenna;
+			//Debug.Log("Model" + Model);
 			isLoaded = true;
 		}
 
@@ -205,7 +205,7 @@ public class PickerManagerCode : MonoBehaviour {
         if (State == 1)
         {
             
-            if (Model == 1 || Model == 2)
+            if (Model == 0 || Model == 1)
             {
                 if (finalizeAnswere ==true)
                 {
@@ -216,7 +216,7 @@ public class PickerManagerCode : MonoBehaviour {
                     else { YouLose(); }
                 }
             }
-            else if (Model == 3)
+            else if (Model == 2)
             {
                 if (finalizeAnswere == true)
                 {
@@ -232,7 +232,7 @@ public class PickerManagerCode : MonoBehaviour {
         if (State == 2)
         {
 
-            if (Model == 1 || Model == 2)
+            if (Model == 0 || Model == 1)
             {
                 if (finalizeAnswere == true)
                 {
@@ -243,7 +243,7 @@ public class PickerManagerCode : MonoBehaviour {
                     else {YouLose(); }
                 }
             }
-            else if (Model == 3)
+            else if (Model == 2)
             {
                 if (finalizeAnswere == true)
                 {
@@ -259,7 +259,7 @@ public class PickerManagerCode : MonoBehaviour {
         if (State == 3)
         {
 
-            if (Model == 1 || Model == 3)
+            if (Model == 0 || Model == 2)
             {
                 if (finalizeAnswere == true)
                 {
@@ -270,7 +270,7 @@ public class PickerManagerCode : MonoBehaviour {
                     else { YouLose(); }
                 }
             }
-            else if (Model == 2)
+            else if (Model == 1)
             {
                 if (finalizeAnswere == true)
                 {
@@ -286,7 +286,7 @@ public class PickerManagerCode : MonoBehaviour {
         if (State == 4)
         {
 
-            if (Model == 1 || Model == 2)
+            if (Model == 0 || Model == 1)
             {
                 if (finalizeAnswere == true)
                 {
@@ -297,7 +297,7 @@ public class PickerManagerCode : MonoBehaviour {
                     else { YouLose(); }
                 }
             }
-            else if (Model == 3)
+            else if (Model == 2)
             {
                 if (finalizeAnswere == true)
                 {
@@ -313,7 +313,7 @@ public class PickerManagerCode : MonoBehaviour {
         if (State == 5)
         {
 
-            if (Model == 1 || Model == 3)
+            if (Model == 0 || Model == 2)
             {
                 if (finalizeAnswere == true)
                 {
@@ -324,7 +324,7 @@ public class PickerManagerCode : MonoBehaviour {
                     else { YouLose(); }
                 }
             }
-            else if (Model ==2)
+            else if (Model ==1)
             {
                 if (finalizeAnswere == true)
                 {

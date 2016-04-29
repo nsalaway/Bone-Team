@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 public class OverallGameManagerErik : MonoBehaviour {
 
     public static int RobotNumber;
-    static int NumberCorrect = 0;
-    static int NumberIncorrect = 0;
+    public static int antenna;
+    public static int eyes;
+    public static int NumberCorrect = 0;
+    public static int NumberIncorrect = 0;
     public int numberToWin, numberToLose;
-    public static bool levelFinished;
+    //public static bool levelFinished;
     public static bool isGameActive = false;
 
     int randomizer=8, previousPuzzle = 7;
@@ -21,6 +23,10 @@ public class OverallGameManagerErik : MonoBehaviour {
 
     void Start()
     {
+        RandomizeRobot();
+        NumberCorrect = 0;
+        NumberIncorrect = 0;
+        isGameActive = false;
         randomizer = Random.Range(0, 3);
         RobotNumber = Random.Range(1, 4);
         puzzleToLoad = Random.Range(1, 4);
@@ -43,6 +49,10 @@ public class OverallGameManagerErik : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RestartGame();
+        }
         if (NumberCorrect == numberToWin)
         {
             Debug.Log("YOU ARE AMAZING");
@@ -85,5 +95,22 @@ public class OverallGameManagerErik : MonoBehaviour {
     {
         NumberIncorrect++;
         Debug.Log("Strike" + NumberIncorrect);
+    }
+
+    void RestartGame()
+    {
+
+        SceneManager.LoadScene(0);
+
+    }
+
+    void RandomizeRobot()
+    {
+        int randomizer = Random.Range(0, 3);
+        antenna = randomizer;
+        Debug.Log("Antenna: " + antenna);
+        randomizer = Random.Range(0, 3);
+        eyes = randomizer;
+        Debug.Log("Eyes: " + eyes);
     }
 }
