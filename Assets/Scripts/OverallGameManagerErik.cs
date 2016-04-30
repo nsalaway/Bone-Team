@@ -18,6 +18,15 @@ public class OverallGameManagerErik : MonoBehaviour {
     public GameObject[] puzzles = new GameObject[3];
 
     private int puzzleToLoad;
+    private static int wonSound;
+    private static int lossSound;
+
+    public static AudioSource Pleasure1;
+    public static AudioSource Pleasure2;
+    public static AudioSource Pleasure3;
+    public static AudioSource Fail1;
+    public static AudioSource Fail2;
+    public static AudioSource Fail3;
 
     // Use this for initialization
 
@@ -89,12 +98,39 @@ public class OverallGameManagerErik : MonoBehaviour {
         NumberCorrect++;
         isGameActive = false;
         Destroy(myGO);
+        wonSound = Random.Range(0, 3);
+        if (wonSound == 0)
+        {
+            Pleasure1.Play();
+        }
+        if (wonSound == 1)
+        {
+            Pleasure2.Play();
+        }
+        if (wonSound == 2)
+        {
+            Pleasure3.Play();
+        }
     }
 
     public static void MadeError()
     {
         NumberIncorrect++;
         Debug.Log("Strike" + NumberIncorrect);
+        lossSound = Random.Range(0, 3);
+
+        if (lossSound == 0)
+        {
+            Fail1.Play();
+        }
+        if (lossSound == 1)
+        {
+            Fail2.Play();
+        }
+        if (lossSound == 2)
+        {
+            Fail3.Play();
+        }
     }
 
     void RestartGame()
