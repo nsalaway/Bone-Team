@@ -117,7 +117,7 @@ public class OverallGameManagerErik : MonoBehaviour {
     void RestartGame()
     {
 
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(3);
 
     }
 
