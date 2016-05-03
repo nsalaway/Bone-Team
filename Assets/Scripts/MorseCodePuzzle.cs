@@ -36,6 +36,13 @@ public class MorseCodePuzzle : MonoBehaviour
 		Ray mouseRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit mouseRayInfo = new RaycastHit ();
 
+		//Replay sound on right click.
+		if (Input.GetMouseButtonDown (1)) {
+			soundManager.Stop ();
+			StartCoroutine (ReplaySound());
+
+		}
+
 		//Detect which button is being pressed and raise its counter.
 		if (Input.GetMouseButtonDown (0) && Physics.Raycast (mouseRay, out mouseRayInfo, 1000f)) {
 			if (mouseRayInfo.collider.tag == "pink") {
@@ -199,15 +206,17 @@ public class MorseCodePuzzle : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Replays the chosen robot sound.
+	/// Pauses & then replays the chosen robot sound.
 	/// </summary>
-	public void ReplaySound ()
+	public IEnumerator ReplaySound ()
 	{
 		//Replay sound on right click.
 		if (Input.GetMouseButtonDown (1)) {
             soundManager.Stop();
 			soundManager.PlayOneShot (sounds [randomSoundChooser], 1f);
 		}
+		yield return new WaitForSeconds (1.0f);
+		soundManager.PlayOneShot (sounds [randomSoundChooser], 1f);
 	}
 
 	public void YouLose ()
