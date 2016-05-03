@@ -205,6 +205,7 @@ public class MorseCodePuzzle : MonoBehaviour
 	{
 		//Replay sound on right click.
 		if (Input.GetMouseButtonDown (1)) {
+            soundManager.Stop();
 			soundManager.PlayOneShot (sounds [randomSoundChooser], 1f);
 		}
 	}
