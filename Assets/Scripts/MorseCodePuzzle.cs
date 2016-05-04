@@ -219,8 +219,10 @@ public class MorseCodePuzzle : MonoBehaviour
         OverallGameManagerErik.MadeError();
 		pinkClickCounter = 0;
 		blackClickCounter = 0;
+		dialNumber = 5;
 		totalTime = 10.0f;
 		wasDialPressed = false;
+		wasBlackClicked = false;
     }
 
 	public void YouWon ()

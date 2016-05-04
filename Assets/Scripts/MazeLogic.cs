@@ -44,8 +44,9 @@ public class MazeLogic : MonoBehaviour {
         randZ = Random.Range(-4, 6);
 
         Vector3 playerStartLocation = new Vector3(randX, 1, randZ);
-		GameObject myPlayer = (GameObject)Instantiate(player, playerStartLocation, player.transform.rotation);
+		GameObject myPlayer = (GameObject)Instantiate(player, transform.position, player.transform.rotation);
         myPlayer.transform.parent = transform;
+		myPlayer.transform.localPosition = playerStartLocation;
 
 
         randZ = Random.Range(-4, 6);
@@ -60,8 +61,9 @@ public class MazeLogic : MonoBehaviour {
         }
 
         Vector3 goalLocation = new Vector3(randX, 1, randZ);
-		GameObject myGoal = (GameObject)Instantiate(goal, goalLocation, goal.transform.rotation);
+		GameObject myGoal = (GameObject)Instantiate(goal, transform.position, goal.transform.rotation);
         myGoal.transform.parent = transform;
+		myGoal.transform.localPosition = goalLocation;
     }
 
     void GetRobot()
