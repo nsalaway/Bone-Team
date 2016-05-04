@@ -15,6 +15,7 @@ public class OverallGameManagerErik : MonoBehaviour {
     public static bool isGameActive = false;
 	public float overallGameTime = 900.0f;
 	public Text gameTimerText;
+	public static Image progressBar;
 
     int randomizer=8, previousPuzzle = 7;
     
@@ -23,6 +24,7 @@ public class OverallGameManagerErik : MonoBehaviour {
     private int puzzleToLoad;
 
     // Use this for initialization
+	//progressBar.fillAmount = (float)"score"/float("math stuff");
 
     void Start()
     {
@@ -33,6 +35,7 @@ public class OverallGameManagerErik : MonoBehaviour {
         randomizer = Random.Range(0, 3);
         RobotNumber = Random.Range(1, 4);
         puzzleToLoad = Random.Range(1, 4);
+		progressBar = GameObject.Find ("Fill").GetComponent<Image>();
 
         if (RobotNumber == 1)
         {
@@ -88,7 +91,7 @@ public class OverallGameManagerErik : MonoBehaviour {
                 randomizer = Random.Range(0, 3);
             }
             previousPuzzle = randomizer;
-			GameObject myPuzzle = (GameObject)Instantiate(puzzles[randomizer], transform.position, puzzles[randomizer].transform.rotation);
+			GameObject myPuzzle = (GameObject)Instantiate(puzzles[randomizer], puzzles[randomizer].transform.position, puzzles[randomizer].transform.rotation);
 
 
         }
@@ -111,7 +114,9 @@ public class OverallGameManagerErik : MonoBehaviour {
     public static void MadeError()
     {
         NumberIncorrect++;
+		progressBar.fillAmount = (float)NumberIncorrect/(float)100;
         Debug.Log("Strike" + NumberIncorrect);
+
     }
 		
     void RestartGame()
