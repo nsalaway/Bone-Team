@@ -45,6 +45,7 @@ public class OverallGameManagerErik : MonoBehaviour {
         RobotNumber = Random.Range(1, 4);
         puzzleToLoad = Random.Range(1, 4);
 		progressBar = GameObject.Find ("Fill").GetComponent<Image>();
+		progressBar.fillAmount = (50f / 100f);
 
         if (RobotNumber == 1)
         {
@@ -112,6 +113,7 @@ public class OverallGameManagerErik : MonoBehaviour {
     public static void PuzzleWon(GameObject myGO)
     {
         NumberCorrect++;
+		progressBar.fillAmount = ((float)NumberCorrect * 10)/(float)100;
         isGameActive = false;
         Destroy(myGO);
 		Debug.Log ("correctly solved puzzle");
@@ -125,7 +127,7 @@ public class OverallGameManagerErik : MonoBehaviour {
     public static void MadeError()
     {
         NumberIncorrect++;
-		progressBar.fillAmount = ((float)NumberIncorrect * 10)/(float)100;
+		progressBar.fillAmount = 1f - (((float)NumberIncorrect * 10)/(float)100);
         Debug.Log("Strike" + NumberIncorrect);
         randomSoundChooser = Random.Range(0, 3);
         instance.soundManager.PlayOneShot(instance.soundsIncorrect[randomSoundChooser], 1f);
