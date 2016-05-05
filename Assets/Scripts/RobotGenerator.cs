@@ -39,9 +39,9 @@ public class RobotGenerator : MonoBehaviour {
 
 
 		//eyeball generator
-		int eyeNumber = Random.Range (1, 4);
+		//int eyeNumber = Random.Range (1, 4);
 
-		if (eyeNumber == 1) {
+		if (OverallGameManagerErik.eyes==0) {
 			Debug.Log ("it was one");
 
 			foreach (MeshRenderer eye1Renderer in Eyes1.GetComponentsInChildren<MeshRenderer>()) {
@@ -56,7 +56,7 @@ public class RobotGenerator : MonoBehaviour {
 				eye3Renderer.enabled = false;
 			}
 
-		} else if (eyeNumber == 2) {
+		} else if (OverallGameManagerErik.eyes == 1) {
 
 			foreach (MeshRenderer eye1Renderer in Eyes1.GetComponentsInChildren<MeshRenderer>()) {
 				eye1Renderer.enabled = false;
@@ -71,7 +71,7 @@ public class RobotGenerator : MonoBehaviour {
 			}
 			Debug.Log ("it was two");
 
-		} else if (eyeNumber == 3) {
+		} else if (OverallGameManagerErik.eyes == 2) {
 
 			foreach (MeshRenderer eye1Renderer in Eyes1.GetComponentsInChildren<MeshRenderer>()) {
 				eye1Renderer.enabled = false;
@@ -91,8 +91,8 @@ public class RobotGenerator : MonoBehaviour {
 
 
 		//antenna generator
-		int antennaNumber = Random.Range (1, 4);
-		if (antennaNumber == 1) {
+		//int antennaNumber = Random.Range (1, 4);
+		if (OverallGameManagerErik.antenna == 0) {
 			Debug.Log ("it was one");
 			//this section makes the antenna disappear
 			foreach (MeshRenderer antenna1Renderer in Antenna1.GetComponentsInChildren<MeshRenderer>()) {
@@ -108,7 +108,7 @@ public class RobotGenerator : MonoBehaviour {
 			}
 
 
-		} else if (antennaNumber == 2) {
+		} else if (OverallGameManagerErik.antenna == 1) {
 			Debug.Log ("it was two");
 			//this section makes the antenna disappear
 			foreach (MeshRenderer antenna1Renderer in Antenna1.GetComponentsInChildren<MeshRenderer>()) {
@@ -122,7 +122,7 @@ public class RobotGenerator : MonoBehaviour {
 			foreach (MeshRenderer antenna3Renderer in Antenna3.GetComponentsInChildren<MeshRenderer>()) {
 				antenna3Renderer.enabled = false;
 			}
-		} else if (antennaNumber == 3) {
+		} else if (OverallGameManagerErik.antenna == 2) {
 			Debug.Log ("Three");
 			//this section makes the antenna disappear
 			foreach (MeshRenderer antenna1Renderer in Antenna1.GetComponentsInChildren<MeshRenderer>()) {
