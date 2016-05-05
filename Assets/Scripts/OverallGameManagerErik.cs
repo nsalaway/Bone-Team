@@ -78,14 +78,12 @@ public class OverallGameManagerErik : MonoBehaviour {
 		//You won.
         if (NumberCorrect == numberToWin)
         {
-            Debug.Log("YOU ARE AMAZING");
-            //SceneManager.LoadScene(0);
+			SceneManager.LoadScene (4);
         }
 		//You lost.
 		if (NumberIncorrect == numberToLose || overallGameTime <= 0f)
         {
-            Debug.Log("YOU SUCK AT THIS GAME");
-            //SceneManager.LoadScene(0);
+			SceneManager.LoadScene (5);
         }
         if (isGameActive)
         {

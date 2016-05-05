@@ -10,6 +10,11 @@ public class LoadScenes : MonoBehaviour {
 	public AudioClip yesSound2;
 
 
+	public void LoadTitleScreen(){
+		soundManager.PlayOneShot (moreSound, 1f);
+		Invoke ("LoadTitleDelay", 1f);
+	}
+
 	/// <summary>
 	/// Load intro scene after playing sound & short delay.
 	/// </summary>
@@ -46,4 +51,7 @@ public class LoadScenes : MonoBehaviour {
 		SceneManager.LoadScene (3);
 	}
 
+	void LoadTitleDelay(){
+		SceneManager.LoadScene (0);
+	}
 }
