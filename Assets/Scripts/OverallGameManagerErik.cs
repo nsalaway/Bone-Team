@@ -114,7 +114,7 @@ public class OverallGameManagerErik : MonoBehaviour {
     public static void MadeError()
     {
         NumberIncorrect++;
-		progressBar.fillAmount = (float)NumberIncorrect/(float)100;
+		progressBar.fillAmount = ((float)NumberIncorrect * 10)/(float)100;
         Debug.Log("Strike" + NumberIncorrect);
 
     }
