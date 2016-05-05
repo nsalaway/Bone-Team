@@ -3,9 +3,17 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
     int counter = 0;
+    //Vector3 moveRight = new Vector3(0.62016666666666666666666666666665f, 0, 0);
+    //Vector3 moveLeft = new Vector3(-0.62016666666666666666666666666665f, 0, 0);
+    //Vector3 moveUp = new Vector3(0, 0, 0.6262777777777777777777777777778f);
+    //Vector3 moveDown = new Vector3(0, 0, -0.6262777777777777777777777777778f);
+    Vector3 moveRight = new Vector3(1.2403333333333333333333333333333f, 0, 0);
+    Vector3 moveLeft = new Vector3(-1.2403333333333333333333333333333f, 0, 0);
+    Vector3 moveUp = new Vector3(0, 0, 1.2525555555555555555555555555556f);
+    Vector3 moveDown = new Vector3(0, 0, -1.2525555555555555555555555555556f);
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
@@ -29,11 +37,11 @@ public class Player : MonoBehaviour {
                     case "Up":
                         Ray upRay = new Ray(transform.position, Vector3.forward);
                         RaycastHit upRayInfo;
-                        if (Physics.Raycast(upRay, out upRayInfo, 1))
+                        if (Physics.Raycast(upRay, out upRayInfo, .65f))
                         {
                             if (upRayInfo.collider.tag == "Goal")
                             {
-                                transform.position = transform.position + Vector3.forward;
+                                transform.localPosition = transform.localPosition + moveUp;
                                 Debug.Log("You Win!");
                                 OverallGameManagerErik.PuzzleWon(transform.parent.gameObject);
                                 //tell game manager the game was won
@@ -48,7 +56,7 @@ public class Player : MonoBehaviour {
 
                         else
                         {
-                            transform.position = transform.position + Vector3.forward;
+                            transform.localPosition = transform.localPosition + moveUp;
                         }
                         break;
 
@@ -56,11 +64,11 @@ public class Player : MonoBehaviour {
                     case "Down":
                         Ray downRay = new Ray(transform.position, Vector3.back);
                         RaycastHit downRayInfo;
-                        if (Physics.Raycast(downRay, out downRayInfo, 1))
+                        if (Physics.Raycast(downRay, out downRayInfo, .65f))
                         {
                             if (downRayInfo.collider.tag == "Goal")
                             {
-                                transform.position = transform.position + Vector3.back;
+                                transform.localPosition = transform.localPosition + moveDown;
                                 Debug.Log("You Win!");
                                 OverallGameManagerErik.PuzzleWon(transform.parent.gameObject);
                                 //tell game manager the game was won
@@ -76,7 +84,7 @@ public class Player : MonoBehaviour {
 
                         else
                         {
-                            transform.position = transform.position + Vector3.back;
+                            transform.localPosition = transform.localPosition + moveDown;
                         }
                         break;
 
@@ -84,11 +92,11 @@ public class Player : MonoBehaviour {
                     case "Left":
                         Ray leftRay = new Ray(transform.position, Vector3.left);
                         RaycastHit leftRayInfo;
-                        if (Physics.Raycast(leftRay, out leftRayInfo, 1))
+                        if (Physics.Raycast(leftRay, out leftRayInfo, .65f))
                         {
                             if (leftRayInfo.collider.tag == "Goal")
                             {
-                                transform.position = transform.position + Vector3.left;
+                                transform.localPosition = transform.localPosition + moveLeft;
                                 Debug.Log("You Win!");
                                 OverallGameManagerErik.PuzzleWon(transform.parent.gameObject);
                                 //tell game manager the game was won
@@ -104,19 +112,19 @@ public class Player : MonoBehaviour {
 
                         else
                         {
-                            transform.position = transform.position + Vector3.left;
+                            transform.localPosition = transform.localPosition + moveLeft;
                         }
                         break;
 
 
                     case "Right":
-                        Ray rightRay = new Ray(transform.position, Vector3.right);
+                        Ray rightRay = new Ray(transform.position, moveRight);
                         RaycastHit rightRayInfo;
-                        if (Physics.Raycast(rightRay, out rightRayInfo, 1))
+                        if (Physics.Raycast(rightRay, out rightRayInfo, .65f))
                         {
                             if (rightRayInfo.collider.tag == "Goal")
                             {
-                                transform.position = transform.position + Vector3.right;
+                                transform.localPosition = transform.localPosition + Vector3.right;
                                 Debug.Log("You Win!");
                                 OverallGameManagerErik.PuzzleWon(transform.parent.gameObject);
                                 //tell game manager the game was won
@@ -132,7 +140,7 @@ public class Player : MonoBehaviour {
 
                         else
                         {
-                            transform.position = transform.position + Vector3.right;
+                            transform.localPosition = transform.localPosition + moveRight;
                         }
                         break;
                 }
