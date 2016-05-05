@@ -23,11 +23,20 @@ public class OverallGameManagerErik : MonoBehaviour {
 
     private int puzzleToLoad;
 
+    public AudioSource soundManager;
+    public AudioClip[] soundsCorrect;
+    public AudioClip[] soundsIncorrect;
+    static int randomSoundChooser;
+    public static OverallGameManagerErik instance;
+
+
+
     // Use this for initialization
-	//progressBar.fillAmount = (float)"score"/float("math stuff");
+    //progressBar.fillAmount = (float)"score"/float("math stuff");
 
     void Start()
     {
+        instance = this;
         RandomizeRobot();
         NumberCorrect = 0;
         NumberIncorrect = 0;
@@ -106,6 +115,8 @@ public class OverallGameManagerErik : MonoBehaviour {
         isGameActive = false;
         Destroy(myGO);
 		Debug.Log ("correctly solved puzzle");
+        randomSoundChooser = Random.Range(0, 3);
+        instance.soundManager.PlayOneShot(instance.soundsCorrect[randomSoundChooser], 1f);
     }
 
 	/// <summary>
@@ -116,6 +127,8 @@ public class OverallGameManagerErik : MonoBehaviour {
         NumberIncorrect++;
 		progressBar.fillAmount = (float)NumberIncorrect/(float)100;
         Debug.Log("Strike" + NumberIncorrect);
+        randomSoundChooser = Random.Range(0, 3);
+        instance.soundManager.PlayOneShot(instance.soundsIncorrect[randomSoundChooser], 1f);
 
     }
 		
