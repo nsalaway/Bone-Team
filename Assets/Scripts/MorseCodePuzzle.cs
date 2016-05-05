@@ -210,11 +210,6 @@ public class MorseCodePuzzle : MonoBehaviour
 	/// </summary>
 	public IEnumerator ReplaySound ()
 	{
-		//Replay sound on right click.
-		if (Input.GetMouseButtonDown (1)) {
-            soundManager.Stop();
-			soundManager.PlayOneShot (sounds [randomSoundChooser], 1f);
-		}
 		yield return new WaitForSeconds (1.0f);
 		soundManager.PlayOneShot (sounds [randomSoundChooser], 1f);
 	}
