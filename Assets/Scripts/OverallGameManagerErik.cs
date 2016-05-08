@@ -13,10 +13,11 @@ public class OverallGameManagerErik : MonoBehaviour {
     public int numberToWin, numberToLose;
     //public static bool levelFinished;
     public static bool isGameActive = false;
-	public float overallGameTime = 900.0f;
+	public float overallGameTime = 600.0f;
 	public Text gameTimerText;
 	public static Image progressBar;
 
+	float timeMouseClicked;
     int randomizer=8, previousPuzzle = 7;
     
     public GameObject[] puzzles = new GameObject[3];
@@ -24,6 +25,7 @@ public class OverallGameManagerErik : MonoBehaviour {
     private int puzzleToLoad;
 
     public AudioSource soundManager;
+	public AudioClip hurryUp;
     public AudioClip[] soundsCorrect;
     public AudioClip[] soundsIncorrect;
     static int randomSoundChooser;
@@ -70,6 +72,15 @@ public class OverallGameManagerErik : MonoBehaviour {
 		string timerTextInSeconds = string.Format ("{0:0}:{1:00}", Mathf.Floor (overallGameTime / 60), overallGameTime % 60); //Displays timer in minutes & seconds.
 		gameTimerText.text = timerTextInSeconds.ToString ();
 
+		//When did the player last click?
+		if (Input.GetMouseButtonDown (0)) {
+			timeMouseClicked = Time.time;
+		}
+		//If the player clicked more than 30 seconds ago, play sound.
+		if (randomizer != 1 && Time.time >= timeMouseClicked + 30f) {
+			soundManager.PlayOneShot (hurryUp, 1f);
+			timeMouseClicked = Time.time;
+		}
 		//Restart.
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -89,10 +100,8 @@ public class OverallGameManagerErik : MonoBehaviour {
         {
             //dont do anything basically
         }
-
         else
         {
-
             //spawn a new puzzle
             while (randomizer == previousPuzzle)
             {
@@ -100,9 +109,7 @@ public class OverallGameManagerErik : MonoBehaviour {
             }
             previousPuzzle = randomizer;
 			GameObject myPuzzle = (GameObject)Instantiate(puzzles[randomizer], puzzles[randomizer].transform.position, puzzles[randomizer].transform.rotation);
-
-
-        }
+		}
 
     }
 	/// <summary>
