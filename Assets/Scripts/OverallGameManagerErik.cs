@@ -13,6 +13,8 @@ public class OverallGameManagerErik : MonoBehaviour {
     public int numberToWin, numberToLose;
     //public static bool levelFinished;
     public static bool isGameActive = false;
+	bool hasLost = false;
+	bool hasWon = false;
 	public float overallGameTime = 600.0f;
 	public Text gameTimerText;
 	public static Image progressBar;
@@ -25,11 +27,15 @@ public class OverallGameManagerErik : MonoBehaviour {
     private int puzzleToLoad;
 
     public AudioSource soundManager;
-	public AudioClip hurryUp;
+	public AudioClip explodeSound;
+	public AudioClip winSound;
     public AudioClip[] soundsCorrect;
     public AudioClip[] soundsIncorrect;
+	public AudioClip[] impatientSounds;
     static int randomSoundChooser;
     public static OverallGameManagerErik instance;
+
+	public Image blackScreen;
 
     GameObject myPuzzle;
 
@@ -49,6 +55,7 @@ public class OverallGameManagerErik : MonoBehaviour {
         puzzleToLoad = Random.Range(1, 4);
 		progressBar = GameObject.Find ("Fill").GetComponent<Image>();
 		progressBar.fillAmount = (50f / 100f);
+		blackScreen.enabled = false;
 
         if (RobotNumber == 1)
         {
@@ -80,8 +87,10 @@ public class OverallGameManagerErik : MonoBehaviour {
 		}
 		//If the player clicked more than 30 seconds ago, play sound.
 		if (randomizer != 1 && Time.time >= timeMouseClicked + 30f) {
-			soundManager.PlayOneShot (hurryUp, 1f);
+			randomSoundChooser = Random.Range (0, 3);
+			instance.soundManager.PlayOneShot (instance.impatientSounds [randomSoundChooser], 1f);
 			timeMouseClicked = Time.time;
+			randomSoundChooser = Random.Range (0, 3);
 		}
 		//Restart.
         if (Input.GetKeyDown(KeyCode.R))
@@ -91,12 +100,14 @@ public class OverallGameManagerErik : MonoBehaviour {
 		//You won.
         if (NumberCorrect == numberToWin)
         {
-			SceneManager.LoadScene (4);
+			hasWon = true;
+			Destroy (myPuzzle);
         }
 		//You lost.
 		if (NumberIncorrect == numberToLose || overallGameTime <= 0f)
         {
-			SceneManager.LoadScene (5);
+			hasLost = true;
+			Destroy(myPuzzle);
         }
         if (isGameActive)
         {
@@ -111,6 +122,14 @@ public class OverallGameManagerErik : MonoBehaviour {
             }
             previousPuzzle = randomizer;
 			myPuzzle = (GameObject)Instantiate(puzzles[randomizer], puzzles[randomizer].transform.position, puzzles[randomizer].transform.rotation);
+		}
+
+		if (hasLost == true) {
+			StartCoroutine (LoadLoseScreen ());	
+		}
+
+		if (hasWon == true) {
+			StartCoroutine (LoadWinScreen ());
 		}
 
     }
@@ -134,9 +153,7 @@ public class OverallGameManagerErik : MonoBehaviour {
     {
         MadeError();
         Destroy(myPuzzle);
-        isGameActive = false;
-        
-        
+        isGameActive = false;       
     }
 
     /// <summary>
@@ -171,4 +188,30 @@ public class OverallGameManagerErik : MonoBehaviour {
         eyes = randomizer;
         Debug.Log("Eyes: " + eyes);
     }
+
+	public IEnumerator LoadLoseScreen(){
+		hasLost = false;
+		NumberIncorrect = 0;
+		NumberCorrect = 0;
+		overallGameTime = 600.0f;
+		yield return new WaitForSeconds (0.5f);
+		soundManager.PlayOneShot (explodeSound, 1f);
+		yield return new WaitForSeconds (5f);
+		blackScreen.enabled = true;
+		yield return new WaitForSeconds (5f);
+		SceneManager.LoadScene (5);
+	}
+
+	public IEnumerator LoadWinScreen(){
+		hasWon = false;
+		NumberCorrect = 0;
+		NumberIncorrect = 0;
+		overallGameTime = 600.0f;
+		yield return new WaitForSeconds (0.5f);
+		soundManager.PlayOneShot (winSound, 1f);
+		yield return new WaitForSeconds (4.5f);
+		blackScreen.enabled = true;
+		yield return new WaitForSeconds (3f);
+		SceneManager.LoadScene (4);
+	}
 }
