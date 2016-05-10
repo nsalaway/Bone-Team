@@ -9,6 +9,10 @@ public class LoadScenes : MonoBehaviour {
 	public AudioClip moreSound;
 	public AudioClip yesSound2;
 
+	public void QuitGame(){
+		Application.Quit ();
+	}
+
 
 	public void LoadTitleScreen(){
 		soundManager.PlayOneShot (moreSound, 1f);

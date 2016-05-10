@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PickerManagerCode : MonoBehaviour
 {
@@ -30,6 +31,10 @@ public class PickerManagerCode : MonoBehaviour
 
 	bool isLoaded = false;
 
+	SpriteRenderer originalBlue, originalGreen, originalPurple, originalLightBlue, originalPink, originalRed, originalOrange, originalYellow;
+	public Sprite blueUp, greenUp, purpleUp, lightBlueUp, pinkUp, redUp, orangeUp, yellowUp;
+	public Sprite bluePressed, greenPressed, purplePressed, lightBluePressed, pinkPressed, redPressed, orangePressed, yellowPressed;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -38,6 +43,7 @@ public class PickerManagerCode : MonoBehaviour
 		State = Random.Range (1, 7);
    
 
+		//===========================================================================================================================
 		//iNSTANTIATE THE REQUIRED GAME OBJECTS FOR EACH STATE
 		if (State == 1) {
 			//(instantiate code for State here)
@@ -103,9 +109,6 @@ public class PickerManagerCode : MonoBehaviour
 			spawnYellow ();
 
 		}
-
-
-		//transform.Rotate (90, 0, 0);
 	}
 
 	//yOU WIN FUNCTION
@@ -151,39 +154,49 @@ public class PickerManagerCode : MonoBehaviour
 		if (Physics.Raycast (ray, out rayHitInfo, 1000f) && (Input.GetMouseButtonDown (0))) {
 			if (rayHitInfo.collider.tag == "BlueBox") {
 				isClickedBlue = !isClickedBlue;
+				StartCoroutine (ChangeBlueButton ());
 				Debug.Log ("Blue clicked");
 			}
 			if (rayHitInfo.collider.tag == "TealBox") {
 				isClickedTeal = !isClickedTeal;
+				StartCoroutine (ChangePurpleButton ());
 				Debug.Log ("Teal clicked");
 			}
 			if (rayHitInfo.collider.tag == "GreenBox") {
 				isClickedGreen = !isClickedGreen;
+				StartCoroutine (ChangeGreenButton ());
 				Debug.Log ("Green clicked");
 			}
 			if (rayHitInfo.collider.tag == "GreyBox") {
 				isClickedGrey = !isClickedGrey;
+				StartCoroutine (ChangeLightBlueButton ());
 				Debug.Log ("Grey clicked");
 			}
 			if (rayHitInfo.collider.tag == "RedBox") {
 				isClickedRed = !isClickedRed;
+				StartCoroutine (ChangeRedButton ());
 				Debug.Log ("Red clicked");
 			}
 			if (rayHitInfo.collider.tag == "PinkBox") {
 				isClickedPink = !isClickedPink;
+				StartCoroutine (ChangePinkButton ());
 				Debug.Log ("Pink clicked");
 			}
 			if (rayHitInfo.collider.tag == "OrangeBox") {
 				isClickedOrange = !isClickedOrange;
+				StartCoroutine (ChangeOrangeButton ());
 				Debug.Log ("Orange clicked");
 			}
 			if (rayHitInfo.collider.tag == "YellowBox") {
 				isClickedYellow = !isClickedYellow;
+				StartCoroutine (ChangeYellowButton ());
 				Debug.Log ("Yellow clicked");
 			}
 
 		}
-		//ANSWERES AND DECLARING WIN/LOSE FOR EACH GAME STATE
+
+		//=================================================================================================================================
+		//ANSWERS AND DECLARING WIN/LOSE FOR EACH GAME STATE
 		if (State == 1) {
             
 			if (Model == 0 || Model == 1) {
@@ -302,52 +315,63 @@ public class PickerManagerCode : MonoBehaviour
 
 	}
 
+	//==========================================================================================================================================
+	//SPAWN BUTTONS BELOW.
+
 	void spawnBlue ()
 	{
 		GameObject myButton = (GameObject)Instantiate (blueBox, blueBox.transform.localPosition, gameObject.transform.rotation);
 		myButton.transform.parent = transform;
+		originalBlue = GameObject.Find ("BlueBox(Clone)").GetComponent<SpriteRenderer> ();
 	}
 
 	void spawnTeal ()
 	{
 		GameObject myButton = (GameObject)Instantiate (tealBox, tealBox.transform.localPosition, gameObject.transform.rotation);
 		myButton.transform.parent = transform;
+		originalPurple = GameObject.Find ("TealBox(Clone)").GetComponent<SpriteRenderer> ();
 	}
 
 	void spawnGreen ()
 	{
 		GameObject myButton = (GameObject)Instantiate (greenBox, greenBox.transform.localPosition, gameObject.transform.rotation);
 		myButton.transform.parent = transform;
+		originalGreen = GameObject.Find ("GreenBox(Clone)").GetComponent<SpriteRenderer> ();
 	}
 
 	void spawnGrey ()
 	{
 		GameObject myButton = (GameObject)Instantiate (greyBox, greyBox.transform.localPosition, gameObject.transform.rotation);
 		myButton.transform.parent = transform;
+		originalLightBlue = GameObject.Find ("GreyBox(Clone)").GetComponent<SpriteRenderer> ();
 	}
 
 	void spawnRed ()
 	{
 		GameObject myButton = (GameObject)Instantiate (redBox, redBox.transform.localPosition, gameObject.transform.rotation);
 		myButton.transform.parent = transform;
+		originalRed = GameObject.Find ("RedBox(Clone)").GetComponent<SpriteRenderer> ();
 	}
 
 	void spawnPink ()
 	{
 		GameObject myButton = (GameObject)Instantiate (pinkBox, pinkBox.transform.localPosition, gameObject.transform.rotation);
 		myButton.transform.parent = transform;
+		originalPink = GameObject.Find ("PinkBox(Clone)").GetComponent<SpriteRenderer> ();
 	}
 
 	void spawnOrange ()
 	{
 		GameObject myButton = (GameObject)Instantiate (orangeBox, orangeBox.transform.localPosition, gameObject.transform.rotation);
 		myButton.transform.parent = transform;
+		originalOrange = GameObject.Find ("OrangeBox(Clone)").GetComponent<SpriteRenderer> ();
 	}
 
 	void spawnYellow ()
 	{
 		GameObject myButton = (GameObject)Instantiate (yellowBox, yellowBox.transform.localPosition, gameObject.transform.rotation);
 		myButton.transform.parent = transform;
+		originalYellow = GameObject.Find ("YellowBox(Clone)").GetComponent<SpriteRenderer> ();
 	}
 
 	/// <summary>
@@ -355,5 +379,57 @@ public class PickerManagerCode : MonoBehaviour
 	/// </summary>
 	public void FinalAnswer(){
 			finalizeAnswere = true;
+	}
+
+
+	//=========================================================================================================================================
+	//CHANGE STATES OF BUTTON SPRITES WHEN PRESSED, THEN CHANGE BACK TO ORIGINAL.
+
+	public IEnumerator ChangeBlueButton(){
+		originalBlue.sprite = bluePressed;
+		yield return new WaitForSeconds (0.1f);
+		originalBlue.sprite = blueUp;
+	}
+
+	public IEnumerator ChangeLightBlueButton(){
+		originalLightBlue.sprite = lightBluePressed;
+		yield return new WaitForSeconds (0.1f);
+		originalLightBlue.sprite = lightBlueUp;
+	}
+
+	public IEnumerator ChangeGreenButton(){
+		originalGreen.sprite = greenPressed;
+		yield return new WaitForSeconds (0.1f);
+		originalGreen.sprite = greenUp;
+	}
+
+	public IEnumerator ChangePurpleButton(){
+		originalPurple.sprite = purplePressed;
+		yield return new WaitForSeconds (0.1f);
+		originalPurple.sprite = purpleUp;
+	}
+
+	public IEnumerator ChangeRedButton(){
+		originalRed.sprite = redPressed;
+		yield return new WaitForSeconds (0.1f);
+		originalRed.sprite = redUp;
+	}
+
+	public IEnumerator ChangePinkButton(){
+		originalPink.sprite = pinkPressed;
+		yield return new WaitForSeconds (0.1f);
+		originalPink.sprite = pinkUp;
+	}
+
+	public IEnumerator ChangeYellowButton(){
+		originalYellow.sprite = yellowPressed;
+		yield return new WaitForSeconds (0.1f);
+		originalYellow.sprite = yellowUp;
+	}
+
+	public IEnumerator ChangeOrangeButton(){
+		originalOrange.sprite = orangePressed;
+		yield return new WaitForSeconds (0.1f);
+		originalOrange.sprite = orangeUp;
 	}
 }

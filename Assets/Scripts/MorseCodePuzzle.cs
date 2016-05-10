@@ -18,6 +18,8 @@ public class MorseCodePuzzle : MonoBehaviour
 	public Transform arrowParentCube;
 	bool wasDialPressed;
 	public Transform arrowSprite;
+	public Sprite pinkPressed, bluePressed, pinkUp, blueUp;
+	Image originalPinkSprite, originalBlueSprite;
 
 	void Start ()
 	{
@@ -26,6 +28,9 @@ public class MorseCodePuzzle : MonoBehaviour
 		//Play random sound at start of puzzle.
 		soundManager.PlayOneShot (sounds [randomSoundChooser], 1f);
 		Debug.Log ("sound #" + randomSoundChooser);
+		originalPinkSprite = GameObject.Find ("pinkButton").GetComponent<Image> ();
+		originalBlueSprite = GameObject.Find ("blueButton").GetComponent<Image> ();
+
 	}
 
 	// Update is called once per frame
@@ -47,10 +52,12 @@ public class MorseCodePuzzle : MonoBehaviour
 		if (Input.GetMouseButtonDown (0) && Physics.Raycast (mouseRay, out mouseRayInfo, 1000f)) {
 			if (mouseRayInfo.collider.tag == "pink") {
 				pinkClickCounter++;
+				StartCoroutine (ChangePinkButton ());
 				Debug.Log ("pink counter = " + pinkClickCounter);
 			} 
 
 			if (mouseRayInfo.collider.tag == "black") {
+				StartCoroutine (ChangeBlueButton ());
 				//If you haven't already clicked in the past 2 seconds, you can click & raise counter (see ResetButton function).
 				if (!wasBlackClicked) {
 					clickDelay = 1f;
@@ -229,4 +236,22 @@ public class MorseCodePuzzle : MonoBehaviour
 	{
         OverallGameManagerErik.PuzzleWon(transform.parent.gameObject);
     }
+
+	/// <summary>
+	/// Changes the pink button sprite to "pushed".
+	/// </summary>
+	public IEnumerator ChangePinkButton(){
+		originalPinkSprite.sprite = pinkPressed;
+		yield return new WaitForSeconds (0.1f);
+		originalPinkSprite.sprite = pinkUp;
+	}
+
+	/// <summary>
+	/// Changes the blue button sprite to "pushed".
+	/// </summary>
+	public IEnumerator ChangeBlueButton(){
+		originalBlueSprite.sprite = bluePressed;
+		yield return new WaitForSeconds (0.1f);
+		originalBlueSprite.sprite = blueUp;
+	}
 }
