@@ -13,12 +13,14 @@ public class OverallGameManagerErik : MonoBehaviour {
     public int numberToWin, numberToLose;
     //public static bool levelFinished;
     public static bool isGameActive = false;
-    public float overallGameTime = 600.0f;
-    public Text gameTimerText;
-    public static Image progressBar;
 
     float timeMouseClicked;
     int randomizer = 8, previousPuzzle = 7;
+	bool hasLost = false;
+	bool hasWon = false;
+	public float overallGameTime = 600.0f;
+	public Text gameTimerText;
+	public static Image progressBar;
 
     public GameObject[] puzzles = new GameObject[3];
 
@@ -26,10 +28,15 @@ public class OverallGameManagerErik : MonoBehaviour {
 
     public AudioSource soundManager;
     public AudioClip hurryUp;
+	public AudioClip explodeSound;
+	public AudioClip winSound;
     public AudioClip[] soundsCorrect;
     public AudioClip[] soundsIncorrect;
+	public AudioClip[] impatientSounds;
     static int randomSoundChooser;
     public static OverallGameManagerErik instance;
+
+	public Image blackScreen;
 
     GameObject myPuzzle;
 
@@ -49,7 +56,9 @@ public class OverallGameManagerErik : MonoBehaviour {
         puzzleToLoad = Random.Range(1, 4);
         progressBar = GameObject.Find("Fill").GetComponent<Image>();
         progressBar.fillAmount = (50f / 100f);
-
+		progressBar = GameObject.Find ("Fill").GetComponent<Image>();
+		progressBar.fillAmount = (50f / 100f);
+		blackScreen.enabled = false;
         if (RobotNumber == 1)
         {
             //instantiate Robot 1
@@ -83,7 +92,20 @@ public class OverallGameManagerErik : MonoBehaviour {
             soundManager.PlayOneShot(hurryUp, 1f);
             timeMouseClicked = Time.time;
         }
-        //Restart.
+        //Restart
+
+		//When did the player last click?
+		if (Input.GetMouseButtonDown (0)) {
+			timeMouseClicked = Time.time;
+		}
+		//If the player clicked more than 30 seconds ago, play sound.
+		if (randomizer != 1 && Time.time >= timeMouseClicked + 30f) {
+			randomSoundChooser = Random.Range (0, 3);
+			instance.soundManager.PlayOneShot (instance.impatientSounds [randomSoundChooser], 1f);
+			timeMouseClicked = Time.time;
+			randomSoundChooser = Random.Range (0, 3);
+		}
+		//Restart.
         if (Input.GetKeyDown(KeyCode.R))
         {
             RestartGame();
@@ -92,11 +114,15 @@ public class OverallGameManagerErik : MonoBehaviour {
         if (NumberCorrect == numberToWin)
         {
             SceneManager.LoadScene(4);
+			hasWon = true;
+			Destroy (myPuzzle);
         }
         //You lost.
         if (NumberIncorrect == numberToLose || overallGameTime <= 0f)
         {
             SceneManager.LoadScene(5);
+			hasLost = true;
+			Destroy(myPuzzle);
         }
         if (isGameActive)
         {
@@ -112,6 +138,14 @@ public class OverallGameManagerErik : MonoBehaviour {
             previousPuzzle = randomizer;
             myPuzzle = (GameObject)Instantiate(puzzles[randomizer], puzzles[randomizer].transform.position, puzzles[randomizer].transform.rotation);
         }
+
+		if (hasLost == true) {
+			StartCoroutine (LoadLoseScreen ());	
+		}
+
+		if (hasWon == true) {
+			StartCoroutine (LoadWinScreen ());
+		}
 
     }
    
@@ -137,7 +171,7 @@ public class OverallGameManagerErik : MonoBehaviour {
         Destroy(myPuzzle);
         StartCoroutine(LoadNewPuzzle());
         
-        
+        isGameActive = false;       
     }
 
     /// <summary>
@@ -178,4 +212,30 @@ public class OverallGameManagerErik : MonoBehaviour {
         isGameActive = false;
     }
 
+
+	public IEnumerator LoadLoseScreen(){
+		hasLost = false;
+		NumberIncorrect = 0;
+		NumberCorrect = 0;
+		overallGameTime = 600.0f;
+		yield return new WaitForSeconds (0.5f);
+		soundManager.PlayOneShot (explodeSound, 1f);
+		yield return new WaitForSeconds (5f);
+		blackScreen.enabled = true;
+		yield return new WaitForSeconds (5f);
+		SceneManager.LoadScene (5);
+	}
+
+	public IEnumerator LoadWinScreen(){
+		hasWon = false;
+		NumberCorrect = 0;
+		NumberIncorrect = 0;
+		overallGameTime = 600.0f;
+		yield return new WaitForSeconds (0.5f);
+		soundManager.PlayOneShot (winSound, 1f);
+		yield return new WaitForSeconds (4.5f);
+		blackScreen.enabled = true;
+		yield return new WaitForSeconds (3f);
+		SceneManager.LoadScene (4);
+	}
 }
