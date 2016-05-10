@@ -14,6 +14,7 @@ public class OverallGameManagerErik : MonoBehaviour {
     //public static bool levelFinished;
     public static bool isGameActive = false;
 	bool hasLost = false;
+	bool hasWon = false;
 	public float overallGameTime = 600.0f;
 	public Text gameTimerText;
 	public static Image progressBar;
@@ -27,6 +28,7 @@ public class OverallGameManagerErik : MonoBehaviour {
 
     public AudioSource soundManager;
 	public AudioClip explodeSound;
+	public AudioClip winSound;
     public AudioClip[] soundsCorrect;
     public AudioClip[] soundsIncorrect;
 	public AudioClip[] impatientSounds;
@@ -98,7 +100,8 @@ public class OverallGameManagerErik : MonoBehaviour {
 		//You won.
         if (NumberCorrect == numberToWin)
         {
-			SceneManager.LoadScene (4);
+			hasWon = true;
+			Destroy (myPuzzle);
         }
 		//You lost.
 		if (NumberIncorrect == numberToLose || overallGameTime <= 0f)
@@ -123,6 +126,10 @@ public class OverallGameManagerErik : MonoBehaviour {
 
 		if (hasLost == true) {
 			StartCoroutine (LoadLoseScreen ());	
+		}
+
+		if (hasWon == true) {
+			StartCoroutine (LoadWinScreen ());
 		}
 
     }
@@ -193,5 +200,18 @@ public class OverallGameManagerErik : MonoBehaviour {
 		blackScreen.enabled = true;
 		yield return new WaitForSeconds (5f);
 		SceneManager.LoadScene (5);
+	}
+
+	public IEnumerator LoadWinScreen(){
+		hasWon = false;
+		NumberCorrect = 0;
+		NumberIncorrect = 0;
+		overallGameTime = 600.0f;
+		yield return new WaitForSeconds (0.5f);
+		soundManager.PlayOneShot (winSound, 1f);
+		yield return new WaitForSeconds (4.5f);
+		blackScreen.enabled = true;
+		yield return new WaitForSeconds (3f);
+		SceneManager.LoadScene (4);
 	}
 }
