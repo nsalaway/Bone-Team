@@ -31,6 +31,7 @@ public class OverallGameManagerErik : MonoBehaviour {
     static int randomSoundChooser;
     public static OverallGameManagerErik instance;
 
+    GameObject myPuzzle;
 
 
     // Use this for initialization
@@ -63,6 +64,7 @@ public class OverallGameManagerErik : MonoBehaviour {
         }
 
     }
+
 
     // Update is called once per frame
     void Update()
@@ -108,7 +110,7 @@ public class OverallGameManagerErik : MonoBehaviour {
                 randomizer = Random.Range(0, 3);
             }
             previousPuzzle = randomizer;
-			GameObject myPuzzle = (GameObject)Instantiate(puzzles[randomizer], puzzles[randomizer].transform.position, puzzles[randomizer].transform.rotation);
+			myPuzzle = (GameObject)Instantiate(puzzles[randomizer], puzzles[randomizer].transform.position, puzzles[randomizer].transform.rotation);
 		}
 
     }
@@ -126,9 +128,20 @@ public class OverallGameManagerErik : MonoBehaviour {
         instance.soundManager.PlayOneShot(instance.soundsCorrect[randomSoundChooser], 1f);
     }
 
-	/// <summary>
-	/// When you make an error, add a strike.
-	/// </summary>
+    //Function to call on puzzl skip
+
+    public void PuzzleSkip()
+    {
+        MadeError();
+        Destroy(myPuzzle);
+        isGameActive = false;
+        
+        
+    }
+
+    /// <summary>
+    /// When you make an error, add a strike.
+    /// </summary>
     public static void MadeError()
     {
         NumberIncorrect++;
