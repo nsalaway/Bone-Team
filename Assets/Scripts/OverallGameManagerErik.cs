@@ -13,20 +13,21 @@ public class OverallGameManagerErik : MonoBehaviour {
     public int numberToWin, numberToLose;
     //public static bool levelFinished;
     public static bool isGameActive = false;
+
+    float timeMouseClicked;
+    int randomizer = 8, previousPuzzle = 7;
 	bool hasLost = false;
 	bool hasWon = false;
 	public float overallGameTime = 600.0f;
 	public Text gameTimerText;
 	public static Image progressBar;
 
-	float timeMouseClicked;
-    int randomizer=8, previousPuzzle = 7;
-    
     public GameObject[] puzzles = new GameObject[3];
 
     private int puzzleToLoad;
 
     public AudioSource soundManager;
+    public AudioClip hurryUp;
 	public AudioClip explodeSound;
 	public AudioClip winSound;
     public AudioClip[] soundsCorrect;
@@ -53,10 +54,11 @@ public class OverallGameManagerErik : MonoBehaviour {
         randomizer = Random.Range(0, 3);
         RobotNumber = Random.Range(1, 4);
         puzzleToLoad = Random.Range(1, 4);
+        progressBar = GameObject.Find("Fill").GetComponent<Image>();
+        progressBar.fillAmount = (50f / 100f);
 		progressBar = GameObject.Find ("Fill").GetComponent<Image>();
 		progressBar.fillAmount = (50f / 100f);
 		blackScreen.enabled = false;
-
         if (RobotNumber == 1)
         {
             //instantiate Robot 1
@@ -76,10 +78,21 @@ public class OverallGameManagerErik : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-		//Timer.
-		overallGameTime -= Time.deltaTime;
-		string timerTextInSeconds = string.Format ("{0:0}:{1:00}", Mathf.Floor (overallGameTime / 60), overallGameTime % 60); //Displays timer in minutes & seconds.
-		gameTimerText.text = timerTextInSeconds.ToString ();
+        //Timer.
+        overallGameTime -= Time.deltaTime;
+        string timerTextInSeconds = string.Format("{0:0}:{1:00}", Mathf.Floor(overallGameTime / 60), overallGameTime % 60); //Displays timer in minutes & seconds.
+        gameTimerText.text = timerTextInSeconds.ToString();
+
+        //When did the player last click?
+        if (Input.GetMouseButtonDown(0)) {
+            timeMouseClicked = Time.time;
+        }
+        //If the player clicked more than 30 seconds ago, play sound.
+        if (randomizer != 1 && Time.time >= timeMouseClicked + 30f) {
+            soundManager.PlayOneShot(hurryUp, 1f);
+            timeMouseClicked = Time.time;
+        }
+        //Restart
 
 		//When did the player last click?
 		if (Input.GetMouseButtonDown (0)) {
@@ -97,15 +110,17 @@ public class OverallGameManagerErik : MonoBehaviour {
         {
             RestartGame();
         }
-		//You won.
+        //You won.
         if (NumberCorrect == numberToWin)
         {
+            SceneManager.LoadScene(4);
 			hasWon = true;
 			Destroy (myPuzzle);
         }
-		//You lost.
-		if (NumberIncorrect == numberToLose || overallGameTime <= 0f)
+        //You lost.
+        if (NumberIncorrect == numberToLose || overallGameTime <= 0f)
         {
+            SceneManager.LoadScene(5);
 			hasLost = true;
 			Destroy(myPuzzle);
         }
@@ -121,8 +136,8 @@ public class OverallGameManagerErik : MonoBehaviour {
                 randomizer = Random.Range(0, 3);
             }
             previousPuzzle = randomizer;
-			myPuzzle = (GameObject)Instantiate(puzzles[randomizer], puzzles[randomizer].transform.position, puzzles[randomizer].transform.rotation);
-		}
+            myPuzzle = (GameObject)Instantiate(puzzles[randomizer], puzzles[randomizer].transform.position, puzzles[randomizer].transform.rotation);
+        }
 
 		if (hasLost == true) {
 			StartCoroutine (LoadLoseScreen ());	
@@ -133,6 +148,7 @@ public class OverallGameManagerErik : MonoBehaviour {
 		}
 
     }
+   
 	/// <summary>
 	/// When you win a puzzle, destroy it & add score.
 	/// </summary>
@@ -140,11 +156,11 @@ public class OverallGameManagerErik : MonoBehaviour {
     {
         NumberCorrect++;
 		progressBar.fillAmount = ((float)NumberCorrect * 10)/(float)100;
-        isGameActive = false;
         Destroy(myGO);
 		Debug.Log ("correctly solved puzzle");
         randomSoundChooser = Random.Range(0, 3);
         instance.soundManager.PlayOneShot(instance.soundsCorrect[randomSoundChooser], 1f);
+        instance.StartCoroutine(instance.LoadNewPuzzle());
     }
 
     //Function to call on puzzl skip
@@ -153,6 +169,8 @@ public class OverallGameManagerErik : MonoBehaviour {
     {
         MadeError();
         Destroy(myPuzzle);
+        StartCoroutine(LoadNewPuzzle());
+        
         isGameActive = false;       
     }
 
@@ -188,6 +206,12 @@ public class OverallGameManagerErik : MonoBehaviour {
         eyes = randomizer;
         Debug.Log("Eyes: " + eyes);
     }
+    public IEnumerator LoadNewPuzzle()
+    {
+        yield return new WaitForSeconds(.2f);
+        isGameActive = false;
+    }
+
 
 	public IEnumerator LoadLoseScreen(){
 		hasLost = false;
