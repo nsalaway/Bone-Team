@@ -25,9 +25,10 @@ public class OverallGameManagerErik : MonoBehaviour {
     private int puzzleToLoad;
 
     public AudioSource soundManager;
-	public AudioClip hurryUp;
+	//public AudioClip hurryUp;
     public AudioClip[] soundsCorrect;
     public AudioClip[] soundsIncorrect;
+	public AudioClip[] impatientSounds;
     static int randomSoundChooser;
     public static OverallGameManagerErik instance;
 
@@ -78,8 +79,10 @@ public class OverallGameManagerErik : MonoBehaviour {
 		}
 		//If the player clicked more than 30 seconds ago, play sound.
 		if (randomizer != 1 && Time.time >= timeMouseClicked + 30f) {
-			soundManager.PlayOneShot (hurryUp, 1f);
+			randomSoundChooser = Random.Range (0, 3);
+			instance.soundManager.PlayOneShot (instance.impatientSounds [randomSoundChooser], 1f);
 			timeMouseClicked = Time.time;
+			randomSoundChooser = Random.Range (0, 3);
 		}
 		//Restart.
         if (Input.GetKeyDown(KeyCode.R))
