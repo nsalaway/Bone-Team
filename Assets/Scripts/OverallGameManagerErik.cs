@@ -10,7 +10,7 @@ public class OverallGameManagerErik : MonoBehaviour {
     public static int eyes;
     public static int NumberCorrect = 0;
     public static int NumberIncorrect = 0;
-	public static int numberToWin;
+    public static int numberToWin = 1;
 	int numberToLose = 3;
     //public static bool levelFinished;
     public static bool isGameActive = false;
@@ -119,12 +119,12 @@ public class OverallGameManagerErik : MonoBehaviour {
         if (NumberCorrect == numberToWin)
         {
 			hasWon = true;
-			Destroy (myPuzzle);
+			//Destroy (myPuzzle);
         }
 		//You lost.
 		if (NumberIncorrect == numberToLose || overallGameTime <= 0f)
         {
-			hasLost = true;
+			//hasLost = true;
 			Destroy(myPuzzle);
         }
         if (isGameActive)
@@ -133,13 +133,16 @@ public class OverallGameManagerErik : MonoBehaviour {
         }
         else
         {
-            //spawn a new puzzle
-            while (randomizer == previousPuzzle)
+            if (!isWinningActive)
             {
-                randomizer = Random.Range(0, 3);
+                //spawn a new puzzle
+                while (randomizer == previousPuzzle)
+                {
+                    randomizer = Random.Range(0, 3);
+                }
+                previousPuzzle = randomizer;
+                myPuzzle = (GameObject)Instantiate(puzzles[randomizer], puzzles[randomizer].transform.position, puzzles[randomizer].transform.rotation);
             }
-            previousPuzzle = randomizer;
-			myPuzzle = (GameObject)Instantiate(puzzles[randomizer], puzzles[randomizer].transform.position, puzzles[randomizer].transform.rotation);
 		}
 
 		if (hasLost == true) {
