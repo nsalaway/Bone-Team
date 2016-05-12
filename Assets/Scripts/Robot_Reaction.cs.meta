@@ -1,18 +1,18 @@
 fileFormatVersion: 2
 guid: e112ddb39edd52d4f9f71f9b22ea9331
-timeCreated: 1463024962
+timeCreated: 1463028448
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - pinkMaterial: {fileID: 2100000, guid: f5a5f531b92de7e42b90db7936f7bcd8, type: 2}
-  - blackMaterial: {fileID: 2100000, guid: 196ff2e258a14fe4792c79245ea82d3c, type: 2}
+  - blackMaterial: {fileID: 2100000, guid: 4f9e6487b72a32348b7e82b067603bd5, type: 2}
   - superPinkMaterial: {fileID: 2100000, guid: 4c657e492d860a54c9aefd55af990f9b, type: 2}
   - reallySuperPinkMaterial: {fileID: 2100000, guid: e6618e96c19687742a056629162df18a,
       type: 2}
   - bottomLeft: {fileID: 166310, guid: 4ffbc8c1933e88f4ab40ee9362d8284a, type: 2}
   - bottomRight: {fileID: 185298, guid: 0b44e6f7fe538244f8199fd29cd45d37, type: 2}
-  - secondLeft: {fileID: 199148, guid: c483791f055086f47af8ed52bd67fe85, type: 2}
+  - secondLeft: {fileID: 129308, guid: 693b11c5798df394c9e7da78e1f4c0e5, type: 2}
   - secondRight: {fileID: 156054, guid: ec4f9c12f11c6104daf705b11360b836, type: 2}
   - thirdLeft: {fileID: 195658, guid: 4c14397a1ae6f104cb479cad2453b980, type: 2}
   - thirdRight: {fileID: 161636, guid: 0b11a8bc397cf5747b98ea28da669053, type: 2}

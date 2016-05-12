@@ -42,7 +42,7 @@ public class Second_Negatives : MonoBehaviour {
 
 	public float duration = 0.2f;
 
-	public MeshRenderer heartRenderer;
+	//public MeshRenderer heartRenderer;
 	//***END PUBLIC OBJECTS FOR EYE 0
 
 

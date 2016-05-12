@@ -1,10 +1,46 @@
 fileFormatVersion: 2
 guid: 96c0d74ab6be3ca4ebfc042483e52719
-timeCreated: 1462973333
+timeCreated: 1463028870
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - openLeft: {fileID: 170452, guid: 693b11c5798df394c9e7da78e1f4c0e5, type: 2}
+  - closedLeft: {fileID: 108718, guid: 572b1ccb18a86b0408001593373000f2, type: 2}
+  - openRight: {fileID: 127020, guid: adbee0f198457524a9ef8ce09ac91f48, type: 2}
+  - closedRight: {fileID: 153460, guid: 97cbe745c2977084199a95f59dde0e2f, type: 2}
+  - blueMaterial: {fileID: 2100000, guid: e862f7f38c06ea14bb92b20eeb2379b0, type: 2}
+  - whiteMaterial: {fileID: 2100000, guid: ae1c11b84a3086a48a826295f99da1f3, type: 2}
+  - darkBlue: {fileID: 2100000, guid: 362fbd370d705f245820af000132aeba, type: 2}
+  - darkerBlue: {fileID: 2100000, guid: 3e6ef1679f08c5848a2a9e2a3db80a1b, type: 2}
+  - darkestBlue: {fileID: 2100000, guid: f3fa6c6918d05f54caeeec77ca8ecf3c, type: 2}
+  - blackMaterial: {fileID: 2100000, guid: 4f9e6487b72a32348b7e82b067603bd5, type: 2}
+  - pinkMaterial: {fileID: 2100000, guid: f5a5f531b92de7e42b90db7936f7bcd8, type: 2}
+  - bottomLeft: {fileID: 166310, guid: 4ffbc8c1933e88f4ab40ee9362d8284a, type: 2}
+  - bottomRight: {fileID: 185298, guid: 0b44e6f7fe538244f8199fd29cd45d37, type: 2}
+  - secondLeft: {fileID: 199148, guid: c483791f055086f47af8ed52bd67fe85, type: 2}
+  - secondRight: {fileID: 156054, guid: ec4f9c12f11c6104daf705b11360b836, type: 2}
+  - thirdLeft: {fileID: 195658, guid: 4c14397a1ae6f104cb479cad2453b980, type: 2}
+  - thirdRight: {fileID: 161636, guid: 0b11a8bc397cf5747b98ea28da669053, type: 2}
+  - fourthLeft: {fileID: 198998, guid: 9489c4d29d6c1ef4e98f10f33c0dd916, type: 2}
+  - fourthRight: {fileID: 105580, guid: 4d3a9086531da4b43949177200d00c6c, type: 2}
+  - fifthLeft: {fileID: 156924, guid: ca352094076823649b1c19041f004e75, type: 2}
+  - fifthRight: {fileID: 186022, guid: e27313e1a26f6a044b1845bb6b91feb3, type: 2}
+  - heartLeft: {fileID: 161710, guid: b0caca79a52d03841a28c1f108f48579, type: 2}
+  - heartRight: {fileID: 110074, guid: 5233ae645f76cf74ba6db2a5ef5b8036, type: 2}
+  - visor: {fileID: 177276, guid: fec0ad6a049907943b8cd64e7a4580f7, type: 2}
+  - badReaction: {fileID: 2100000, guid: 5c719eed4a289be478a940a2546b2c5d, type: 2}
+  - superFrownyFace: {fileID: 2100000, guid: 221c9f7eefd2ee548968e7f487cfe4be, type: 2}
+  - startX: {fileID: 164726, guid: 1d3088bf301ea0b4eb7178e7989a6608, type: 2}
+  - otherX: {fileID: 132912, guid: 06f67e649f16b0240bc028940d230a52, type: 2}
+  - startO: {fileID: 165630, guid: 0c8258cfa2e65cc4fb1aea10df194a8c, type: 2}
+  - otherO: {fileID: 151658, guid: 379c362097a0fdf48b3eb9eaeab646e0, type: 2}
+  - left1: {fileID: 166314, guid: 1d3088bf301ea0b4eb7178e7989a6608, type: 2}
+  - left2: {fileID: 177930, guid: 1d3088bf301ea0b4eb7178e7989a6608, type: 2}
+  - left3: {fileID: 171808, guid: 1d3088bf301ea0b4eb7178e7989a6608, type: 2}
+  - right1: {fileID: 123274, guid: 0c8258cfa2e65cc4fb1aea10df194a8c, type: 2}
+  - right2: {fileID: 102644, guid: 0c8258cfa2e65cc4fb1aea10df194a8c, type: 2}
+  - right3: {fileID: 189498, guid: 0c8258cfa2e65cc4fb1aea10df194a8c, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
