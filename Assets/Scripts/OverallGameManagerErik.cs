@@ -10,14 +10,15 @@ public class OverallGameManagerErik : MonoBehaviour {
     public static int eyes;
     public static int NumberCorrect = 0;
     public static int NumberIncorrect = 0;
-    public int numberToWin, numberToLose;
+	public static int numberToWin;
+	int numberToLose = 3;
     //public static bool levelFinished;
     public static bool isGameActive = false;
 	bool hasLost = false;
 	bool hasWon = false;
-	public float overallGameTime = 600.0f;
+	public static bool isWinningActive = false;
+	public float overallGameTime = 900.0f;
 	public Text gameTimerText;
-	public static Image progressBar;
 
 	float timeMouseClicked;
     int randomizer=8, previousPuzzle = 7;
@@ -36,6 +37,9 @@ public class OverallGameManagerErik : MonoBehaviour {
     public static OverallGameManagerErik instance;
 
 	public Image blackScreen;
+	public Image correct1, correct2, correct3, correct4, correct5, correct6, correct7, incorrect1, incorrect2, incorrect3;
+	//public Sprite correct1Off, correct2Off, correct3Off, correct4Off, correct5Off, correct6Off, correct7Off, incorrect1Off, incorrect2Off, incorrect3Off;
+	public Sprite correctOn, incorrectOn;
 
     GameObject myPuzzle;
 
@@ -53,9 +57,8 @@ public class OverallGameManagerErik : MonoBehaviour {
         randomizer = Random.Range(0, 3);
         RobotNumber = Random.Range(1, 4);
         puzzleToLoad = Random.Range(1, 4);
-		progressBar = GameObject.Find ("Fill").GetComponent<Image>();
-		progressBar.fillAmount = (50f / 100f);
 		blackScreen.enabled = false;
+		Debug.Log (numberToWin + "towin");
 
         if (RobotNumber == 1)
         {
@@ -69,6 +72,21 @@ public class OverallGameManagerErik : MonoBehaviour {
         {
             //instantiate Robot 3
         }
+
+		//Set progress indicators depending on difficulty level.
+		if (numberToWin == 3) {
+			correct4.enabled = false;
+			correct5.enabled = false;
+			correct6.enabled = false;
+			correct7.enabled = false;
+		} else if (numberToWin == 5) {
+			correct4.enabled = true;
+			correct5.enabled = true;
+			correct6.enabled = false;
+			correct7.enabled = false;
+		} else if (numberToWin == 7) {
+			//all active
+		}
 
     }
 
@@ -132,19 +150,49 @@ public class OverallGameManagerErik : MonoBehaviour {
 			StartCoroutine (LoadWinScreen ());
 		}
 
+		//Progress indicators.
+		if (NumberCorrect >= 1) {
+			correct1.sprite = correctOn;
+		}
+		if (NumberCorrect >= 2) {
+			correct2.sprite = correctOn;
+		}
+		if (NumberCorrect >= 3) {
+			correct3.sprite = correctOn;
+		}
+		if (correct4.enabled == true && NumberCorrect >= 4) {
+			correct4.sprite = correctOn;
+		}
+		if (correct5.enabled == true && NumberCorrect >= 5) {
+			correct5.sprite = correctOn;
+		}
+		if (correct6.enabled == true && NumberCorrect >= 6) {
+			correct6.sprite = correctOn;
+		}
+		if (correct7.enabled == true && NumberCorrect >= 7) {
+			correct7.sprite = correctOn;
+		}
+		if (NumberIncorrect >= 1) {
+			incorrect1.sprite = incorrectOn;
+		}
+		if (NumberIncorrect >= 2) {
+			incorrect2.sprite = incorrectOn;
+		}
+
     }
 	/// <summary>
 	/// When you win a puzzle, destroy it & add score.
 	/// </summary>
     public static void PuzzleWon(GameObject myGO)
     {
-        NumberCorrect++;
-		progressBar.fillAmount = ((float)NumberCorrect * 10)/(float)100;
-        isGameActive = false;
-        Destroy(myGO);
-		Debug.Log ("correctly solved puzzle");
-        randomSoundChooser = Random.Range(0, 3);
-        instance.soundManager.PlayOneShot(instance.soundsCorrect[randomSoundChooser], 1f);
+		if (isWinningActive == false) {
+			NumberCorrect++;
+			instance.StartCoroutine (instance.LoadNewPuzzle ());
+			Destroy (myGO);
+			Debug.Log ("correctly solved puzzle");
+			randomSoundChooser = Random.Range (0, 3);
+			instance.soundManager.PlayOneShot (instance.soundsCorrect [randomSoundChooser], 1f);
+		}
     }
 
     //Function to call on puzzl skip
@@ -153,7 +201,10 @@ public class OverallGameManagerErik : MonoBehaviour {
     {
         MadeError();
         Destroy(myPuzzle);
-        isGameActive = false;       
+
+		if (NumberIncorrect != numberToLose) {
+			instance.StartCoroutine (instance.LoadNewPuzzle ());  
+		}
     }
 
     /// <summary>
@@ -162,7 +213,6 @@ public class OverallGameManagerErik : MonoBehaviour {
     public static void MadeError()
     {
         NumberIncorrect++;
-		progressBar.fillAmount = 1f - (((float)NumberIncorrect * 10)/(float)100);
         Debug.Log("Strike" + NumberIncorrect);
         randomSoundChooser = Random.Range(0, 3);
         instance.soundManager.PlayOneShot(instance.soundsIncorrect[randomSoundChooser], 1f);
@@ -189,11 +239,18 @@ public class OverallGameManagerErik : MonoBehaviour {
         Debug.Log("Eyes: " + eyes);
     }
 
+	public IEnumerator LoadNewPuzzle(){
+		yield return new WaitForSeconds (1f);
+		isGameActive = false;
+	}
+
 	public IEnumerator LoadLoseScreen(){
+		incorrect3.sprite = incorrectOn;
 		hasLost = false;
 		NumberIncorrect = 0;
 		NumberCorrect = 0;
-		overallGameTime = 600.0f;
+		overallGameTime = 900.0f;
+		gameTimerText.enabled = false;
 		yield return new WaitForSeconds (0.5f);
 		soundManager.PlayOneShot (explodeSound, 1f);
 		yield return new WaitForSeconds (5f);
@@ -203,13 +260,15 @@ public class OverallGameManagerErik : MonoBehaviour {
 	}
 
 	public IEnumerator LoadWinScreen(){
+		isWinningActive = true;
 		hasWon = false;
 		NumberCorrect = 0;
 		NumberIncorrect = 0;
-		overallGameTime = 600.0f;
-		yield return new WaitForSeconds (0.5f);
+		overallGameTime = 900.0f;
+		gameTimerText.enabled = false;
+		yield return new WaitForSeconds (0.7f);
 		soundManager.PlayOneShot (winSound, 1f);
-		yield return new WaitForSeconds (4.5f);
+		yield return new WaitForSeconds (4f);
 		blackScreen.enabled = true;
 		yield return new WaitForSeconds (3f);
 		SceneManager.LoadScene (4);
