@@ -1,10 +1,34 @@
 fileFormatVersion: 2
 guid: e112ddb39edd52d4f9f71f9b22ea9331
-timeCreated: 1461868526
+timeCreated: 1463028448
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - pinkMaterial: {fileID: 2100000, guid: f5a5f531b92de7e42b90db7936f7bcd8, type: 2}
+  - blackMaterial: {fileID: 2100000, guid: 4f9e6487b72a32348b7e82b067603bd5, type: 2}
+  - superPinkMaterial: {fileID: 2100000, guid: 4c657e492d860a54c9aefd55af990f9b, type: 2}
+  - reallySuperPinkMaterial: {fileID: 2100000, guid: e6618e96c19687742a056629162df18a,
+      type: 2}
+  - bottomLeft: {fileID: 166310, guid: 4ffbc8c1933e88f4ab40ee9362d8284a, type: 2}
+  - bottomRight: {fileID: 185298, guid: 0b44e6f7fe538244f8199fd29cd45d37, type: 2}
+  - secondLeft: {fileID: 129308, guid: 693b11c5798df394c9e7da78e1f4c0e5, type: 2}
+  - secondRight: {fileID: 156054, guid: ec4f9c12f11c6104daf705b11360b836, type: 2}
+  - thirdLeft: {fileID: 195658, guid: 4c14397a1ae6f104cb479cad2453b980, type: 2}
+  - thirdRight: {fileID: 161636, guid: 0b11a8bc397cf5747b98ea28da669053, type: 2}
+  - fourthLeft: {fileID: 198998, guid: 9489c4d29d6c1ef4e98f10f33c0dd916, type: 2}
+  - fourthRight: {fileID: 105580, guid: 4d3a9086531da4b43949177200d00c6c, type: 2}
+  - fifthLeft: {fileID: 156924, guid: ca352094076823649b1c19041f004e75, type: 2}
+  - fifthRight: {fileID: 186022, guid: e27313e1a26f6a044b1845bb6b91feb3, type: 2}
+  - heartLeft: {fileID: 161710, guid: b0caca79a52d03841a28c1f108f48579, type: 2}
+  - heartRight: {fileID: 110074, guid: 5233ae645f76cf74ba6db2a5ef5b8036, type: 2}
+  - visor: {fileID: 177276, guid: fec0ad6a049907943b8cd64e7a4580f7, type: 2}
+  - winkyFace: {fileID: 2100000, guid: 9cb29f5f1e4e9a740ab059e01eef6917, type: 2}
+  - goodReaction: {fileID: 2100000, guid: c7f33a5e48300e84da8a963342758eb1, type: 2}
+  - startX: {fileID: 164726, guid: 1d3088bf301ea0b4eb7178e7989a6608, type: 2}
+  - otherX: {fileID: 132912, guid: 06f67e649f16b0240bc028940d230a52, type: 2}
+  - startO: {fileID: 165630, guid: 0c8258cfa2e65cc4fb1aea10df194a8c, type: 2}
+  - otherO: {fileID: 151658, guid: 379c362097a0fdf48b3eb9eaeab646e0, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

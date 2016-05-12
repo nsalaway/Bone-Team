@@ -42,7 +42,7 @@ public class Second_Negatives : MonoBehaviour {
 
 	public float duration = 0.2f;
 
-	public MeshRenderer heartRenderer;
+	//public MeshRenderer heartRenderer;
 	//***END PUBLIC OBJECTS FOR EYE 0
 
 
@@ -55,6 +55,27 @@ public class Second_Negatives : MonoBehaviour {
 	public Material superFrownyFace;
 
 	//****END OBJECTS FOR EYE 1.
+
+
+
+	//***THE FOLLOWING ARE FOR PUBLIC OBJECTS WITH EYE 2
+
+	public GameObject startX;
+	public GameObject otherX;
+
+	public GameObject startO;
+	public GameObject otherO;
+
+	public GameObject left1;
+	public GameObject left2;
+	public GameObject left3;
+
+
+	public GameObject right1;
+	public GameObject right2;
+	public GameObject right3;
+
+	// END OBJECTS FOR EYE 2
 
 
 	// Use this for initialization
@@ -100,6 +121,14 @@ public class Second_Negatives : MonoBehaviour {
 		StartCoroutine (eye1Animation ());
 
 		//****END IF EYE 1 IS CHOSEN*******
+
+
+
+		//if eye 2 is chosen
+
+		StartCoroutine (eye2Animation ());
+
+		//end if eye 2 is chosen 
 
 
 	}
@@ -481,6 +510,39 @@ public class Second_Negatives : MonoBehaviour {
 
 	}
 
+
+
+	IEnumerator eye2Animation (){
+
+		while (true) {
+
+			foreach (MeshRenderer otherXRenderer in otherX.GetComponentsInChildren<MeshRenderer>()) {
+				otherXRenderer.enabled = true;
+			}
+
+			foreach (MeshRenderer startXRenderer in startX.GetComponentsInChildren<MeshRenderer>()) {
+				startXRenderer.enabled = true;
+			}
+
+			startX.GetComponent<MeshRenderer> ().material = blackMaterial;
+			otherX.GetComponent<MeshRenderer> ().material = blackMaterial;
+
+			yield return new WaitForSeconds (2f);
+
+			left1.GetComponent<MeshRenderer> ().material = pinkMaterial;
+			right1.GetComponent<MeshRenderer> ().material = pinkMaterial;
+
+			left3.GetComponent<MeshRenderer> ().material = pinkMaterial;
+			right3.GetComponent<MeshRenderer> ().material = pinkMaterial;
+
+
+
+			yield return new WaitForSeconds (2f);
+
+
+		}
+
+	}
 
 
 
