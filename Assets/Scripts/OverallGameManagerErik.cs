@@ -10,7 +10,7 @@ public class OverallGameManagerErik : MonoBehaviour {
     public static int eyes;
     public static int NumberCorrect = 0;
     public static int NumberIncorrect = 0;
-	public static int numberToWin;
+    public static int numberToWin = 1;
 	int numberToLose = 3;
     //public static bool levelFinished;
     public static bool isGameActive = false;
@@ -120,6 +120,7 @@ public class OverallGameManagerErik : MonoBehaviour {
         {
 			hasWon = true;
         }
+
 		//You lost.
 		if (NumberIncorrect == numberToLose || overallGameTime <= 0f)
         {
