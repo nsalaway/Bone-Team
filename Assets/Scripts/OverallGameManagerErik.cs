@@ -5,12 +5,15 @@ using UnityEngine.UI;
 
 public class OverallGameManagerErik : MonoBehaviour {
 
+    public static int currentPuzzle;
+    public GameObject briasCode;
+    public static GameObject briasCodeStatic;
     public static int RobotNumber;
     public static int antenna;
     public static int eyes;
     public static int NumberCorrect = 0;
     public static int NumberIncorrect = 0;
-    public static int numberToWin = 1;
+    public static int numberToWin;
 	int numberToLose = 3;
     //public static bool levelFinished;
     public static bool isGameActive = false;
@@ -49,6 +52,8 @@ public class OverallGameManagerErik : MonoBehaviour {
 
     void Start()
     {
+        briasCodeStatic = briasCode;
+        isWinningActive = false;
         instance = this;
         RandomizeRobot();
         NumberCorrect = 0;
@@ -110,21 +115,17 @@ public class OverallGameManagerErik : MonoBehaviour {
 			timeMouseClicked = Time.time;
 			randomSoundChooser = Random.Range (0, 3);
 		}
-		//Restart.
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            RestartGame();
-        }
+
 		//You won.
         if (NumberCorrect == numberToWin)
         {
 			hasWon = true;
-			//Destroy (myPuzzle);
+			Destroy (myPuzzle);
         }
 		//You lost.
 		if (NumberIncorrect == numberToLose || overallGameTime <= 0f)
         {
-			//hasLost = true;
+			hasLost = true;
 			Destroy(myPuzzle);
         }
         if (isGameActive)
@@ -140,6 +141,7 @@ public class OverallGameManagerErik : MonoBehaviour {
                 {
                     randomizer = Random.Range(0, 3);
                 }
+                currentPuzzle = randomizer;
                 previousPuzzle = randomizer;
                 myPuzzle = (GameObject)Instantiate(puzzles[randomizer], puzzles[randomizer].transform.position, puzzles[randomizer].transform.rotation);
             }
@@ -188,7 +190,10 @@ public class OverallGameManagerErik : MonoBehaviour {
 	/// </summary>
     public static void PuzzleWon(GameObject myGO)
     {
-		if (isWinningActive == false) {
+        //briasCode.GameObject.Robot_Reaction.eye0AnimationStart();
+        Debug.Log(currentPuzzle);
+        briasCodeStatic.GetComponent<Robot_Reaction>().eyeAnimationStart(eyes);
+        if (isWinningActive == false) {
 			NumberCorrect++;
 			instance.StartCoroutine (instance.LoadNewPuzzle ());
 			Destroy (myGO);
@@ -215,19 +220,15 @@ public class OverallGameManagerErik : MonoBehaviour {
     /// </summary>
     public static void MadeError()
     {
+        
+        briasCodeStatic.GetComponent<First_Negatives>().badAnimationStart(eyes);
         NumberIncorrect++;
         Debug.Log("Strike" + NumberIncorrect);
         randomSoundChooser = Random.Range(0, 3);
         instance.soundManager.PlayOneShot(instance.soundsIncorrect[randomSoundChooser], 1f);
 
     }
-		
-    void RestartGame()
-    {
 
-        SceneManager.LoadScene(3);
-
-    }
 
 	/// <summary>
 	/// Randomizes the robot.
@@ -263,13 +264,23 @@ public class OverallGameManagerErik : MonoBehaviour {
 	}
 
 	public IEnumerator LoadWinScreen(){
+        if (numberToWin == 3)
+        {
+            correct3.sprite = correctOn;
+        } else if (numberToWin == 5) {
+            correct5.sprite = correctOn;
+        } else if (numberToWin == 7)
+        {
+            correct7.sprite = correctOn;
+        }
+
 		isWinningActive = true;
 		hasWon = false;
 		NumberCorrect = 0;
 		NumberIncorrect = 0;
 		overallGameTime = 900.0f;
 		gameTimerText.enabled = false;
-		yield return new WaitForSeconds (0.7f);
+		yield return new WaitForSeconds (1f);
 		soundManager.PlayOneShot (winSound, 1f);
 		yield return new WaitForSeconds (4f);
 		blackScreen.enabled = true;

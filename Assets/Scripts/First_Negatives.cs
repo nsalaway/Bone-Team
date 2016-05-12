@@ -19,9 +19,10 @@ public class First_Negatives : MonoBehaviour {
 	public Material darkestBlue;
 	public Material blackMaterial;
 	public Material pinkMaterial;
+    public Material superPinkMaterial;
 
-	//eye0 hierarchy
-	public GameObject bottomLeft;
+    //eye0 hierarchy
+    public GameObject bottomLeft;
 	public GameObject bottomRight;
 
 	public GameObject secondLeft;
@@ -53,13 +54,14 @@ public class First_Negatives : MonoBehaviour {
 	public GameObject visor;
 	public Material badReaction;
 	public Material frownyFace;
+    public Material defaultMaterial;
 
-	//****END OBJECTS FOR EYE 1.
+    //****END OBJECTS FOR EYE 1.
 
 
-	//***THE FOLLOWING ARE FOR PUBLIC OBJECTS WITH EYE 2
+    //***THE FOLLOWING ARE FOR PUBLIC OBJECTS WITH EYE 2
 
-	public GameObject startX;
+    public GameObject startX;
 	public GameObject otherX;
 
 	public GameObject startO;
@@ -79,55 +81,8 @@ public class First_Negatives : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		//these are objects that should be invisible. 
-		//commented out for testing purposes. 
-		//		foreach (MeshRenderer closedLeftRenderer in openRight.GetComponentsInChildren<MeshRenderer>()) {
-		//			closedLeftRenderer.enabled = false;
-		//		}
-
-
-		//IF EYE == 0
-		//this replaces the open left eye with an closed left eye for a second.
-		//this is to create a grimacing affect.
-	
-		foreach (MeshRenderer closedLeftRenderer in closedLeft.GetComponentsInChildren<MeshRenderer>()) {
-			closedLeftRenderer.enabled = true;
-		}
-
-		foreach (MeshRenderer openLeftRenderer in openLeft.GetComponentsInChildren<MeshRenderer>()) {
-			openLeftRenderer.enabled = false;
-		}
-		foreach (MeshRenderer openRightRenderer in openRight.GetComponentsInChildren<MeshRenderer>()) {
-			openRightRenderer.enabled = false;
-		}
-
-		foreach (MeshRenderer closedRightRenderer in closedRight.GetComponentsInChildren<MeshRenderer>()) {
-			closedRightRenderer.enabled = true;
-		}
-		//turns on the coroutine
-		StartCoroutine (BlueScreened ());
-
-		//END IF EYE == 0 
-
-
-
-
-
-		//****IF EYE 1 IS CHOSEN****
-
-		visor.GetComponent<MeshRenderer> ().material = badReaction;
-		visor.GetComponent<MeshRenderer> ().material.mainTextureOffset = new Vector2 (0f, -0.03f);
-		visor.GetComponent<MeshRenderer> ().material.mainTextureScale = new Vector2 (-9.33f, -2.89f);
-		StartCoroutine (eye1Animation ());
-
-		//****END IF EYE 1 IS CHOSEN****
-
-	
-		//if eye 2 is chosen
-
-		StartCoroutine (eye2Animation ());
-
-		//end if eye 2 is chosen 
+		
+		
 	
 	
 	}
@@ -137,11 +92,23 @@ public class First_Negatives : MonoBehaviour {
 
 
 
+    public void badAnimationStart(int myEye)
+    {
+        if (myEye == 0)
+        {
+            Debug.Log("the right eye");
+            StartCoroutine(BlueScreened());
+        }
+        else if (myEye == 1)
+        {
+            StartCoroutine(bad1Animation());
+        }
+        else if (myEye == 2)
+        {
+            StartCoroutine(bad2Animation());
+        }
+    }
 
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 
 
@@ -149,12 +116,31 @@ public class First_Negatives : MonoBehaviour {
 
 
 
-	//COROUTINE ANIMATION FOR EYE 0
-	IEnumerator BlueScreened(){
+    //COROUTINE ANIMATION FOR EYE 0
+    public IEnumerator BlueScreened(){
 
-		while (true) {
-			//this opens eyes again so that we can get obnoxious.
-			yield return new WaitForSeconds (1f);
+
+        foreach (MeshRenderer closedLeftRenderer in closedLeft.GetComponentsInChildren<MeshRenderer>())
+        {
+            closedLeftRenderer.enabled = true;
+        }
+
+        foreach (MeshRenderer openLeftRenderer in openLeft.GetComponentsInChildren<MeshRenderer>())
+        {
+            openLeftRenderer.enabled = false;
+        }
+        foreach (MeshRenderer openRightRenderer in openRight.GetComponentsInChildren<MeshRenderer>())
+        {
+            openRightRenderer.enabled = false;
+        }
+
+        foreach (MeshRenderer closedRightRenderer in closedRight.GetComponentsInChildren<MeshRenderer>())
+        {
+            closedRightRenderer.enabled = true;
+        }
+
+
+        yield return new WaitForSeconds (0.5f);
 			foreach (MeshRenderer closedLeftRenderer in closedLeft.GetComponentsInChildren<MeshRenderer>()) {
 				closedLeftRenderer.enabled = false;
 			}
@@ -171,28 +157,6 @@ public class First_Negatives : MonoBehaviour {
 			foreach (MeshRenderer closedRightRenderer in closedRight.GetComponentsInChildren<MeshRenderer>()) {
 				closedRightRenderer.enabled = false;
 			}
-
-			//LOL THIS IS ALL THE BLUE SCREEN ANIMATION. 
-
-			bottomLeft.GetComponent<MeshRenderer> ().material = blackMaterial;
-			bottomRight.GetComponent<MeshRenderer> ().material = blackMaterial;
-
-			secondLeft.GetComponent<MeshRenderer> ().material = blackMaterial;
-			secondRight.GetComponent<MeshRenderer> ().material = blackMaterial;
-
-			thirdLeft.GetComponent<MeshRenderer> ().material = blackMaterial;
-			thirdRight.GetComponent<MeshRenderer> ().material = blackMaterial;
-
-			fourthLeft.GetComponent<MeshRenderer> ().material = blackMaterial;
-			fourthRight.GetComponent<MeshRenderer> ().material = blackMaterial;
-
-			fifthLeft.GetComponent<MeshRenderer> ().material = blackMaterial;
-			fifthRight.GetComponent<MeshRenderer> ().material = blackMaterial;
-
-			heartLeft.GetComponent<MeshRenderer> ().material = pinkMaterial;
-			heartRight.GetComponent<MeshRenderer> ().material = pinkMaterial;
-
-			yield return new WaitForSeconds (0.3f);
 
 
 			bottomLeft.GetComponent<MeshRenderer> ().material = blackMaterial;
@@ -233,7 +197,7 @@ public class First_Negatives : MonoBehaviour {
 			heartLeft.GetComponent<MeshRenderer> ().material = whiteMaterial;
 			heartRight.GetComponent<MeshRenderer> ().material = whiteMaterial;
 
-			yield return new WaitForSeconds (1f);
+			yield return new WaitForSeconds (0.3f);
 
 			bottomLeft.GetComponent<MeshRenderer> ().material = blueMaterial;
 			bottomRight.GetComponent<MeshRenderer> ().material = blueMaterial;
@@ -253,7 +217,7 @@ public class First_Negatives : MonoBehaviour {
 			heartLeft.GetComponent<MeshRenderer> ().material = darkBlue;
 			heartRight.GetComponent<MeshRenderer> ().material = darkBlue;
 
-			yield return new WaitForSeconds (1f);
+			yield return new WaitForSeconds (0.3f);
 
 			bottomLeft.GetComponent<MeshRenderer> ().material = blueMaterial;
 			bottomRight.GetComponent<MeshRenderer> ().material = blueMaterial;
@@ -273,7 +237,7 @@ public class First_Negatives : MonoBehaviour {
 			heartLeft.GetComponent<MeshRenderer> ().material = darkerBlue;
 			heartRight.GetComponent<MeshRenderer> ().material = darkerBlue;
 
-			yield return new WaitForSeconds (1f);
+			yield return new WaitForSeconds (0.3f);
 
 			bottomLeft.GetComponent<MeshRenderer> ().material = blueMaterial;
 			bottomRight.GetComponent<MeshRenderer> ().material = blueMaterial;
@@ -293,7 +257,7 @@ public class First_Negatives : MonoBehaviour {
 			heartLeft.GetComponent<MeshRenderer> ().material = darkestBlue;
 			heartRight.GetComponent<MeshRenderer> ().material = darkestBlue;
 
-			yield return new WaitForSeconds (1f);
+			yield return new WaitForSeconds (0.3f);
 
 			bottomLeft.GetComponent<MeshRenderer> ().material = darkBlue;
 			bottomRight.GetComponent<MeshRenderer> ().material = darkBlue;
@@ -313,7 +277,7 @@ public class First_Negatives : MonoBehaviour {
 			heartLeft.GetComponent<MeshRenderer> ().material = blackMaterial;
 			heartRight.GetComponent<MeshRenderer> ().material = blackMaterial;
 
-			yield return new WaitForSeconds (1f);
+			yield return new WaitForSeconds (0.3f);
 
 			bottomLeft.GetComponent<MeshRenderer> ().material = darkerBlue;
 			bottomRight.GetComponent<MeshRenderer> ().material = darkerBlue;
@@ -334,7 +298,7 @@ public class First_Negatives : MonoBehaviour {
 			heartRight.GetComponent<MeshRenderer> ().material = blueMaterial;
 
 
-			yield return new WaitForSeconds (1f);
+			yield return new WaitForSeconds (0.5f);
 
 			bottomLeft.GetComponent<MeshRenderer> ().material = darkestBlue;
 			bottomRight.GetComponent<MeshRenderer> ().material = darkestBlue;
@@ -354,7 +318,7 @@ public class First_Negatives : MonoBehaviour {
 			heartLeft.GetComponent<MeshRenderer> ().material = blackMaterial;
 			heartRight.GetComponent<MeshRenderer> ().material = blackMaterial;
 
-			yield return new WaitForSeconds (1f);
+			yield return new WaitForSeconds (0.5f);
 
 			bottomLeft.GetComponent<MeshRenderer> ().material = blackMaterial;
 			bottomRight.GetComponent<MeshRenderer> ().material = blackMaterial;
@@ -374,22 +338,22 @@ public class First_Negatives : MonoBehaviour {
 			heartLeft.GetComponent<MeshRenderer> ().material = blueMaterial;
 			heartRight.GetComponent<MeshRenderer> ().material = blueMaterial;
 
-			yield return new WaitForSeconds (1f);
+			yield return new WaitForSeconds (0.5f);
 
 			heartLeft.GetComponent<MeshRenderer> ().material = blackMaterial;
 			heartRight.GetComponent<MeshRenderer> ().material = blackMaterial;
 
-			yield return new WaitForSeconds (1f);
+			yield return new WaitForSeconds (0.5f);
 
 			heartLeft.GetComponent<MeshRenderer> ().material = blueMaterial;
 			heartRight.GetComponent<MeshRenderer> ().material = blueMaterial;
 
-			yield return new WaitForSeconds (1f);
+			yield return new WaitForSeconds (0.5f);
 
 			heartLeft.GetComponent<MeshRenderer> ().material = blackMaterial;
 			heartRight.GetComponent<MeshRenderer> ().material = blackMaterial;
 
-			yield return new WaitForSeconds (3f);
+			yield return new WaitForSeconds (1f);
 			bottomLeft.GetComponent<MeshRenderer> ().material = darkBlue;
 			bottomRight.GetComponent<MeshRenderer> ().material = darkBlue;
 
@@ -467,9 +431,39 @@ public class First_Negatives : MonoBehaviour {
 			heartLeft.GetComponent<MeshRenderer> ().material = blackMaterial;
 			heartRight.GetComponent<MeshRenderer> ().material = blackMaterial;
 
-		}
-		
-	}
+        yield return new WaitForSeconds(0.3f);
+
+        foreach (MeshRenderer closedLeftRenderer in closedLeft.GetComponentsInChildren<MeshRenderer>())
+        {
+            closedLeftRenderer.enabled = false;
+        }
+
+        foreach (MeshRenderer openLeftRenderer in openLeft.GetComponentsInChildren<MeshRenderer>())
+        {
+            openLeftRenderer.enabled = true;
+        }
+
+        //this replaces the closed right eye with an open right eye. 
+        foreach (MeshRenderer openRightRenderer in openRight.GetComponentsInChildren<MeshRenderer>())
+        {
+            openRightRenderer.enabled = false;
+        }
+
+        foreach (MeshRenderer closedRightRenderer in closedRight.GetComponentsInChildren<MeshRenderer>())
+        {
+            closedRightRenderer.enabled = true;
+        }
+
+
+        thirdLeft.GetComponent<MeshRenderer>().material = pinkMaterial;
+        thirdRight.GetComponent<MeshRenderer>().material = pinkMaterial;
+
+        heartLeft.GetComponent<MeshRenderer>().material = pinkMaterial;
+        heartRight.GetComponent<MeshRenderer>().material = pinkMaterial;
+
+        yield return null;
+
+    }
 
 	//END COROUTINE FOR EYE 0
 
@@ -477,10 +471,15 @@ public class First_Negatives : MonoBehaviour {
 
 
 
-	IEnumerator eye1Animation (){
+	public IEnumerator bad1Animation (){
 
-		while (true) {
-			yield return new WaitForSeconds (0.3f);
+        visor.GetComponent<MeshRenderer>().material = badReaction;
+
+        visor.GetComponent<MeshRenderer>().material.mainTextureOffset = new Vector2(0f, -0.03f);
+        visor.GetComponent<MeshRenderer>().material.mainTextureScale = new Vector2(-9.33f, -2.89f);
+
+        yield return new WaitForSeconds (0.3f);
+
 			visor.GetComponent<MeshRenderer> ().material = frownyFace;
 
 			visor.GetComponent<MeshRenderer> ().material.mainTextureOffset = new Vector2 (0f, -0.2f);
@@ -501,46 +500,96 @@ public class First_Negatives : MonoBehaviour {
 			yield return new WaitForSeconds (0.3f);
 			visor.GetComponent<MeshRenderer> ().material.mainTextureOffset = new Vector2 (1.5f, -0.2f);
 
+        yield return new WaitForSeconds(0.3f);
+
+        visor.GetComponent<MeshRenderer>().material = defaultMaterial;
+        visor.GetComponent<MeshRenderer>().material.mainTextureScale = new Vector2(-5.51f, -1f);
+
+        yield return null;
 
 
-		}
-
-	}
-
-
-
-	IEnumerator eye2Animation (){
-
-		while (true) {
-
-			foreach (MeshRenderer otherXRenderer in otherX.GetComponentsInChildren<MeshRenderer>()) {
-				otherXRenderer.enabled = true;
-			}
-
-			foreach (MeshRenderer startXRenderer in startX.GetComponentsInChildren<MeshRenderer>()) {
-				startXRenderer.enabled = true;
-			}
-
-			startX.GetComponent<MeshRenderer> ().material = blackMaterial;
-			otherX.GetComponent<MeshRenderer> ().material = blackMaterial;
-		
-			yield return new WaitForSeconds (1f);
-
-			left1.GetComponent<MeshRenderer> ().material = pinkMaterial;
-				right1.GetComponent<MeshRenderer> ().material = pinkMaterial;
-
-			left3.GetComponent<MeshRenderer> ().material = pinkMaterial;
-			right3.GetComponent<MeshRenderer> ().material = pinkMaterial;
+    }
 
 
 
-			yield return new WaitForSeconds (1f);
+    public IEnumerator bad2Animation()
+    {
+
+        foreach (MeshRenderer otherXRenderer in otherX.GetComponentsInChildren<MeshRenderer>())
+        {
+            otherXRenderer.enabled = true;
+        }
+
+        foreach (MeshRenderer otherORenderer in otherO.GetComponentsInChildren<MeshRenderer>())
+        {
+            otherORenderer.enabled = false;
+        }
+
+        foreach (MeshRenderer startXRenderer in startX.GetComponentsInChildren<MeshRenderer>())
+        {
+            startXRenderer.enabled = true;
+        }
+
+        foreach (MeshRenderer startORenderer in startO.GetComponentsInChildren<MeshRenderer>())
+        {
+            startORenderer.enabled = false;
 
 
-		}
+            //startX.GetComponent<MeshRenderer> ().material = blackMaterial;
+            //otherX.GetComponent<MeshRenderer> ().material = blackMaterial;
 
-	}
+          
 
+            left1.GetComponent<MeshRenderer>().material = blackMaterial;
+            right1.GetComponent<MeshRenderer>().material = blackMaterial;
+
+            left3.GetComponent<MeshRenderer>().material = blackMaterial;
+            right3.GetComponent<MeshRenderer>().material = blackMaterial;
+
+
+            yield return new WaitForSeconds(1f);
+
+
+
+
+            foreach (MeshRenderer otherXRenderer in otherX.GetComponentsInChildren<MeshRenderer>())
+            {
+                otherXRenderer.enabled = false;
+            }
+
+            foreach (MeshRenderer otherORenderer in otherO.GetComponentsInChildren<MeshRenderer>())
+            {
+                otherORenderer.enabled = false;
+            }
+
+            foreach (MeshRenderer startXRenderer in startX.GetComponentsInChildren<MeshRenderer>())
+            {
+                startXRenderer.enabled = true;
+            }
+
+            foreach (MeshRenderer startOrRenderer in startO.GetComponentsInChildren<MeshRenderer>())
+            {
+                startOrRenderer.enabled = true;
+
+            }
+
+
+            left2.GetComponent<MeshRenderer>().material = pinkMaterial;
+            right2.GetComponent<MeshRenderer>().material = pinkMaterial;
+
+            left3.GetComponent<MeshRenderer>().material = pinkMaterial;
+            right3.GetComponent<MeshRenderer>().material = pinkMaterial;
+
+            left1.GetComponent<MeshRenderer>().material = superPinkMaterial;
+            right1.GetComponent<MeshRenderer>().material = superPinkMaterial;
+
+            yield return null;  
+
+        }
+
+
+
+    }
 
 
 }

@@ -6,34 +6,36 @@ public class Robot_Reaction : MonoBehaviour {
 
 	//****THE FOLLOWING ARE PUBLIC OBJECTS FOR EYE 0 (hearts)****
 	//turned off for testing
-//	public GameObject closedRight;
-//	public GameObject openRight;
+	public GameObject closedRight;
+	public GameObject openRight;
 
+    public GameObject closedLeft, openLeft;
 
+    
 	//materials
-	public Material pinkMaterial;
-	public Material blackMaterial;
-	public Material superPinkMaterial;
-	public Material reallySuperPinkMaterial;
+	public  Material pinkMaterial;
+	public  Material blackMaterial;
+	public  Material superPinkMaterial;
+	public  Material reallySuperPinkMaterial;
 
 	//eye1 hierarchy
-	public GameObject bottomLeft;
-	public GameObject bottomRight;
+	public  GameObject bottomLeft;
+	public  GameObject bottomRight;
 
-	public GameObject secondLeft;
-	public GameObject secondRight;
+	public  GameObject secondLeft;
+	public  GameObject secondRight;
 
-	public GameObject thirdLeft;
-	public GameObject thirdRight;
+	public  GameObject thirdLeft;
+	public  GameObject thirdRight;
 
-	public GameObject fourthLeft;
-	public GameObject fourthRight;
+	public  GameObject fourthLeft;
+	public  GameObject fourthRight;
 
-	public GameObject fifthLeft;
-	public GameObject fifthRight;
+	public  GameObject fifthLeft;
+	public  GameObject fifthRight;
 
-	public GameObject heartLeft;
-	public GameObject heartRight;
+	public  GameObject heartLeft;
+	public  GameObject heartRight;
 
 	//****END OBJECTS FOR EYE 0.****
 
@@ -43,6 +45,7 @@ public class Robot_Reaction : MonoBehaviour {
 
 	public GameObject visor;
 	public Material winkyFace;
+    public Material defaultMaterial;
 	public Material goodReaction;
 
 	//****END OBJECTS FOR EYE 1.
@@ -66,37 +69,99 @@ public class Robot_Reaction : MonoBehaviour {
 	void Start () {
 
 
-		//these are objects that should be invisible. 
-		//commented out for testing purposes. 
-//		foreach (MeshRenderer openRightRenderer in openRight.GetComponentsInChildren<MeshRenderer>()) {
-//			openRightRenderer.enabled = false;
-//		}
-//
-		//****IF EYE 0 IS CHOSEN:****
-
-		//this replaces the closed right eye with an open right eye. 
-		//also turned OFF for testing reasons
-
-//		foreach (MeshRenderer closedLeftRenderer in closedLeft.GetComponentsInChildren<MeshRenderer>()) {
-//			closedLeftRenderer.enabled = false;
-//		}
-//
-//		foreach (MeshRenderer openLeftRenderer in openLeft.GetComponentsInChildren<MeshRenderer>()) {
-//			openLeftRenderer.enabled = true;
-//		}
-//
-//		//this replaces the closed right eye with an open right eye. 
-//		foreach (MeshRenderer openRightRenderer in openRight.GetComponentsInChildren<MeshRenderer>()) {
-//			openRightRenderer.enabled = true;
-//		}
-//
-//		foreach (MeshRenderer closedRightRenderer in closedRight.GetComponentsInChildren<MeshRenderer>()) {
-//			closedRightRenderer.enabled = false;
-//		}
+	}
 
 
-		//this coroutine is in charge of the FIRST POSITIVE REACTION for EYE 0.
-		bottomLeft.GetComponent<MeshRenderer> ().material = pinkMaterial;
+
+
+
+
+
+
+
+
+
+
+
+    //ANIMATION IF EYE == 0 
+
+
+
+
+
+    public void eyeAnimationStart(int myEye)
+    {
+        if (myEye == 0)
+        {
+            StartCoroutine(eye0Animation());
+        }
+        else if (myEye == 1)
+        {
+            StartCoroutine(eye1Animation());
+        }
+        else if (myEye == 2)
+        {
+            StartCoroutine(eye2Animation());
+        }
+    }
+
+
+
+
+
+
+
+
+    public IEnumerator eye0Animation(){
+
+ 
+
+            foreach (MeshRenderer closedLeftRenderer in closedLeft.GetComponentsInChildren<MeshRenderer>())
+            {
+                closedLeftRenderer.enabled = false;
+            }
+
+            foreach (MeshRenderer openLeftRenderer in openLeft.GetComponentsInChildren<MeshRenderer>())
+            {
+                openLeftRenderer.enabled = true;
+            }
+
+            //this replaces the closed right eye with an open right eye. 
+            foreach (MeshRenderer openRightRenderer in openRight.GetComponentsInChildren<MeshRenderer>())
+            {
+                openRightRenderer.enabled = true;
+            }
+
+            foreach (MeshRenderer closedRightRenderer in closedRight.GetComponentsInChildren<MeshRenderer>())
+            {
+                closedRightRenderer.enabled = false;
+            }
+
+
+
+            bottomLeft.GetComponent<MeshRenderer>().material = pinkMaterial;
+            bottomRight.GetComponent<MeshRenderer>().material = pinkMaterial;
+
+            secondLeft.GetComponent<MeshRenderer>().material = pinkMaterial;
+            secondRight.GetComponent<MeshRenderer>().material = pinkMaterial;
+
+            thirdLeft.GetComponent<MeshRenderer>().material = pinkMaterial;
+            thirdRight.GetComponent<MeshRenderer>().material = pinkMaterial;
+
+            fourthLeft.GetComponent<MeshRenderer>().material = pinkMaterial;
+            fourthRight.GetComponent<MeshRenderer>().material = pinkMaterial;
+
+            fifthLeft.GetComponent<MeshRenderer>().material = pinkMaterial;
+            fifthRight.GetComponent<MeshRenderer>().material = pinkMaterial;
+
+            heartLeft.GetComponent<MeshRenderer>().material = superPinkMaterial;
+            heartRight.GetComponent<MeshRenderer>().material = superPinkMaterial;
+
+
+
+            yield return new WaitForSeconds (0.5f);
+		
+            	bottomLeft.GetComponent<MeshRenderer> ().material = pinkMaterial;
 		bottomRight.GetComponent<MeshRenderer> ().material = pinkMaterial;
 
 		secondLeft.GetComponent<MeshRenderer> ().material = pinkMaterial;
@@ -113,53 +178,6 @@ public class Robot_Reaction : MonoBehaviour {
 
 		heartLeft.GetComponent<MeshRenderer> ().material = superPinkMaterial;
 		heartRight.GetComponent<MeshRenderer> ().material = superPinkMaterial;
-
-		StartCoroutine (HappyLightDance1 ());
-
-		//****end IF EYE 0 IS CHOSEN
-
-
-
-		//****IF EYE 1 IS CHOSEN****
-
-
-		visor.GetComponent<MeshRenderer> ().material = goodReaction;
-		visor.GetComponent<MeshRenderer> ().material.mainTextureOffset = new Vector2 (0.02f, -0.12f);
-		visor.GetComponent<MeshRenderer> ().material.mainTextureScale = new Vector2 (9.18f, -2.61f);
-
-
-		StartCoroutine (eye1Animation ());
-
-		//****END IF EYE 1 IS CHOSEN****
-
-
-
-
-		//if eye 2 is chosen
-
-		StartCoroutine (eye2Animation ());
-
-		//end if eye 2 is chosen 
-
-
-	}
-
-
-
-	
-	// Update is called once per frame
-	void Update () {
-
-	
-	}
-
-
-
-	//ANIMATION IF EYE == 0 
-	IEnumerator HappyLightDance1(){
-		while (true) {
-			yield return new WaitForSeconds (1f);
-		
 
 			//layer 1
 			bottomLeft.GetComponent<MeshRenderer> ().material = blackMaterial;
@@ -181,7 +199,7 @@ public class Robot_Reaction : MonoBehaviour {
 			heartRight.GetComponent<MeshRenderer> ().material = pinkMaterial;
 
 			//layer 2
-			yield return new WaitForSeconds (1f);
+			yield return new WaitForSeconds (0.5f);
 
 			bottomLeft.GetComponent<MeshRenderer> ().material = superPinkMaterial;
 			bottomRight.GetComponent<MeshRenderer> ().material = superPinkMaterial;
@@ -201,7 +219,7 @@ public class Robot_Reaction : MonoBehaviour {
 
 			//layer 3
 
-			yield return new WaitForSeconds (1f);
+			yield return new WaitForSeconds (0.5f);
 			bottomLeft.GetComponent<MeshRenderer> ().material = blackMaterial;
 			bottomRight.GetComponent<MeshRenderer> ().material = blackMaterial;
 
@@ -219,7 +237,7 @@ public class Robot_Reaction : MonoBehaviour {
 
 			//layer 4
 
-			yield return new WaitForSeconds (1f);
+			yield return new WaitForSeconds (0.5f);
 			bottomLeft.GetComponent<MeshRenderer> ().material = pinkMaterial;
 			bottomRight.GetComponent<MeshRenderer> ().material = pinkMaterial;
 
@@ -237,7 +255,7 @@ public class Robot_Reaction : MonoBehaviour {
 
 			//layer 5
 
-			yield return new WaitForSeconds (1f);
+			yield return new WaitForSeconds (0.5f);
 			bottomLeft.GetComponent<MeshRenderer> ().material = superPinkMaterial;
 			bottomRight.GetComponent<MeshRenderer> ().material = superPinkMaterial;
 
@@ -255,17 +273,72 @@ public class Robot_Reaction : MonoBehaviour {
 
 			heartLeft.GetComponent<MeshRenderer> ().material = blackMaterial;
 			heartRight.GetComponent<MeshRenderer> ().material = blackMaterial;
-		}
+        yield return new WaitForSeconds(0.5f);
+
+        foreach (MeshRenderer closedLeftRenderer in closedLeft.GetComponentsInChildren<MeshRenderer>())
+        {
+            closedLeftRenderer.enabled = false;
+        }
+
+        foreach (MeshRenderer openLeftRenderer in openLeft.GetComponentsInChildren<MeshRenderer>())
+        {
+            openLeftRenderer.enabled = true;
+        }
+
+        //this replaces the closed right eye with an open right eye. 
+        foreach (MeshRenderer openRightRenderer in openRight.GetComponentsInChildren<MeshRenderer>())
+        {
+            openRightRenderer.enabled = false;
+        }
+
+        foreach (MeshRenderer closedRightRenderer in closedRight.GetComponentsInChildren<MeshRenderer>())
+        {
+            closedRightRenderer.enabled = true;
+        }
+
+
+        bottomLeft.GetComponent<MeshRenderer>().material = blackMaterial;
+        bottomRight.GetComponent<MeshRenderer>().material = blackMaterial;
+
+        secondLeft.GetComponent<MeshRenderer>().material = pinkMaterial;
+        secondRight.GetComponent<MeshRenderer>().material = pinkMaterial;
+
+        thirdLeft.GetComponent<MeshRenderer>().material = blackMaterial;
+        thirdRight.GetComponent<MeshRenderer>().material = blackMaterial;
+
+        fourthLeft.GetComponent<MeshRenderer>().material = pinkMaterial;
+        fourthRight.GetComponent<MeshRenderer>().material = pinkMaterial;
+
+        fifthLeft.GetComponent<MeshRenderer>().material = blackMaterial;
+        fifthRight.GetComponent<MeshRenderer>().material = blackMaterial;
+
+        heartLeft.GetComponent<MeshRenderer>().material = pinkMaterial;
+        heartRight.GetComponent<MeshRenderer>().material = pinkMaterial;
+
+
+
+        yield return null;
+        
 			
 	}
 
-	//END 
+    //END 
 
 
 
-	IEnumerator eye1Animation (){
-	
-		while (true) {
+
+
+
+
+
+
+
+
+
+
+
+    public IEnumerator eye1Animation (){
+
 
 			visor.GetComponent<MeshRenderer> ().material = winkyFace;
 			visor.GetComponent<MeshRenderer> ().material.mainTextureScale = new Vector2 (30.4f, 3f);
@@ -288,58 +361,113 @@ public class Robot_Reaction : MonoBehaviour {
 			yield return new WaitForSeconds (0.3f);
 			visor.GetComponent<MeshRenderer> ().material.mainTextureOffset = new Vector2 (7.8f, 0f);
 
-		
+            yield return new WaitForSeconds(0.3f);
 
-		
-		}
+            visor.GetComponent<MeshRenderer>().material = defaultMaterial;
+            visor.GetComponent<MeshRenderer>().material.mainTextureScale = new Vector2(-5.51f, -1f);
+
+            yield return null;
 	
 	}
 
 
 
 
-	IEnumerator eye2Animation (){
-
-		while (true) {
-
-			foreach (MeshRenderer otherXRenderer in otherX.GetComponentsInChildren<MeshRenderer>()) {
-				otherXRenderer.enabled = true;
-			}
-
-			foreach (MeshRenderer otherORenderer in otherO.GetComponentsInChildren<MeshRenderer>()) {
-				otherORenderer.enabled = true;
-			}
-
-			foreach (MeshRenderer startXRenderer in startX.GetComponentsInChildren<MeshRenderer>()) {
-				startXRenderer.enabled = false;
-			}
-
-			foreach (MeshRenderer startORenderer in startO.GetComponentsInChildren<MeshRenderer>()) {
-				startORenderer.enabled = false;
-			}
-			yield return new WaitForSeconds (1f);
-
-			foreach (MeshRenderer otherXRenderer in otherX.GetComponentsInChildren<MeshRenderer>()) {
-				otherXRenderer.enabled = false;
-			}
-
-			foreach (MeshRenderer otherORenderer in otherO.GetComponentsInChildren<MeshRenderer>()) {
-				otherORenderer.enabled = false;
-			}
-
-			foreach (MeshRenderer startXRenderer in startX.GetComponentsInChildren<MeshRenderer>()) {
-				startXRenderer.enabled = true;
-			}
-
-			foreach (MeshRenderer startORenderer in startO.GetComponentsInChildren<MeshRenderer>()) {
-				startORenderer.enabled = true;
-			}
-			yield return new WaitForSeconds (1f);
+    public IEnumerator eye2Animation()
+    {
 
 
-		}
+        foreach (MeshRenderer otherXRenderer in otherX.GetComponentsInChildren<MeshRenderer>())
+        {
+            otherXRenderer.enabled = true;
+        }
 
-	}
+        foreach (MeshRenderer otherORenderer in otherO.GetComponentsInChildren<MeshRenderer>())
+        {
+            otherORenderer.enabled = true;
+        }
+
+        foreach (MeshRenderer startXRenderer in startX.GetComponentsInChildren<MeshRenderer>())
+        {
+            startXRenderer.enabled = false;
+        }
+
+        foreach (MeshRenderer startORenderer in startO.GetComponentsInChildren<MeshRenderer>())
+        {
+            startORenderer.enabled = false;
+        }
+        yield return new WaitForSeconds(0.5f);
+
+        foreach (MeshRenderer otherXRenderer in otherX.GetComponentsInChildren<MeshRenderer>())
+        {
+            otherXRenderer.enabled = false;
+        }
+
+        foreach (MeshRenderer otherORenderer in otherO.GetComponentsInChildren<MeshRenderer>())
+        {
+            otherORenderer.enabled = false;
+        }
+
+        foreach (MeshRenderer startXRenderer in startX.GetComponentsInChildren<MeshRenderer>())
+        {
+            startXRenderer.enabled = true;
+        }
+
+        foreach (MeshRenderer startORenderer in startO.GetComponentsInChildren<MeshRenderer>())
+        {
+            startORenderer.enabled = true;
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        foreach (MeshRenderer otherXRenderer in otherX.GetComponentsInChildren<MeshRenderer>())
+        {
+            otherXRenderer.enabled = true;
+        }
+
+        foreach (MeshRenderer otherORenderer in otherO.GetComponentsInChildren<MeshRenderer>())
+        {
+            otherORenderer.enabled = true;
+        }
+
+        foreach (MeshRenderer startXRenderer in startX.GetComponentsInChildren<MeshRenderer>())
+        {
+            startXRenderer.enabled = false;
+        }
+
+        foreach (MeshRenderer startORenderer in startO.GetComponentsInChildren<MeshRenderer>())
+        {
+            startORenderer.enabled = false;
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        foreach (MeshRenderer otherXRenderer in otherX.GetComponentsInChildren<MeshRenderer>())
+        {
+            otherXRenderer.enabled = false;
+        }
+
+        foreach (MeshRenderer otherORenderer in otherO.GetComponentsInChildren<MeshRenderer>())
+        {
+            otherORenderer.enabled = false;
+        }
+
+        foreach (MeshRenderer startXRenderer in startX.GetComponentsInChildren<MeshRenderer>())
+        {
+            startXRenderer.enabled = true;
+        }
+
+        foreach (MeshRenderer startORenderer in startO.GetComponentsInChildren<MeshRenderer>())
+        {
+            startORenderer.enabled = true;
+
+        }
+
+        yield return null;
+    }
 
 
-}
+
+
+
+    }

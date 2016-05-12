@@ -19,10 +19,6 @@ public class LoadScenes : MonoBehaviour {
 		hardButt.SetActive (false);
 	}
 
-	public void QuitGame(){
-		Application.Quit ();
-	}
-
 	public void LoadDifficultyButtsLol(){
 			easyButt.SetActive (true);
 			medButt.SetActive (true);
