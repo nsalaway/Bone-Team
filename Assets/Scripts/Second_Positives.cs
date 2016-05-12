@@ -49,6 +49,22 @@ public class Second_Positives : MonoBehaviour {
 	//****END OBJECTS FOR EYE 1.
 
 
+
+
+	//***THE FOLLOWING ARE FOR PUBLIC OBJECTS WITH EYE 2
+
+	public GameObject startX;
+	public GameObject otherX;
+
+	public GameObject startO;
+	public GameObject otherO;
+
+	// END OBJECTS FOR EYE 2
+
+
+
+
+
 	// Use this for initialization
 	void Start () {
 
@@ -106,6 +122,13 @@ public class Second_Positives : MonoBehaviour {
 		StartCoroutine (eye1Animation ());
 
 		//****END IF EYE 1 IS CHOSEN****
+
+
+		//if eye 2 is chosen
+
+		StartCoroutine (eye2Animation ());
+
+		//end if eye 2 is chosen 
 
 	}
 	
@@ -257,6 +280,51 @@ public class Second_Positives : MonoBehaviour {
 
 	}
 
+
+
+
+	IEnumerator eye2Animation (){
+
+		while (true) {
+
+			foreach (MeshRenderer otherXRenderer in otherX.GetComponentsInChildren<MeshRenderer>()) {
+				otherXRenderer.enabled = true;
+			}
+
+			foreach (MeshRenderer otherORenderer in otherO.GetComponentsInChildren<MeshRenderer>()) {
+				otherORenderer.enabled = true;
+			}
+
+			foreach (MeshRenderer startXRenderer in startX.GetComponentsInChildren<MeshRenderer>()) {
+				startXRenderer.enabled = false;
+			}
+
+			foreach (MeshRenderer startORenderer in startO.GetComponentsInChildren<MeshRenderer>()) {
+				startORenderer.enabled = false;
+			}
+			yield return new WaitForSeconds (0.3f);
+
+			foreach (MeshRenderer otherXRenderer in otherX.GetComponentsInChildren<MeshRenderer>()) {
+				otherXRenderer.enabled = false;
+			}
+
+			foreach (MeshRenderer otherORenderer in otherO.GetComponentsInChildren<MeshRenderer>()) {
+				otherORenderer.enabled = false;
+			}
+
+			foreach (MeshRenderer startXRenderer in startX.GetComponentsInChildren<MeshRenderer>()) {
+				startXRenderer.enabled = true;
+			}
+
+			foreach (MeshRenderer startORenderer in startO.GetComponentsInChildren<MeshRenderer>()) {
+				startORenderer.enabled = true;
+			}
+			yield return new WaitForSeconds (0.3f);
+
+
+		}
+
+	}
 
 
 }

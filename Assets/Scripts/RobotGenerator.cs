@@ -9,7 +9,7 @@ public class RobotGenerator : MonoBehaviour {
 	//generating an antenna should always 
 
 	//list of arms
-	public GameObject Arm1;
+//	public GameObject Arm1;
 	//public GameObject Arm2;
 	//public GameObject Arm3;
 
@@ -196,9 +196,6 @@ public class RobotGenerator : MonoBehaviour {
 
 
 
-		//this section makes each arm disappear. 
-		foreach(MeshRenderer arm1Renderer in Arm1.GetComponentsInChildren<MeshRenderer>()){
-		arm1Renderer.enabled = false;
 		}
 
 
@@ -214,7 +211,7 @@ public class RobotGenerator : MonoBehaviour {
 
 
 
-		}
+
 
 
 
