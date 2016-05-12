@@ -7,6 +7,7 @@ public class MorseCodePuzzle : MonoBehaviour
 {
 
 	public AudioSource soundManager;
+	public AudioClip clickSound;
 	public AudioClip[] sounds;
 	int pinkClickCounter, blackClickCounter, randomSoundChooser;
 	int pinkMouseClicksNeeded = 30;
@@ -51,6 +52,7 @@ public class MorseCodePuzzle : MonoBehaviour
 		//Detect which button is being pressed and raise its counter.
 		if (Input.GetMouseButtonDown (0) && Physics.Raycast (mouseRay, out mouseRayInfo, 1000f)) {
 			if (mouseRayInfo.collider.tag == "pink") {
+				soundManager.PlayOneShot (clickSound, 0.7f);
 				pinkClickCounter++;
 				StartCoroutine (ChangePinkButton ());
 				Debug.Log ("pink counter = " + pinkClickCounter);
@@ -58,6 +60,7 @@ public class MorseCodePuzzle : MonoBehaviour
 
 			if (mouseRayInfo.collider.tag == "black") {
 				StartCoroutine (ChangeBlueButton ());
+				soundManager.PlayOneShot (clickSound, 0.7f);
 				//If you haven't already clicked in the past 2 seconds, you can click & raise counter (see ResetButton function).
 				if (!wasBlackClicked) {
 					clickDelay = 1f;
@@ -179,6 +182,7 @@ public class MorseCodePuzzle : MonoBehaviour
 	public void RotateArrow ()
 	{
 		wasDialPressed = true;
+		soundManager.PlayOneShot (clickSound, 0.7f);
 
 		//rotate arrow & increment dailNumber
 		arrowParentCube.Rotate (0f, 50f, 0f);

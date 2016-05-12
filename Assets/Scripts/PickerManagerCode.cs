@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class PickerManagerCode : MonoBehaviour
 {
+	public AudioSource soundManager;
+	public AudioClip clickSound;
+
 	public GameObject blueBox;
 	public GameObject tealBox;
 	public GameObject greenBox;
@@ -387,48 +390,56 @@ public class PickerManagerCode : MonoBehaviour
 
 	public IEnumerator ChangeBlueButton(){
 		originalBlue.sprite = bluePressed;
+		soundManager.PlayOneShot (clickSound, 0.7f);
 		yield return new WaitForSeconds (0.1f);
 		originalBlue.sprite = blueUp;
 	}
 
 	public IEnumerator ChangeLightBlueButton(){
 		originalLightBlue.sprite = lightBluePressed;
+		soundManager.PlayOneShot (clickSound, 0.7f);
 		yield return new WaitForSeconds (0.1f);
 		originalLightBlue.sprite = lightBlueUp;
 	}
 
 	public IEnumerator ChangeGreenButton(){
 		originalGreen.sprite = greenPressed;
+		soundManager.PlayOneShot (clickSound, 0.7f);
 		yield return new WaitForSeconds (0.1f);
 		originalGreen.sprite = greenUp;
 	}
 
 	public IEnumerator ChangePurpleButton(){
 		originalPurple.sprite = purplePressed;
+		soundManager.PlayOneShot (clickSound, 0.7f);
 		yield return new WaitForSeconds (0.1f);
 		originalPurple.sprite = purpleUp;
 	}
 
 	public IEnumerator ChangeRedButton(){
 		originalRed.sprite = redPressed;
+		soundManager.PlayOneShot (clickSound, 0.7f);
 		yield return new WaitForSeconds (0.1f);
 		originalRed.sprite = redUp;
 	}
 
 	public IEnumerator ChangePinkButton(){
 		originalPink.sprite = pinkPressed;
+		soundManager.PlayOneShot (clickSound, 0.7f);
 		yield return new WaitForSeconds (0.1f);
 		originalPink.sprite = pinkUp;
 	}
 
 	public IEnumerator ChangeYellowButton(){
 		originalYellow.sprite = yellowPressed;
+		soundManager.PlayOneShot (clickSound, 0.7f);
 		yield return new WaitForSeconds (0.1f);
 		originalYellow.sprite = yellowUp;
 	}
 
 	public IEnumerator ChangeOrangeButton(){
 		originalOrange.sprite = orangePressed;
+		soundManager.PlayOneShot (clickSound, 0.7f);
 		yield return new WaitForSeconds (0.1f);
 		originalOrange.sprite = orangeUp;
 	}
