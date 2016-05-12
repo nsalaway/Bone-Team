@@ -10,7 +10,7 @@ public class OverallGameManagerErik : MonoBehaviour {
     public static int eyes;
     public static int NumberCorrect = 0;
     public static int NumberIncorrect = 0;
-    public static int numberToWin = 1;
+    public static int numberToWin = 0;
 	int numberToLose = 3;
     //public static bool levelFinished;
     public static bool isGameActive = false;
@@ -50,6 +50,9 @@ public class OverallGameManagerErik : MonoBehaviour {
     void Start()
     {
         instance = this;
+		isWinningActive = false;
+		hasWon = false;
+		hasLost = false;
         RandomizeRobot();
         NumberCorrect = 0;
         NumberIncorrect = 0;
@@ -125,6 +128,7 @@ public class OverallGameManagerErik : MonoBehaviour {
 		if (NumberIncorrect == numberToLose || overallGameTime <= 0f)
         {
 			hasLost = true;
+			Destroy (myPuzzle);
         }
         if (isGameActive)
         {
@@ -260,6 +264,18 @@ public class OverallGameManagerErik : MonoBehaviour {
 	}
 
 	public IEnumerator LoadWinScreen(){
+		if (numberToWin == 3) {
+			correct3.sprite = correctOn;
+		}
+
+		if (numberToWin == 5) {
+			correct5.sprite = correctOn;
+		}
+
+		if (numberToWin == 7) {
+			correct7.sprite = correctOn;
+		}
+
 		isWinningActive = true;
 		hasWon = false;
 		NumberCorrect = 0;
