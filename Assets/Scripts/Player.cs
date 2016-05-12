@@ -12,6 +12,9 @@ public class Player : MonoBehaviour {
     Vector3 moveUp = new Vector3(0, 0, 1.2525555555555555555555555555556f);
     Vector3 moveDown = new Vector3(0, 0, -1.2525555555555555555555555555556f);
 
+	public AudioSource soundManager;
+	public AudioClip clickSound;
+
     // Use this for initialization
     void Start () {
 	
@@ -37,10 +40,12 @@ public class Player : MonoBehaviour {
                     case "Up":
                         Ray upRay = new Ray(transform.position, Vector3.forward);
                         RaycastHit upRayInfo;
+
                         if (Physics.Raycast(upRay, out upRayInfo, .65f))
                         {
                             if (upRayInfo.collider.tag == "Goal")
                             {
+								soundManager.PlayOneShot (clickSound, 0.7f);
                                 transform.localPosition = transform.localPosition + moveUp;
                                 Debug.Log("You Win!");
                                 OverallGameManagerErik.PuzzleWon(transform.parent.gameObject);
@@ -50,6 +55,7 @@ public class Player : MonoBehaviour {
                             else
                             {
                                 counter++;
+								soundManager.PlayOneShot (clickSound, 0.7f);
                                 OverallGameManagerErik.MadeError();
                             }
                         }
@@ -57,6 +63,7 @@ public class Player : MonoBehaviour {
                         else
                         {
                             transform.localPosition = transform.localPosition + moveUp;
+							soundManager.PlayOneShot (clickSound, 0.7f);
                         }
                         break;
 
@@ -68,6 +75,7 @@ public class Player : MonoBehaviour {
                         {
                             if (downRayInfo.collider.tag == "Goal")
                             {
+								soundManager.PlayOneShot (clickSound, 0.7f);
                                 transform.localPosition = transform.localPosition + moveDown;
                                 Debug.Log("You Win!");
                                 OverallGameManagerErik.PuzzleWon(transform.parent.gameObject);
@@ -77,6 +85,7 @@ public class Player : MonoBehaviour {
                             else
                             {
                                 counter++;
+								soundManager.PlayOneShot (clickSound, 0.7f);
                                 Debug.Log("Wall!");
                                 OverallGameManagerErik.MadeError();
                             }
@@ -85,6 +94,7 @@ public class Player : MonoBehaviour {
                         else
                         {
                             transform.localPosition = transform.localPosition + moveDown;
+							soundManager.PlayOneShot (clickSound, 0.7f);
                         }
                         break;
 
@@ -96,6 +106,7 @@ public class Player : MonoBehaviour {
                         {
                             if (leftRayInfo.collider.tag == "Goal")
                             {
+								soundManager.PlayOneShot (clickSound, 0.7f);
                                 transform.localPosition = transform.localPosition + moveLeft;
                                 Debug.Log("You Win!");
                                 OverallGameManagerErik.PuzzleWon(transform.parent.gameObject);
@@ -105,6 +116,7 @@ public class Player : MonoBehaviour {
                             else
                             {
                                 counter++;
+								soundManager.PlayOneShot (clickSound, 0.7f);
                                 Debug.Log("Wall!");
                                 OverallGameManagerErik.MadeError();
                             }
@@ -113,6 +125,7 @@ public class Player : MonoBehaviour {
                         else
                         {
                             transform.localPosition = transform.localPosition + moveLeft;
+							soundManager.PlayOneShot (clickSound, 0.7f);
                         }
                         break;
 
@@ -124,6 +137,7 @@ public class Player : MonoBehaviour {
                         {
                             if (rightRayInfo.collider.tag == "Goal")
                             {
+								soundManager.PlayOneShot (clickSound, 0.7f);
                                 transform.localPosition = transform.localPosition + Vector3.right;
                                 Debug.Log("You Win!");
                                 OverallGameManagerErik.PuzzleWon(transform.parent.gameObject);
@@ -133,6 +147,7 @@ public class Player : MonoBehaviour {
                             else
                             {
                                 counter++;
+								soundManager.PlayOneShot (clickSound, 0.7f);
                                 Debug.Log("Wall!");
                                 OverallGameManagerErik.MadeError();
                             }
@@ -141,6 +156,7 @@ public class Player : MonoBehaviour {
                         else
                         {
                             transform.localPosition = transform.localPosition + moveRight;
+							soundManager.PlayOneShot (clickSound, 0.7f);
                         }
                         break;
                 }

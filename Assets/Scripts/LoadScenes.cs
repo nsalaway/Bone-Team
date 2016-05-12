@@ -8,7 +8,32 @@ public class LoadScenes : MonoBehaviour {
 	public AudioClip yesSound1;
 	public AudioClip moreSound;
 	public AudioClip yesSound2;
+	public GameObject playButt;
+	public GameObject easyButt;
+	public GameObject medButt;
+	public GameObject hardButt;
 
+	void Start(){
+		easyButt.SetActive (false);
+		medButt.SetActive (false);
+		hardButt.SetActive (false);
+	}
+
+	public void QuitGame(){
+		Application.Quit ();
+	}
+
+	public void LoadDifficultyButtsLol(){
+			easyButt.SetActive (true);
+			medButt.SetActive (true);
+			hardButt.SetActive (true);
+			playButt.SetActive (false);
+	}
+
+	public void LoadTitleScreen(){
+		soundManager.PlayOneShot (moreSound, 1f);
+		Invoke ("LoadTitleDelay", 1f);
+	}
 
 	/// <summary>
 	/// Load intro scene after playing sound & short delay.
@@ -46,4 +71,19 @@ public class LoadScenes : MonoBehaviour {
 		SceneManager.LoadScene (3);
 	}
 
+	void LoadTitleDelay(){
+		SceneManager.LoadScene (0);
+	}
+
+	public void MakeEasy(){
+		OverallGameManagerErik.numberToWin = 3;
+	}
+
+	public void MakeHard(){
+		OverallGameManagerErik.numberToWin = 7;
+	}
+
+	public void MakeMedium(){
+		OverallGameManagerErik.numberToWin = 5;
+	}
 }
